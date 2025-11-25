@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TowerDragDrop : MonoBehaviour
+public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private readonly string TowerSlotTag = "TowerSlot";
 
@@ -26,30 +26,6 @@ public class TowerDragDrop : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = transform.position.z;
             transform.position = mousePos;
-        }
-    }
-
-    public void OnMouseDown()
-    {
-        if (isDragging) { return; }
-
-        isDragging = true;
-        OnTowerMove?.Invoke();
-        OnAnyTowerMoveStart?.Invoke();
-    }
-
-    public void OnMouseUp() 
-    {
-        if (currentDraggedSlot != null && isDragging)
-        {
-            transform.position = currentDraggedSlot.transform.position;
-
-            TowerSlot towerSlot = currentDraggedSlot.GetComponent<TowerSlot>();
-            if (towerSlot == null) { return; }
-            towerSlot.SetCurrentTower(this);
-
-            isDragging = false;
-            OnAnyTowerMoveEnd?.Invoke();
         }
     }
 
@@ -91,6 +67,34 @@ public class TowerDragDrop : MonoBehaviour
             {
                 //currentDraggedSlot = null;
             }
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("CLICKED ON TOWER");
+
+        if (isDragging) { return; }
+
+        isDragging = true;
+        OnTowerMove?.Invoke();
+        OnAnyTowerMoveStart?.Invoke();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log("RELEASED TOWER");
+
+        if (currentDraggedSlot != null && isDragging)
+        {
+            transform.position = currentDraggedSlot.transform.position;
+
+            TowerSlot towerSlot = currentDraggedSlot.GetComponent<TowerSlot>();
+            if (towerSlot == null) { return; }
+            towerSlot.SetCurrentTower(this);
+
+            isDragging = false;
+            OnAnyTowerMoveEnd?.Invoke();
         }
     }
 }

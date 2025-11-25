@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class TowerBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Attributes")]
+    [SerializeField] TowerData towerData;
 
-    // Update is called once per frame
-    void Update()
+    [Header("Cache")]
+    [SerializeField] SpriteRenderer sprite;
+
+
+
+    private void Start()
     {
-        
+        sprite.sprite = towerData.sprite;
     }
 }

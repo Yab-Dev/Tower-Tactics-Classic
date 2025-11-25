@@ -15,6 +15,7 @@ MonoBehaviour:
   description: A tower for testing
   traits:
   - {fileID: 11400000, guid: d9ef9c8931c9551428e545738ece9164, type: 2}
+  sprite: {fileID: -2135585597343286014, guid: 377daaf42d5fb004c983324f7690f590, type: 3}
   health: 3
   hitSpeed: 1
   damage: 1
