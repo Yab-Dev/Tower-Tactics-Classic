@@ -13,5 +13,6 @@ public class TowerData : ScriptableObject
     public float hitSpeed;
     public int damage;
 
-    public GameObject bullet;
+    public GameObject bulletObject;
+    public float bulletSpeed;
 }
