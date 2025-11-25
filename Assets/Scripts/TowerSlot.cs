@@ -6,8 +6,20 @@ public class TowerSlot : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private TowerDragDrop currentTower;
+    [SerializeField] private Color fadeInColor;
+    [SerializeField] private Color fadeOutColor;
+
+    [Header("Cache")]
+    [SerializeField] private SpriteRenderer sprite;
 
 
+    private void Start()
+    {
+        TowerDragDrop.OnAnyTowerMoveStart += FadeSlotIn;
+        TowerDragDrop.OnAnyTowerMoveEnd += FadeSlotOut;
+
+        sprite.color = fadeOutColor;
+    }
 
     public void SetCurrentTower(TowerDragDrop tower)
     {
@@ -24,5 +36,15 @@ public class TowerSlot : MonoBehaviour
     {
         currentTower.OnTowerMove -= ClearTower;
         currentTower = null;
+    }
+
+    private void FadeSlotIn()
+    {
+        StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeInColor, 0.2f));
+    }
+
+    private void FadeSlotOut()
+    {
+        StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.2f));
     }
 }

@@ -14,6 +14,9 @@ public class TowerDragDrop : MonoBehaviour
     public delegate void OnTowerMoveEventArgs();
     public event OnTowerMoveEventArgs OnTowerMove;
 
+    public delegate void OnAnyTowerMoveEventArgs();
+    public static event OnAnyTowerMoveEventArgs OnAnyTowerMoveStart;
+    public static event OnAnyTowerMoveEventArgs OnAnyTowerMoveEnd;
 
 
     private void Update()
@@ -28,22 +31,26 @@ public class TowerDragDrop : MonoBehaviour
 
     public void OnMouseDown()
     {
+        if (isDragging) { return; }
+
         isDragging = true;
         OnTowerMove?.Invoke();
+        OnAnyTowerMoveStart?.Invoke();
     }
 
     public void OnMouseUp() 
     {
-        if (currentDraggedSlot != null)
+        if (currentDraggedSlot != null && isDragging)
         {
             transform.position = currentDraggedSlot.transform.position;
 
             TowerSlot towerSlot = currentDraggedSlot.GetComponent<TowerSlot>();
             if (towerSlot == null) { return; }
             towerSlot.SetCurrentTower(this);
-        }
 
-        isDragging = false;
+            isDragging = false;
+            OnAnyTowerMoveEnd?.Invoke();
+        }
     }
 
     public void OnTriggerStay2D(Collider2D collision)
