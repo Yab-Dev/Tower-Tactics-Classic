@@ -15,10 +15,15 @@ public class TowerBehavior : MonoBehaviour
 
 
 
+    private void Awake()
+    {
+        GameManager.OnDefensePhaseStart += StartDefense;
+        GameManager.OnDefensePhaseEnd += EndDefense;
+    }
+
     private void Start()
     {
         sprite.sprite = towerData.sprite;
-        shootCooldown = towerData.hitSpeed;
     }
 
     private void Update()
@@ -40,5 +45,17 @@ public class TowerBehavior : MonoBehaviour
         {
             shootCooldown -= Time.deltaTime;
         }
+    }
+
+    private void StartDefense()
+    {
+        shootCooldown = towerData.hitSpeed;
+        isFiring = true;
+    }
+
+    private void EndDefense()
+    {
+        shootCooldown = towerData.hitSpeed;
+        isFiring = false;
     }
 }

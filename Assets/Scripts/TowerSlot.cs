@@ -13,11 +13,15 @@ public class TowerSlot : MonoBehaviour
     [SerializeField] private SpriteRenderer sprite;
 
 
-    private void Start()
+
+    private void Awake()
     {
         TowerDragDrop.OnAnyTowerMoveStart += FadeSlotIn;
         TowerDragDrop.OnAnyTowerMoveEnd += FadeSlotOut;
+    }
 
+    private void Start()
+    {
         sprite.color = fadeOutColor;
     }
 

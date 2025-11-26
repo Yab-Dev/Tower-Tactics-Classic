@@ -8,6 +8,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private readonly string TowerSlotTag = "TowerSlot";
 
     [Header("Attributes")]
+    [SerializeField] private bool canDrag;
     [SerializeField] private bool isDragging;
     [SerializeField] private GameObject currentDraggedSlot;
 
@@ -18,6 +19,13 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public static event OnAnyTowerMoveEventArgs OnAnyTowerMoveStart;
     public static event OnAnyTowerMoveEventArgs OnAnyTowerMoveEnd;
 
+
+
+    private void Awake()
+    {
+        GameManager.OnBuildPhaseStart += SetDraggable;
+        GameManager.OnBuildPhaseEnd += SetUnDraggable;
+    }
 
     private void Update()
     {
@@ -31,6 +39,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnTriggerStay2D(Collider2D collision)
     {
+        if (!canDrag) { return; }
         if (!collision.CompareTag(TowerSlotTag)) { return; }
         if (!isDragging) { return; }
 
@@ -61,6 +70,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        if (!canDrag) { return; }
         if (collision.CompareTag(TowerSlotTag) && isDragging)
         {
             if (currentDraggedSlot == collision.gameObject)
@@ -73,7 +83,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("CLICKED ON TOWER");
-
+        if (!canDrag) { return; }
         if (isDragging) { return; }
 
         isDragging = true;
@@ -85,6 +95,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         Debug.Log("RELEASED TOWER");
 
+        if (!canDrag) { return; }
         if (currentDraggedSlot != null && isDragging)
         {
             transform.position = currentDraggedSlot.transform.position;
@@ -96,5 +107,15 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             isDragging = false;
             OnAnyTowerMoveEnd?.Invoke();
         }
+    }
+
+    private void SetDraggable()
+    {
+        canDrag = true;
+    }
+
+    private void SetUnDraggable()
+    {
+        canDrag = false;
     }
 }
