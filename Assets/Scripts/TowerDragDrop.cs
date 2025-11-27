@@ -9,6 +9,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     [Header("Attributes")]
     [SerializeField] private bool canDrag;
+    [SerializeField] private bool startDragging;
     [SerializeField] private bool isDragging;
     [SerializeField] private GameObject currentDraggedSlot;
 
@@ -25,6 +26,14 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         GameManager.OnBuildPhaseStart += SetDraggable;
         GameManager.OnBuildPhaseEnd += SetUnDraggable;
+    }
+
+    private void Start()
+    {
+        if (startDragging)
+        {
+            StartDrag();
+        }
     }
 
     private void Update()
@@ -82,10 +91,14 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("CLICKED ON TOWER");
         if (!canDrag) { return; }
         if (isDragging) { return; }
 
+        StartDrag();
+    }
+
+    private void StartDrag()
+    {
         isDragging = true;
         OnTowerMove?.Invoke();
         OnAnyTowerMoveStart?.Invoke();
@@ -93,8 +106,6 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("RELEASED TOWER");
-
         if (!canDrag) { return; }
         if (currentDraggedSlot != null && isDragging)
         {
