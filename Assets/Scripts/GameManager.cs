@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+
     [Header("Attributes")]
     [SerializeField] private GamePhase gamePhase;
 
@@ -14,10 +16,32 @@ public class GameManager : MonoBehaviour
     public static event OnGamePhaseChangeEventArgs OnDefensePhaseEnd;
 
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
         SetBuildPhase();
+    }
+
+    public static GameManager GetInstance()
+    {
+        if (instance == null)
+        {
+            Debug.Log("GameManager Instance Not Found");
+            return null;
+        }
+
+        return instance;
     }
 
     private void Update()
@@ -32,7 +56,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SetBuildPhase()
+    public void SetBuildPhase()
     {
         if (gamePhase == GamePhase.Defense)
         {
@@ -42,7 +66,7 @@ public class GameManager : MonoBehaviour
         OnBuildPhaseStart?.Invoke();
     }
 
-    private void SetDefensePhase()
+    public void SetDefensePhase()
     {
         if (gamePhase == GamePhase.Build)
         {
