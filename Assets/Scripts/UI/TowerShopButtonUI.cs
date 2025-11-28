@@ -6,24 +6,24 @@ using UnityEngine.UI;
 public class TowerShopButtonUI : MonoBehaviour
 {
     [Header("Cache")]
-    [SerializeField] private TowerInfoUI towerInfo;
-    [SerializeField] private Button shopButton;
-    [SerializeField] private TowerData TESTDATA;
+    [SerializeField] public TowerInfoUI towerInfo;
+    [SerializeField] public Button shopButton;
 
 
 
     private void Awake()
     {
-        
+        //shopButton.onClick.AddListener(BuyTower);
     }
 
     private void Start()
     {
-        towerInfo.SetTowerInfo(TESTDATA);
+        //towerInfo.SetTowerInfo(TESTDATA);
     }
 
     private void BuyTower()
     {
-
+        //GameManager.GetInstance().SpawnTower(true, TESTDATA);
+        //shopButton.interactable = false;
     }
 }

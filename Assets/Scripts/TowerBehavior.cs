@@ -5,8 +5,8 @@ using UnityEngine;
 public class TowerBehavior : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] TowerData towerData;
-    [SerializeField] bool isFiring;
+    [SerializeField] private TowerData towerData;
+    [SerializeField] private bool isFiring;
 
     [Header("Cache")]
     [SerializeField] SpriteRenderer sprite;
@@ -57,5 +57,10 @@ public class TowerBehavior : MonoBehaviour
     {
         shootCooldown = towerData.hitSpeed;
         isFiring = false;
+    }
+
+    public void SetTowerData(TowerData data)
+    {
+        towerData = data;
     }
 }

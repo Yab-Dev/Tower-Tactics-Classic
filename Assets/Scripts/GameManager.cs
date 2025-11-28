@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private GamePhase gamePhase;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject towerObject;
+
     public delegate void OnGamePhaseChangeEventArgs();
     public static event OnGamePhaseChangeEventArgs OnBuildPhaseStart;
     public static event OnGamePhaseChangeEventArgs OnBuildPhaseEnd;
@@ -74,6 +77,16 @@ public class GameManager : MonoBehaviour
         }
         gamePhase = GamePhase.Defense;
         OnDefensePhaseStart?.Invoke();
+    }
+
+    public void SpawnTower(bool startDragging, TowerData towerData)
+    {
+        GameObject tower = Instantiate(towerObject, Vector2.zero, Quaternion.identity);
+        TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
+        TowerDragDrop towerDragDrop = tower.GetComponent<TowerDragDrop>();
+
+        towerBehavior.SetTowerData(towerData);
+        towerDragDrop.StartDraggable(startDragging);
     }
 
     public enum GamePhase { Build, Defense, None }

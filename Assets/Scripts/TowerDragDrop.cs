@@ -99,6 +99,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     private void StartDrag()
     {
+        canDrag = true;
         isDragging = true;
         OnTowerMove?.Invoke();
         OnAnyTowerMoveStart?.Invoke();
@@ -128,5 +129,10 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private void SetUnDraggable()
     {
         canDrag = false;
+    }
+
+    public void StartDraggable(bool draggable)
+    {
+        startDragging = draggable;
     }
 }

@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerInfo: {fileID: 1706625693931412347}
+  shopButton: {fileID: 7070165284142098748}
   TESTDATA: {fileID: 11400000, guid: c755c95c65cfc0445b3f3d39d5873dba, type: 2}
 --- !u!1 &2021115805732668547
 GameObject:
