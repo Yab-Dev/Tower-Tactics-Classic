@@ -22,6 +22,8 @@ public class LowerPanelUI : MonoBehaviour
     {
         GameManager.OnBuildPhaseStart += BuildPhaseStart;
         GameManager.OnBuildPhaseEnd += FadePanelOut;
+        TowerDragDrop.OnTowerPlaceStart += DisableButtons;
+        TowerDragDrop.OnTowerPlaceEnd += EnableButtons;
 
         startWaveButton.onClick.AddListener(StartWave);
 
@@ -40,6 +42,7 @@ public class LowerPanelUI : MonoBehaviour
     private void BuildPhaseStart()
     {
         startWaveButton.interactable = true;
+
         FadePanelIn();
     }
 
@@ -51,5 +54,15 @@ public class LowerPanelUI : MonoBehaviour
     private void FadePanelOut()
     {
         StartCoroutine(MoveOverTime.MoveUIObjectOverTime(rectTransform, fadeOutPosition, fadeDuration));
+    }
+
+    private void DisableButtons()
+    {
+        startWaveButton.interactable = false;
+    }
+
+    private void EnableButtons()
+    {
+        startWaveButton.interactable = true;
     }
 }

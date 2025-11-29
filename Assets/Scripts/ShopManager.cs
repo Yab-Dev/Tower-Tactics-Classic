@@ -59,4 +59,9 @@ public class ShopManager : MonoBehaviour
         GameManager.GetInstance().SpawnTower(true, shopTowers[index]);
         shopTowers[index] = null;
     }
+
+    public List<TowerData> GetShop()
+    {
+        return shopTowers;
+    }
 }

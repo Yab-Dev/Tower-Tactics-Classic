@@ -20,6 +20,12 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public static event OnAnyTowerMoveEventArgs OnAnyTowerMoveStart;
     public static event OnAnyTowerMoveEventArgs OnAnyTowerMoveEnd;
 
+    public delegate void OnTowerPlaceEventArgs();
+    public static event OnTowerPlaceEventArgs OnTowerPlaceStart;
+    public static event OnTowerPlaceEventArgs OnTowerPlaceEnd;
+
+    private bool initialPlace = true;
+
 
 
     private void Awake()
@@ -94,6 +100,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         if (!canDrag) { return; }
         if (isDragging) { return; }
 
+        initialPlace = false;
         StartDrag();
     }
 
@@ -103,6 +110,10 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         isDragging = true;
         OnTowerMove?.Invoke();
         OnAnyTowerMoveStart?.Invoke();
+        if (initialPlace)
+        {
+            OnTowerPlaceStart?.Invoke();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -118,6 +129,12 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
             isDragging = false;
             OnAnyTowerMoveEnd?.Invoke();
+
+            if (initialPlace)
+            {
+                OnTowerPlaceEnd?.Invoke();
+                initialPlace = false;
+            }
         }
     }
 

@@ -261,6 +261,7 @@ MonoBehaviour:
   refreshShopButton: {fileID: 583793200}
   upgradeCapacityButton: {fileID: 1979649340}
   shopButton: {fileID: 1767342108176587331, guid: 8534383e03d61b04f8af711782fc1c79, type: 3}
+  emptyShopButton: {fileID: 1767342108176587331, guid: 523086939d027ac49bdfa3fbb3073ed7, type: 3}
 --- !u!1 &357935565
 GameObject:
   m_ObjectHideFlags: 0
