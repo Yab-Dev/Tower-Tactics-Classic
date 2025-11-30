@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerBehavior : MonoBehaviour
+public class TowerBehavior : MonoBehaviour, IDamage
 {
     [Header("Attributes")]
     [SerializeField] private TowerData towerData;
@@ -38,7 +38,7 @@ public class TowerBehavior : MonoBehaviour
     {
         if (shootCooldown <= 0.0f)
         {
-            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, towerData.damage, towerData.bulletSpeed);
+            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, IDamage.Team.Tower, towerData.damage, towerData.bulletSpeed);
             shootCooldown = towerData.hitSpeed;
         }
         else
@@ -62,5 +62,15 @@ public class TowerBehavior : MonoBehaviour
     public void SetTowerData(TowerData data)
     {
         towerData = data;
+    }
+
+    public void Damage(int amount)
+    {
+        Debug.Log("Tower Damaged!");
+    }
+
+    public IDamage.Team GetTeam()
+    {
+        return IDamage.Team.Tower;
     }
 }
