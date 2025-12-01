@@ -32,7 +32,14 @@ public class BulletBehavior : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        if (target == null)
+        {
+            transform.position += new Vector3(speed * Time.deltaTime, 0.0f);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        }
         lifetime -= Time.deltaTime;
         if (lifetime <= 0.0f)
         {

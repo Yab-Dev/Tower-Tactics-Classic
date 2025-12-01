@@ -16,6 +16,9 @@ public class EnemyBehavior : MonoBehaviour, IDamage
 
     private float attackCooldown;
 
+    public delegate void OnEnemyDestroyedEventArgs();
+    public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
+
 
 
     private void Awake()
@@ -67,11 +70,17 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         }
     }
 
+    public void SetEnemyData(EnemyData data)
+    {
+        enemyData = data;
+    }
+
     public void Damage(int amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
+            OnEnemyDestroyed?.Invoke();
             Destroy(gameObject);
         }
     }

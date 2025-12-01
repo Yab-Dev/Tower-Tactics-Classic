@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 471019752}
   - component: {fileID: 471019751}
   - component: {fileID: 471019753}
+  - component: {fileID: 471019754}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -159,7 +160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePhase: 0
+  waveCount: 0
   towerObject: {fileID: 1421253106802044554, guid: 524b06f0d7d07eb4b8acc19f1956018a, type: 3}
+  enemyObject: {fileID: 9013912183608196334, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
 --- !u!4 &471019752
 Transform:
   m_ObjectHideFlags: 0
@@ -190,6 +193,22 @@ MonoBehaviour:
   towerPool:
   - {fileID: 11400000, guid: c755c95c65cfc0445b3f3d39d5873dba, type: 2}
   shopSize: 5
+--- !u!114 &471019754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471019750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac70adfb153e80499bda7b8973e5cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topLaneSpawnPos: {x: 8, y: 2.5}
+  midLaneSpawnPos: {x: 8, y: 0.5}
+  botLaneSpawnPos: {x: 8, y: -1.5}
+  levelWaves: {fileID: 11400000, guid: 455c00cfed5e71b418ba751a83231d48, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,63 +917,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4252966324882708701, guid: c534ccc7c4bb23040a7cacfec8ad27f3, type: 3}
   m_PrefabInstance: {fileID: 1574536740860463803}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1616058631446475501
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196017784727886656, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9013912183608196334, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
-      propertyPath: m_Name
-      value: TestEnemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1dee7bf9cb33f494e87824f8ed13b1e3, type: 3}
 --- !u!1001 &2133174486569865649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2106,4 +2068,3 @@ SceneRoots:
   - {fileID: 696761943}
   - {fileID: 924019684}
   - {fileID: 1674447881}
-  - {fileID: 1616058631446475501}

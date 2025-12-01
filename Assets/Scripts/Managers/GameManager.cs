@@ -8,15 +8,18 @@ public class GameManager : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private GamePhase gamePhase;
+    [SerializeField] private int waveCount;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject towerObject;
+    [SerializeField] private GameObject enemyObject;
 
-    public delegate void OnGamePhaseChangeEventArgs();
-    public static event OnGamePhaseChangeEventArgs OnBuildPhaseStart;
-    public static event OnGamePhaseChangeEventArgs OnBuildPhaseEnd;
-    public static event OnGamePhaseChangeEventArgs OnDefensePhaseStart;
-    public static event OnGamePhaseChangeEventArgs OnDefensePhaseEnd;
+    public delegate void OnBuildPhaseChangeEventArgs();
+    public static event OnBuildPhaseChangeEventArgs OnBuildPhaseStart;
+    public static event OnBuildPhaseChangeEventArgs OnBuildPhaseEnd;
+    public delegate void OnDefensePhaseChangeEventArgs(int waveCount);
+    public static event OnDefensePhaseChangeEventArgs OnDefensePhaseStart;
+    public static event OnDefensePhaseChangeEventArgs OnDefensePhaseEnd;
 
 
     private void Awake()
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        waveCount = 0;
         SetBuildPhase();
     }
 
@@ -63,8 +67,9 @@ public class GameManager : MonoBehaviour
     {
         if (gamePhase == GamePhase.Defense)
         {
-            OnDefensePhaseEnd?.Invoke();
+            OnDefensePhaseEnd?.Invoke(waveCount);
         }
+        waveCount++;
         gamePhase = GamePhase.Build;
         OnBuildPhaseStart?.Invoke();
     }
@@ -76,7 +81,20 @@ public class GameManager : MonoBehaviour
             OnBuildPhaseEnd?.Invoke();
         }
         gamePhase = GamePhase.Defense;
-        OnDefensePhaseStart?.Invoke();
+        OnDefensePhaseStart?.Invoke(waveCount);
+    }
+
+    public void CompleteWave(int totalWaves)
+    {
+        if (waveCount == totalWaves)
+        {
+            OnDefensePhaseEnd?.Invoke(waveCount);
+            Debug.Log("You Win!");
+        }
+        else
+        {
+            SetBuildPhase();
+        }
     }
 
     public void SpawnTower(bool startDragging, TowerData towerData)
@@ -87,6 +105,15 @@ public class GameManager : MonoBehaviour
 
         towerBehavior.SetTowerData(towerData);
         towerDragDrop.StartDraggable(startDragging);
+    }
+
+    public EnemyBehavior SpawnEnemy(EnemyData enemyData, Vector2 startingPos)
+    {
+        GameObject enemy = Instantiate(enemyObject, startingPos, Quaternion.identity);
+        EnemyBehavior enemyBehavior = enemy.GetComponent<EnemyBehavior>();
+        enemyBehavior.SetEnemyData(enemyData);
+
+        return enemyBehavior;
     }
 
     public enum GamePhase { Build, Defense, None }

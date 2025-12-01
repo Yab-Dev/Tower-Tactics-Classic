@@ -243,7 +243,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -306,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
   currentHealth: 0
+  isAttacking: 0
   sprite: {fileID: 8422753650241277167}
   rigidbody: {fileID: 4046740577655587331}
   targetDetection: {fileID: 4418681436995224918}

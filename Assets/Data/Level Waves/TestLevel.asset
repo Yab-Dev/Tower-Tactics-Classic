@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7eabba270d8c1e4bb77ea30973e4beb, type: 3}
+  m_Name: TestLevel
+  m_EditorClassIdentifier: 
+  waves:
+  - spawnDelay: 1
+    topLaneHazard: 0
+    midLaneHazard: 0
+    botLaneHazard: 0
+    topLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    midLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    botLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+  - spawnDelay: 1
+    topLaneHazard: 0
+    midLaneHazard: 1
+    botLaneHazard: 0
+    topLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    midLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    botLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}

@@ -53,13 +53,13 @@ public class TowerBehavior : MonoBehaviour, IDamage
         }
     }
 
-    private void StartDefense()
+    private void StartDefense(int waveCount)
     {
         shootCooldown = towerData.hitSpeed;
         isFiring = true;
     }
 
-    private void EndDefense()
+    private void EndDefense(int waveCount)
     {
         shootCooldown = towerData.hitSpeed;
         isFiring = false;
