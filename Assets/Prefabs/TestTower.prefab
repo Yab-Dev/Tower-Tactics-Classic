@@ -322,6 +322,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerData: {fileID: 11400000, guid: c755c95c65cfc0445b3f3d39d5873dba, type: 2}
+  currentHealth: 0
   isFiring: 0
+  isDestroyed: 0
   sprite: {fileID: 6357759981356025847}
+  towerCollision: {fileID: 2122182885935169750}
   targetDetection: {fileID: 2659367015325564853}

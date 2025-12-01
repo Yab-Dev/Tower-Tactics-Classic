@@ -6,10 +6,13 @@ public class TowerBehavior : MonoBehaviour, IDamage
 {
     [Header("Attributes")]
     [SerializeField] private TowerData towerData;
+    [SerializeField] private int currentHealth;
     [SerializeField] private bool isFiring;
+    [SerializeField] private bool isDestroyed;
 
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private BoxCollider2D towerCollision;
     [SerializeField] private TargetDetection targetDetection;
 
     private float shootCooldown;
@@ -18,19 +21,20 @@ public class TowerBehavior : MonoBehaviour, IDamage
 
     private void Awake()
     {
+        GameManager.OnBuildPhaseStart += StartBuild;
         GameManager.OnDefensePhaseStart += StartDefense;
         GameManager.OnDefensePhaseEnd += EndDefense;
     }
 
     private void Start()
     {
-        sprite.sprite = towerData.sprite;
+        RepairTower();
         targetDetection.SetSize(towerData.laneRange, towerData.areaRange);
     }
 
     private void Update()
     {
-        if (isFiring)
+        if (isFiring && !isDestroyed)
         {
             GameObject target = targetDetection.GetClosestTarget(transform.position);
             if (target != null)
@@ -53,6 +57,11 @@ public class TowerBehavior : MonoBehaviour, IDamage
         }
     }
 
+    private void StartBuild()
+    {
+        RepairTower();
+    }
+
     private void StartDefense(int waveCount)
     {
         shootCooldown = towerData.hitSpeed;
@@ -70,9 +79,28 @@ public class TowerBehavior : MonoBehaviour, IDamage
         towerData = data;
     }
 
+    private void DestroyTower()
+    {
+        isDestroyed = true;
+        towerCollision.enabled = false;
+        sprite.sprite = towerData.destroyedSprite;
+    }
+
+    private void RepairTower()
+    {
+        isDestroyed = false;
+        towerCollision.enabled = true;
+        currentHealth = towerData.health;
+        sprite.sprite = towerData.sprite;
+    }
+
     public void Damage(int amount)
     {
-        Debug.Log("Tower Damaged!");
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            DestroyTower();
+        }
     }
 
     public IDamage.Team GetTeam()

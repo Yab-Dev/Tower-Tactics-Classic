@@ -8,6 +8,7 @@ public class TowerData : ScriptableObject
     public string description;
     public TraitData[] traits;
     public Sprite sprite;
+    public Sprite destroyedSprite;
 
     public int health;
     public float hitSpeed;
