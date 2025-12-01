@@ -9,9 +9,10 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
+    [SerializeField] private GameObject target;
 
 
-    public static void CreateBullet(GameObject bulletObject, Vector2 position, IDamage.Team team, int damage, float speed, float lifetime = 5.0f)
+    public static void CreateBullet(GameObject bulletObject, Vector2 position, GameObject target, IDamage.Team team, int damage, float speed, float lifetime = 5.0f)
     {
         GameObject bullet = Instantiate(bulletObject, position, Quaternion.identity);
         BulletBehavior bulletBehavior = bullet.GetComponent<BulletBehavior>();
@@ -21,6 +22,7 @@ public class BulletBehavior : MonoBehaviour
             bulletBehavior.damage = damage;
             bulletBehavior.speed = speed;
             bulletBehavior.lifetime = lifetime;
+            bulletBehavior.target = target;
         }
         else
         {
@@ -30,7 +32,7 @@ public class BulletBehavior : MonoBehaviour
 
     private void Update()
     {
-        transform.position += new Vector3(speed * Time.deltaTime, 0.0f, 0.0f);
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         lifetime -= Time.deltaTime;
         if (lifetime <= 0.0f)
         {

@@ -17,5 +17,5 @@ MonoBehaviour:
   health: 10
   hitSpeed: 1
   damage: 1
-  range: 0.5
+  range: 1.2
   moveSpeed: 1

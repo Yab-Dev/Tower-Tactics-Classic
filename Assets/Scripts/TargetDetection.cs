@@ -26,7 +26,23 @@ public class TargetDetection : MonoBehaviour
         return targetList;
     }
 
-    private void SetSize(float _laneRange, float _areaRange)
+    public GameObject GetClosestTarget(Vector2 position)
+    {
+        if (targetList.Count == 0) { return null; }
+
+        GameObject closestTarget = targetList[0];
+        foreach (GameObject target in targetList)
+        {
+            if (Vector2.Distance(position, target.transform.position) <= Vector2.Distance(position, closestTarget.transform.position))
+            {
+                closestTarget = target;
+            }
+        }
+
+        return closestTarget;
+    }
+
+    public void SetSize(float _laneRange, float _areaRange)
     {
         laneRange = _laneRange;
         areaRange = _areaRange;
