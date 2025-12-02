@@ -18,6 +18,8 @@ public class TowerSlot : MonoBehaviour
     {
         TowerDragDrop.OnAnyTowerMoveStart += FadeSlotIn;
         TowerDragDrop.OnAnyTowerMoveEnd += FadeSlotOut;
+
+        GameManager.OnGetPlacedTowers += GetCurrentTower;
     }
 
     private void Start()
@@ -50,5 +52,13 @@ public class TowerSlot : MonoBehaviour
     private void FadeSlotOut()
     {
         StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.2f));
+    }
+
+    private void GetCurrentTower(ref List<GameObject> towers)
+    {
+        if (currentTower != null)
+        {
+            towers.Add(currentTower.gameObject);
+        }
     }
 }

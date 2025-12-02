@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private GamePhase gamePhase;
     [SerializeField] private int waveCount;
+    [SerializeField] private List<GameObject> currentTowers = new List<GameObject>();
 
     [Header("Prefabs")]
     [SerializeField] private GameObject towerObject;
@@ -17,9 +18,16 @@ public class GameManager : MonoBehaviour
     public delegate void OnBuildPhaseChangeEventArgs();
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseStart;
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseEnd;
+
     public delegate void OnDefensePhaseChangeEventArgs(int waveCount);
     public static event OnDefensePhaseChangeEventArgs OnDefensePhaseStart;
     public static event OnDefensePhaseChangeEventArgs OnDefensePhaseEnd;
+
+    public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> towers);
+    public static event OnGetPlacedTowersEventArgs OnGetPlacedTowers;
+
+    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> towers);
+    public static event OnCurrentTowersUpdatedEventArgs OnCurrentTowersUpdated;
 
 
     private void Awake()
@@ -32,6 +40,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        TowerDragDrop.OnAnyTowerMoveEnd += UpdateCurrentTowers;
     }
 
     private void Start()
@@ -114,6 +124,13 @@ public class GameManager : MonoBehaviour
         enemyBehavior.SetEnemyData(enemyData);
 
         return enemyBehavior;
+    }
+
+    public void UpdateCurrentTowers()
+    {
+        currentTowers.Clear();
+        OnGetPlacedTowers?.Invoke(ref currentTowers);
+        OnCurrentTowersUpdated?.Invoke(currentTowers);
     }
 
     public enum GamePhase { Build, Defense, None }
