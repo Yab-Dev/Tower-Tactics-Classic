@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TraitIconUI : MonoBehaviour
 {
     [Header("Attributes")]
+    [SerializeField] private List<Color> breakpointColors = new List<Color>();
     [SerializeField] private TraitData currentTrait;
     [SerializeField] private int traitCount;
 
@@ -21,12 +22,22 @@ public class TraitIconUI : MonoBehaviour
         currentTrait = trait;
         traitCount = count;
 
-        DisplayTraitData();
+        DisplayTraitData(trait, count);
     }
 
-    private void DisplayTraitData()
+    private void DisplayTraitData(TraitData trait, int count)
     {
         traitImage.sprite = currentTrait.traitIcon;
         traitCountText.text = traitCount.ToString();
+
+        for (int i = 0; i < trait.breakpoints.Length; i++)
+        {
+            if (count < trait.breakpoints[i])
+            {
+                backgroundImage.color = breakpointColors[i];
+                return;
+            }
+        }
+        backgroundImage.color = breakpointColors[trait.breakpoints.Length];
     }
 }
