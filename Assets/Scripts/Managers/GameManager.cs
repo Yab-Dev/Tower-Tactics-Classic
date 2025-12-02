@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> towers);
     public static event OnGetPlacedTowersEventArgs OnGetPlacedTowers;
 
-    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> towers);
+    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> towers, List<(TraitData trait, int count)> traits);
     public static event OnCurrentTowersUpdatedEventArgs OnCurrentTowersUpdated;
 
 
@@ -130,7 +130,42 @@ public class GameManager : MonoBehaviour
     {
         currentTowers.Clear();
         OnGetPlacedTowers?.Invoke(ref currentTowers);
-        OnCurrentTowersUpdated?.Invoke(currentTowers);
+
+        OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits());
+    }
+
+    private List<(TraitData trait, int count)> GetCurrentTraits()
+    {
+        List<(TraitData trait, int count)> traitData = new List<(TraitData trait, int count)>();
+        Dictionary<TraitData, int> traitDict = new Dictionary<TraitData, int>();
+
+        foreach (GameObject tower in currentTowers)
+        {
+            TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
+            if (towerBehavior == null) { continue; }
+
+            List<TraitData> towerTraits = towerBehavior.GetTowerData().traits;
+            foreach (TraitData trait in towerTraits)
+            {
+                if (traitDict.ContainsKey(trait))
+                {
+                    traitDict[trait]++;
+                }
+                else
+                {
+                    traitDict.Add(trait, 1);
+                }
+            }
+        }
+
+        foreach (var trait in traitDict.Keys)
+        {
+            traitData.Add((trait, traitDict[trait]));
+        }
+
+        traitData.Sort((trait1, trait2) => trait1.count.CompareTo(trait2.count));
+
+        return traitData;
     }
 
     public enum GamePhase { Build, Defense, None }

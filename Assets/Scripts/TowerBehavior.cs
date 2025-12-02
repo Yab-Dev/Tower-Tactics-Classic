@@ -94,6 +94,11 @@ public class TowerBehavior : MonoBehaviour, IDamage
         sprite.sprite = towerData.sprite;
     }
 
+    public TowerData GetTowerData()
+    {
+        return towerData;
+    }
+
     public void Damage(int amount)
     {
         currentHealth -= amount;

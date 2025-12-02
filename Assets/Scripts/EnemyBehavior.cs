@@ -15,6 +15,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     [SerializeField] private TargetDetection targetDetection;
 
     private float attackCooldown;
+    private bool isDestroyed;
 
     public delegate void OnEnemyDestroyedEventArgs();
     public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
@@ -78,8 +79,9 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     public void Damage(int amount)
     {
         currentHealth -= amount;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDestroyed)
         {
+            isDestroyed = true;
             OnEnemyDestroyed?.Invoke();
             Destroy(gameObject);
         }

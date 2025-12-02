@@ -22,7 +22,7 @@ public class TowerInfoUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < towerData.traits.Length; i++)
+        for (int i = 0; i < towerData.traits.Count; i++)
         {
             GameObject textObject = Instantiate(traitTextObject, traitTextContent);
             TMPro.TMP_Text traitText = textObject.GetComponent<TMPro.TMP_Text>();

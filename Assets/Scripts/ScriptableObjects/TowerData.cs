@@ -6,7 +6,7 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
     public string description;
-    public TraitData[] traits;
+    public List<TraitData> traits;
     public Sprite sprite;
     public Sprite destroyedSprite;
 

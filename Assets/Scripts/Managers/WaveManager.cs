@@ -61,7 +61,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator WaitUntilWaveOver()
     {
-        yield return new WaitUntil(() => spawnedEnemies == 0);
+        yield return new WaitUntil(() => spawnedEnemies <= 0);
 
         GameManager.GetInstance().CompleteWave(levelWaves.waves.Count);
     }

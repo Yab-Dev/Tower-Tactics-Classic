@@ -7,5 +7,7 @@ public class TraitData : ScriptableObject
 {
     public string description;
 
+    public Sprite traitIcon;
+
     public int[] breakpoints;
 }
