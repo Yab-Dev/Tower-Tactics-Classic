@@ -48,7 +48,7 @@ public class ShopManager : MonoBehaviour
 
         for (int i = 0; i < shopSize; i++)
         {
-            shopTowers.Add(towerPool[Random.Range(0, towerPool.Count - 1)]);
+            shopTowers.Add(towerPool[Random.Range(0, towerPool.Count)]);
         }
 
         OnRefreshShop?.Invoke(shopTowers);

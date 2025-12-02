@@ -198,6 +198,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPool:
   - {fileID: 11400000, guid: c755c95c65cfc0445b3f3d39d5873dba, type: 2}
+  - {fileID: 11400000, guid: f31304f86091d2640b573d8c74ab1960, type: 2}
+  - {fileID: 11400000, guid: cf9b59daa9f0af5479f15d1ff707fb57, type: 2}
+  - {fileID: 11400000, guid: 399f494f7d76f854fa299a7c5e643741, type: 2}
+  - {fileID: 11400000, guid: 8c18e6b676b01a042a0a4030aef179f8, type: 2}
   shopSize: 5
 --- !u!114 &471019754
 MonoBehaviour:

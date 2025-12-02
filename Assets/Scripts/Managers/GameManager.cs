@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
             traitData.Add((trait, traitDict[trait]));
         }
 
-        traitData.Sort((trait1, trait2) => trait1.count.CompareTo(trait2.count));
+        traitData.Sort((trait1, trait2) => trait2.count.CompareTo(trait1.count));
 
         return traitData;
     }
