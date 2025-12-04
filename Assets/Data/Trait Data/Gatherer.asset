@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Tends to gather resources.
   traitIcon: {fileID: 9140294213079773187, guid: d701d727999155142b4ed62b52324fe0, type: 3}
-  breakpoints: 0300000006000000
+  breakpoints:
+  - breakpointValue: 3
+    breakpointDescription: 
+  - breakpointValue: 6
+    breakpointDescription: 

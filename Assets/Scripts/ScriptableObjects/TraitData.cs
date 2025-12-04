@@ -9,5 +9,12 @@ public class TraitData : ScriptableObject
 
     public Sprite traitIcon;
 
-    public int[] breakpoints;
+    [System.Serializable]
+    public class BreakpointData
+    {
+        public int breakpointValue;
+        [TextArea] public string breakpointDescription;
+    }
+
+    public List<BreakpointData> breakpoints = new List<BreakpointData>();
 }

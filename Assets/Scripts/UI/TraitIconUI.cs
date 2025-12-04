@@ -27,7 +27,11 @@ public class TraitIconUI : TooltipObject
 
     protected override void DisplayTooltip(GameObject tooltip)
     {
-        Debug.Log("TOOLTIP");
+        TraitTooltipUI traitTooltipUI = tooltip.GetComponent<TraitTooltipUI>();
+        if (traitTooltipUI != null)
+        {
+            traitTooltipUI.DisplayTraitData(currentTrait, traitCount);
+        }
     }
 
     private void DisplayTraitData(TraitData trait, int count)
@@ -35,14 +39,14 @@ public class TraitIconUI : TooltipObject
         traitImage.sprite = currentTrait.traitIcon;
         traitCountText.text = traitCount.ToString();
 
-        for (int i = 0; i < trait.breakpoints.Length; i++)
+        for (int i = 0; i < trait.breakpoints.Count; i++)
         {
-            if (count < trait.breakpoints[i])
+            if (count < trait.breakpoints[i].breakpointValue)
             {
                 backgroundImage.color = breakpointColors[i];
                 return;
             }
         }
-        backgroundImage.color = breakpointColors[trait.breakpoints.Length];
+        backgroundImage.color = breakpointColors[trait.breakpoints.Count];
     }
 }

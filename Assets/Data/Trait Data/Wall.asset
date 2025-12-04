@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Powerful defenses
   traitIcon: {fileID: 2306664096213449541, guid: 10fd6047f9b70694b9843cd300d1bf74, type: 3}
-  breakpoints: 020000000400000006000000
+  breakpoints:
+  - breakpointValue: 2
+    breakpointDescription: 
+  - breakpointValue: 4
+    breakpointDescription: 
+  - breakpointValue: 6
+    breakpointDescription: 

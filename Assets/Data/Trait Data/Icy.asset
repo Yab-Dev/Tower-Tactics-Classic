@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Uses the power of ice
   traitIcon: {fileID: -2840521585152295393, guid: 699cd3ba1cde62c4fb1e4cbbcea47f3b, type: 3}
-  breakpoints: 0300000006000000
+  breakpoints:
+  - breakpointValue: 3
+    breakpointDescription: 
+  - breakpointValue: 6
+    breakpointDescription: 

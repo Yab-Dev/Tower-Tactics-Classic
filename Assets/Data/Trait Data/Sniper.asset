@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Defined by long range, high damage, and slow hit speed.
   traitIcon: {fileID: -9123956424645862470, guid: be8ae54bbff593a4bb9954a1414d1f2c, type: 3}
-  breakpoints: 0200000006000000
+  breakpoints:
+  - breakpointValue: 2
+    breakpointDescription: 
+  - breakpointValue: 5
+    breakpointDescription: 
