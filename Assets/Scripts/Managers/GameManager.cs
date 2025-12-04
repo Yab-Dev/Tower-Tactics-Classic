@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GamePhase gamePhase;
     [SerializeField] private int waveCount;
     [SerializeField] private List<GameObject> currentTowers = new List<GameObject>();
+    [SerializeField] private TooltipBaseUI tooltipObject;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject towerObject;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
         }
 
         TowerDragDrop.OnAnyTowerMoveEnd += UpdateCurrentTowers;
+        TooltipBaseUI.OnAssignTooltipObject += SetTooltip;
     }
 
     private void Start()
@@ -166,6 +168,16 @@ public class GameManager : MonoBehaviour
         traitData.Sort((trait1, trait2) => trait2.count.CompareTo(trait1.count));
 
         return traitData;
+    }
+
+    private void SetTooltip(TooltipBaseUI tooltipObject)
+    {
+        this.tooltipObject = tooltipObject;
+    }
+
+    public TooltipBaseUI GetTooltipUI()
+    {
+        return tooltipObject;
     }
 
     public enum GamePhase { Build, Defense, None }

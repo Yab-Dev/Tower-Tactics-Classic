@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TraitIconUI : MonoBehaviour
+public class TraitIconUI : TooltipObject
 {
     [Header("Attributes")]
     [SerializeField] private List<Color> breakpointColors = new List<Color>();
@@ -23,6 +23,11 @@ public class TraitIconUI : MonoBehaviour
         traitCount = count;
 
         DisplayTraitData(trait, count);
+    }
+
+    protected override void DisplayTooltip(GameObject tooltip)
+    {
+        Debug.Log("TOOLTIP");
     }
 
     private void DisplayTraitData(TraitData trait, int count)

@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4acbf4081dcfe0d4aab70dc62fc7ddaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 4890056134145657256, guid: 8d63d4f4c5631264097db8754d813903, type: 3}
   breakpointColors:
   - {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 1}
   - {r: 0.8679245, g: 0.36339787, b: 0, a: 1}
