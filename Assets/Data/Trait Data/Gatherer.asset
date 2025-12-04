@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gatherer
   m_EditorClassIdentifier: 
   description: Tends to gather resources.
-  traitIcon: {fileID: -2413806693520163455, guid: 209bf582346822043b353472784860d5, type: 3}
+  traitIcon: {fileID: 9140294213079773187, guid: d701d727999155142b4ed62b52324fe0, type: 3}
   breakpoints: 0300000006000000

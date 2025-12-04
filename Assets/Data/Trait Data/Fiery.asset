@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Fiery
   m_EditorClassIdentifier: 
   description: Uses the power of fire
-  traitIcon: {fileID: -2413806693520163455, guid: 209bf582346822043b353472784860d5, type: 3}
+  traitIcon: {fileID: -6745614665065289277, guid: 1a06b3e1238ab1442a8613f246d92567, type: 3}
   breakpoints: 0300000006000000
