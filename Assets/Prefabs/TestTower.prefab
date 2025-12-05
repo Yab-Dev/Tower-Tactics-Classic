@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1265300341283589504}
   - component: {fileID: 5812526348330978886}
   - component: {fileID: 2659367015325564853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TargetDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -91,7 +91,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -321,6 +321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab90cc25cbfc9194694360d415042bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 4890056134145657256, guid: 66823c982b283674ebfc496462ee5ec5, type: 3}
+  tooltipDelay: 1
   towerData: {fileID: 11400000, guid: c755c95c65cfc0445b3f3d39d5873dba, type: 2}
   currentHealth: 0
   isFiring: 0

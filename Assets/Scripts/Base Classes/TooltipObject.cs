@@ -7,17 +7,38 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
 {
     [Header("TooltipObject Prefabs")]
     [SerializeField] private GameObject tooltipPrefab;
+    [SerializeField] private float tooltipDelay;
+
+    private float tooltipTimer;
+    private bool hovering = false;
+    private bool displaying = false;
 
 
+    protected virtual void Update()
+    {
+        if (hovering)
+        {
+            tooltipTimer += Time.deltaTime;
+            if (tooltipTimer >= tooltipDelay && displaying == false)
+            {
+                displaying = true;
+                GameObject tooltip = GameManager.GetInstance().GetTooltipUI().SetTooltip(tooltipPrefab);
+                DisplayTooltip(tooltip);
+            }
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameObject tooltip = GameManager.GetInstance().GetTooltipUI().SetTooltip(tooltipPrefab);
-        DisplayTooltip(tooltip);
+        hovering = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        hovering = false;
+        displaying = false;
+        tooltipTimer = 0.0f;
+
         GameManager.GetInstance().GetTooltipUI().ClearTooltip();
     }
 

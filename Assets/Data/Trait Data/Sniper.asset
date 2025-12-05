@@ -16,6 +16,6 @@ MonoBehaviour:
   traitIcon: {fileID: -9123956424645862470, guid: be8ae54bbff593a4bb9954a1414d1f2c, type: 3}
   breakpoints:
   - breakpointValue: 2
-    breakpointDescription: 
+    breakpointDescription: Bullets will deal more damage the further they have traveled.
   - breakpointValue: 5
-    breakpointDescription: 
+    breakpointDescription: Towers placed in the back row will fire twice.

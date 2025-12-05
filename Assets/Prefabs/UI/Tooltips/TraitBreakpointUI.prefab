@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93997a5754380334196d6d6f95a5a229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakpointReachedColor: {r: 0.8666667, g: 0.3647059, b: 0, a: 1}
+  breakpointReachedColor: {r: 0.86666673, g: 0.3647059, b: 0, a: 1}
   breakpointNotReachedColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   breakpointBackground: {fileID: 3255031219196396467}
   breakpointCount: {fileID: 3939148751283964476}

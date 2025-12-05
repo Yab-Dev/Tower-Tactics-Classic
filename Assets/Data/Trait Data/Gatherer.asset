@@ -16,6 +16,6 @@ MonoBehaviour:
   traitIcon: {fileID: 9140294213079773187, guid: d701d727999155142b4ed62b52324fe0, type: 3}
   breakpoints:
   - breakpointValue: 3
-    breakpointDescription: 
+    breakpointDescription: During the defense phase, currency will rain down to collect.
   - breakpointValue: 6
-    breakpointDescription: 
+    breakpointDescription: Defeated enemies will drop currency to collect.

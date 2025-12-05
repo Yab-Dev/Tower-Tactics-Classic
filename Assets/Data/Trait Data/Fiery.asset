@@ -16,6 +16,7 @@ MonoBehaviour:
   traitIcon: {fileID: -6745614665065289277, guid: 1a06b3e1238ab1442a8613f246d92567, type: 3}
   breakpoints:
   - breakpointValue: 3
-    breakpointDescription: 
+    breakpointDescription: Bullets going over a certain row of tiles will become
+      ignited, dealing damage over time.
   - breakpointValue: 6
-    breakpointDescription: 
+    breakpointDescription: All enemies take damage over time.

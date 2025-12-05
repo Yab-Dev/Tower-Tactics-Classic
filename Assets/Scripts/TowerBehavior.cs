@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerBehavior : MonoBehaviour, IDamage
+public class TowerBehavior : TooltipObject, IDamage
 {
     [Header("Attributes")]
     [SerializeField] private TowerData towerData;
@@ -32,8 +32,10 @@ public class TowerBehavior : MonoBehaviour, IDamage
         targetDetection.SetSize(towerData.laneRange, towerData.areaRange);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (isFiring && !isDestroyed)
         {
             GameObject target = targetDetection.GetClosestTarget(transform.position);
@@ -111,5 +113,10 @@ public class TowerBehavior : MonoBehaviour, IDamage
     public IDamage.Team GetTeam()
     {
         return IDamage.Team.Tower;
+    }
+
+    protected override void DisplayTooltip(GameObject tooltip)
+    {
+        Debug.Log("TOOLTIP");
     }
 }
