@@ -7,6 +7,9 @@ public class TowerBehavior : TooltipObject, IDamage
     [Header("Attributes")]
     [SerializeField] private TowerData towerData;
     [SerializeField] private int currentHealth;
+    [SerializeField] private int level;
+    [SerializeField] private int currentExp;
+    [SerializeField] private int maxExp;
     [SerializeField] private bool isFiring;
     [SerializeField] private bool isDestroyed;
 
@@ -29,6 +32,7 @@ public class TowerBehavior : TooltipObject, IDamage
     private void Start()
     {
         RepairTower();
+        LevelUp();
         targetDetection.SetSize(towerData.laneRange, towerData.areaRange);
     }
 
@@ -104,6 +108,23 @@ public class TowerBehavior : TooltipObject, IDamage
     public int GetCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public (int current, int max) GetExp()
+    {
+        return (currentExp, maxExp);
+    }
+
+    public void LevelUp()
+    {
+        level++;
+        currentExp = 0;
+        maxExp = 1 + level;
     }
 
     public void Damage(int amount)

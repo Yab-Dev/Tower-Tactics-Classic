@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class TowerTooltipUI : MonoBehaviour
 {
+    [Header("Attributes")]
+    [SerializeField] private Color expColor;
+
     [Header("Cache")]
     [SerializeField] private TMPro.TMP_Text towerNameText;
     [SerializeField] private TMPro.TMP_Text towerLevelText;
@@ -30,6 +33,21 @@ public class TowerTooltipUI : MonoBehaviour
         TowerData towerData = tower.GetTowerData();
 
         towerNameText.text = towerData.name;
+        towerLevelText.text = $"Lv. {tower.GetLevel().ToString()}";
+
+        foreach (Transform child in towerTraitsContent)
+        {
+            Destroy(child.gameObject);
+        }
+        for (int i = 0; i < tower.GetExp().max; i++)
+        {
+            GameObject expObject = Instantiate(towerExpPrefab, towerExpContent);
+            Image expImage = expObject.GetComponent<Image>();
+            if (i < tower.GetExp().current)
+            {
+                expImage.color = expColor;
+            }
+        }
 
         towerIcon.sprite = towerData.sprite;
 
