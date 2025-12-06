@@ -101,6 +101,11 @@ public class TowerBehavior : TooltipObject, IDamage
         return towerData;
     }
 
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
     public void Damage(int amount)
     {
         currentHealth -= amount;
@@ -117,6 +122,10 @@ public class TowerBehavior : TooltipObject, IDamage
 
     protected override void DisplayTooltip(GameObject tooltip)
     {
-        Debug.Log("TOOLTIP");
+        TowerTooltipUI towerTooltip = tooltip.GetComponent<TowerTooltipUI>();
+        if (towerTooltip != null)
+        {
+            towerTooltip.DisplayTowerData(this);
+        }
     }
 }
