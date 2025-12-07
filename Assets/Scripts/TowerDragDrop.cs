@@ -12,6 +12,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     [SerializeField] private bool startDragging;
     [SerializeField] private bool isDragging;
     [SerializeField] private GameObject currentDraggedSlot;
+    [SerializeField] private GameObject startingSlot;
 
     public delegate void OnTowerMoveEventArgs();
     public event OnTowerMoveEventArgs OnTowerMove;
@@ -77,9 +78,12 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         {
             TowerSlot towerSlot = collision.GetComponent<TowerSlot>();
             if (towerSlot == null) { return; }
-            if (towerSlot.HasTower()) { return; }
 
-            currentDraggedSlot = collision.gameObject;
+            if (!(startingSlot == null && towerSlot.HasTower()))
+            {
+                currentDraggedSlot = collision.gameObject;
+            }
+            return;
         }
     }
 
@@ -108,6 +112,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         canDrag = true;
         isDragging = true;
+        startingSlot = null;
         OnTowerMove?.Invoke();
         OnAnyTowerMoveStart?.Invoke();
         if (initialPlace)
@@ -125,6 +130,18 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
             TowerSlot towerSlot = currentDraggedSlot.GetComponent<TowerSlot>();
             if (towerSlot == null) { return; }
+
+            if (towerSlot.HasTower() && startingSlot != null)
+            {
+                TowerSlot slot = startingSlot.GetComponent<TowerSlot>();
+                if (slot == null) { return; }
+                slot.ClearTower();
+                slot.SetCurrentTower(towerSlot.GetTower());
+                slot.GetTower().transform.position = startingSlot.transform.position;
+            }
+
+            towerSlot.ClearTower();
+            towerSlot.OnSlotTowerMoved += SetStartingSlot;
             towerSlot.SetCurrentTower(this);
 
             isDragging = false;
@@ -146,6 +163,11 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private void SetUnDraggable()
     {
         canDrag = false;
+    }
+
+    private void SetStartingSlot(GameObject slot)
+    {
+        startingSlot = slot;
     }
 
     public void StartDraggable(bool draggable)

@@ -12,6 +12,8 @@ public class TowerSlot : MonoBehaviour
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
 
+    public delegate void OnSlotTowerMovedEventArgs(GameObject slot);
+    public event OnSlotTowerMovedEventArgs OnSlotTowerMoved;
 
 
     private void Awake()
@@ -38,9 +40,18 @@ public class TowerSlot : MonoBehaviour
         return currentTower != null;
     }
 
+    public TowerDragDrop GetTower()
+    {
+        return currentTower;
+    }
+
     public void ClearTower()
     {
-        currentTower.OnTowerMove -= ClearTower;
+        if (currentTower != null)
+        {
+            currentTower.OnTowerMove -= ClearTower;
+        }
+        OnSlotTowerMoved?.Invoke(gameObject);
         currentTower = null;
     }
 
