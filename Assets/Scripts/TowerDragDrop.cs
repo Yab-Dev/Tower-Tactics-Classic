@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -83,6 +84,18 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             {
                 currentDraggedSlot = collision.gameObject;
             }
+            else if (towerSlot.HasTower()) 
+            {
+                TowerBehavior slotBehavior = towerSlot.GetTower().GetComponent<TowerBehavior>();
+                if (slotBehavior == null) { return; }
+                TowerBehavior towerBehavior = GetComponent<TowerBehavior>();
+                if (towerBehavior == null) { return; };
+
+                if (slotBehavior.GetTowerData().name == towerBehavior.GetTowerData().name)
+                {
+                    currentDraggedSlot = collision.gameObject;
+                }
+            }
             return;
         }
     }
@@ -131,13 +144,33 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             TowerSlot towerSlot = currentDraggedSlot.GetComponent<TowerSlot>();
             if (towerSlot == null) { return; }
 
-            if (towerSlot.HasTower() && startingSlot != null)
+            if (towerSlot.HasTower())
             {
-                TowerSlot slot = startingSlot.GetComponent<TowerSlot>();
-                if (slot == null) { return; }
-                slot.ClearTower();
-                slot.SetCurrentTower(towerSlot.GetTower());
-                slot.GetTower().transform.position = startingSlot.transform.position;
+                TowerBehavior slotTowerBehavior = towerSlot.GetTower().GetComponent<TowerBehavior>();
+                if (slotTowerBehavior == null) { return; }
+                TowerBehavior towerBehavior = GetComponent<TowerBehavior>();
+                if (towerBehavior == null) { return; }
+                
+                if (slotTowerBehavior.GetTowerData().name == towerBehavior.GetTowerData().name)
+                {
+                    slotTowerBehavior.AddExp();
+                    OnAnyTowerMoveEnd?.Invoke();
+                    if (initialPlace)
+                    {
+                        OnTowerPlaceEnd?.Invoke();
+                    }
+                    Destroy(gameObject);
+                    return;
+                }
+
+                if (startingSlot != null)
+                {
+                    TowerSlot slot = startingSlot.GetComponent<TowerSlot>();
+                    if (slot == null) { return; }
+                    slot.ClearTower();
+                    slot.SetCurrentTower(towerSlot.GetTower());
+                    slot.GetTower().transform.position = startingSlot.transform.position;
+                }
             }
 
             towerSlot.ClearTower();

@@ -94,10 +94,13 @@ public class TowerBehavior : TooltipObject, IDamage
 
     private void RepairTower()
     {
-        isDestroyed = false;
-        towerCollision.enabled = true;
-        currentHealth = towerData.health;
-        sprite.sprite = towerData.sprite;
+        if (this != null)
+        {
+            isDestroyed = false;
+            towerCollision.enabled = true;
+            currentHealth = towerData.health;
+            sprite.sprite = towerData.sprite;
+        }
     }
 
     public TowerData GetTowerData()
@@ -125,6 +128,15 @@ public class TowerBehavior : TooltipObject, IDamage
         level++;
         currentExp = 0;
         maxExp = 1 + level;
+    }
+
+    public void AddExp()
+    {
+        currentExp++;
+        if (currentExp >= maxExp)
+        {
+            LevelUp();
+        }
     }
 
     public void Damage(int amount)
