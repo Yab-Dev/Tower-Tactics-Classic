@@ -62,11 +62,11 @@ public class TowerTooltipUI : MonoBehaviour
             traitText.text = towerData.traits[i].name;
         }
 
-        towerHealthText.text = $"Health: {tower.GetCurrentHealth()}/{towerData.health}";
-        towerHitspeedText.text = $"Hit Speed: {towerData.hitSpeed.ToString()}";
-        towerDamageText.text = $"Damage: {towerData.damage.ToString()}";
-        towerLaneRangeText.text = $"Lane Range: {towerData.laneRange.ToString()}";
-        towerAreaRangeText.text = $"Area Range: {towerData.areaRange.ToString()}";
+        towerHealthText.text = $"Health: {tower.GetCurrentHealth()}/{towerData.stats[tower.GetLevel()-1].health}";
+        towerHitspeedText.text = $"Hit Speed: {towerData.stats[tower.GetLevel() - 1].hitSpeed.ToString()}";
+        towerDamageText.text = $"Damage: {towerData.stats[tower.GetLevel() - 1].damage.ToString()}";
+        towerLaneRangeText.text = $"Lane Range: {towerData.stats[tower.GetLevel() - 1].laneRange.ToString()}";
+        towerAreaRangeText.text = $"Area Range: {towerData.stats[tower.GetLevel() - 1].areaRange.ToString()}";
         towerHitCountText.text = "Hit Count: 1";
 
         towerDescriptionText.text = towerData.description;

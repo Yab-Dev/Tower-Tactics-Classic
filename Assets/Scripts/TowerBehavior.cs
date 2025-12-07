@@ -31,9 +31,7 @@ public class TowerBehavior : TooltipObject, IDamage
 
     private void Start()
     {
-        RepairTower();
         LevelUp();
-        targetDetection.SetSize(towerData.laneRange, towerData.areaRange);
     }
 
     protected override void Update()
@@ -54,8 +52,8 @@ public class TowerBehavior : TooltipObject, IDamage
     {
         if (shootCooldown <= 0.0f)
         {
-            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, target, IDamage.Team.Tower, towerData.damage, towerData.bulletSpeed);
-            shootCooldown = towerData.hitSpeed;
+            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, target, IDamage.Team.Tower, towerData.stats[level - 1].damage, towerData.bulletSpeed);
+            shootCooldown = towerData.stats[level - 1].hitSpeed;
         }
         else
         {
@@ -70,13 +68,13 @@ public class TowerBehavior : TooltipObject, IDamage
 
     private void StartDefense(int waveCount)
     {
-        shootCooldown = towerData.hitSpeed;
+        shootCooldown = towerData.stats[level - 1].hitSpeed;
         isFiring = true;
     }
 
     private void EndDefense(int waveCount)
     {
-        shootCooldown = towerData.hitSpeed;
+        shootCooldown = towerData.stats[level - 1].hitSpeed;
         isFiring = false;
     }
 
@@ -98,7 +96,7 @@ public class TowerBehavior : TooltipObject, IDamage
         {
             isDestroyed = false;
             towerCollision.enabled = true;
-            currentHealth = towerData.health;
+            currentHealth = towerData.stats[level - 1].health;
             sprite.sprite = towerData.sprite;
         }
     }
@@ -128,6 +126,8 @@ public class TowerBehavior : TooltipObject, IDamage
         level++;
         currentExp = 0;
         maxExp = 1 + level;
+        RepairTower();
+        targetDetection.SetSize(towerData.stats[level - 1].laneRange, towerData.stats[level - 1].areaRange);
     }
 
     public void AddExp()
