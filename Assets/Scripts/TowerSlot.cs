@@ -29,7 +29,7 @@ public class TowerSlot : MonoBehaviour
         sprite.color = fadeOutColor;
     }
 
-    public void SetCurrentTower(TowerDragDrop tower)
+    public virtual void SetCurrentTower(TowerDragDrop tower)
     {
         currentTower = tower;
         currentTower.OnTowerMove += ClearTower;
