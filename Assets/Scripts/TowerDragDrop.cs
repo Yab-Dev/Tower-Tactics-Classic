@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using static UnityEngine.Rendering.SplashScreen;
 
 public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -91,7 +92,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
                 TowerBehavior towerBehavior = GetComponent<TowerBehavior>();
                 if (towerBehavior == null) { return; };
 
-                if (slotBehavior.GetTowerData().name == towerBehavior.GetTowerData().name)
+                if (slotBehavior.GetTowerData().name == towerBehavior.GetTowerData().name && slotBehavior.GetLevel() != slotBehavior.GetTowerData().stats.Count)
                 {
                     currentDraggedSlot = collision.gameObject;
                 }
@@ -151,9 +152,9 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
                 TowerBehavior towerBehavior = GetComponent<TowerBehavior>();
                 if (towerBehavior == null) { return; }
                 
-                if (slotTowerBehavior.GetTowerData().name == towerBehavior.GetTowerData().name)
+                if (slotTowerBehavior.GetTowerData().name == towerBehavior.GetTowerData().name && slotTowerBehavior.GetLevel() != slotTowerBehavior.GetTowerData().stats.Count)
                 {
-                    slotTowerBehavior.AddExp();
+                    slotTowerBehavior.AddExp(towerBehavior.GetTotalExp());
                     OnAnyTowerMoveEnd?.Invoke();
                     if (initialPlace)
                     {

@@ -32,20 +32,28 @@ public class TowerTooltipUI : MonoBehaviour
     {
         TowerData towerData = tower.GetTowerData();
 
-        towerNameText.text = towerData.name;
-        towerLevelText.text = $"Lv. {tower.GetLevel().ToString()}";
-
         foreach (Transform child in towerTraitsContent)
         {
             Destroy(child.gameObject);
         }
-        for (int i = 0; i < tower.GetExp().max; i++)
+
+        towerNameText.text = towerData.name;
+        if (tower.GetLevel() == towerData.stats.Count)
         {
-            GameObject expObject = Instantiate(towerExpPrefab, towerExpContent);
-            Image expImage = expObject.GetComponent<Image>();
-            if (i < tower.GetExp().current)
+            towerLevelText.text = $"Lv. Max";
+        }
+        else
+        {
+            towerLevelText.text = $"Lv. {tower.GetLevel().ToString()}";
+
+            for (int i = 0; i < tower.GetExp().max; i++)
             {
-                expImage.color = expColor;
+                GameObject expObject = Instantiate(towerExpPrefab, towerExpContent);
+                Image expImage = expObject.GetComponent<Image>();
+                if (i < tower.GetExp().current)
+                {
+                    expImage.color = expColor;
+                }
             }
         }
 

@@ -19,6 +19,7 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private TargetDetection targetDetection;
 
     private float shootCooldown;
+    private int totalExp = 1;
 
 
 
@@ -121,21 +122,30 @@ public class TowerBehavior : TooltipObject, IDamage
         return (currentExp, maxExp);
     }
 
+    public int GetTotalExp()
+    {
+        return totalExp;
+    }
+
     public void LevelUp()
     {
-        level++;
+        level = Mathf.Min(level + 1, towerData.stats.Count);
         currentExp = 0;
         maxExp = 1 + level;
         RepairTower();
         targetDetection.SetSize(towerData.stats[level - 1].laneRange, towerData.stats[level - 1].areaRange);
     }
 
-    public void AddExp()
+    public void AddExp(int count)
     {
-        currentExp++;
-        if (currentExp >= maxExp)
+        for (int i = 0; i < count; i++)
         {
-            LevelUp();
+            currentExp++;
+            totalExp++;
+            if (currentExp >= maxExp)
+            {
+                LevelUp();
+            }
         }
     }
 
