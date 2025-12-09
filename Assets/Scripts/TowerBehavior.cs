@@ -10,6 +10,8 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private int level;
     [SerializeField] private int currentExp;
     [SerializeField] private int maxExp;
+    [SerializeField] private int totalExp = 1;
+    [SerializeField] private int sellValue;
     [SerializeField] private bool isFiring;
     [SerializeField] private bool isDestroyed;
 
@@ -19,7 +21,6 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private TargetDetection targetDetection;
 
     private float shootCooldown;
-    private int totalExp = 1;
 
 
 
@@ -127,11 +128,17 @@ public class TowerBehavior : TooltipObject, IDamage
         return totalExp;
     }
 
+    public int GetSellValue()
+    {
+        return sellValue;
+    }
+
     public void LevelUp()
     {
         level = Mathf.Min(level + 1, towerData.stats.Count);
         currentExp = 0;
         maxExp = 1 + level;
+        sellValue = Mathf.FloorToInt(towerData.cost / 2.0f) * level;
         RepairTower();
         targetDetection.SetSize(towerData.stats[level - 1].laneRange, towerData.stats[level - 1].areaRange);
     }

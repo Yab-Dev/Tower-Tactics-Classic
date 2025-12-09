@@ -16,6 +16,7 @@ MonoBehaviour:
   traits:
   - {fileID: 11400000, guid: dd4104b6bf02a4c46be6af93859aaa1f, type: 2}
   - {fileID: 11400000, guid: dc4dad2ba7cae0e48923facb34505aa9, type: 2}
+  cost: 5
   sprite: {fileID: -2135585597343286014, guid: 377daaf42d5fb004c983324f7690f590, type: 3}
   destroyedSprite: {fileID: 7482667652216324306, guid: 9caa2f69bdb3b7f4681e35cf76642948, type: 3}
   stats:

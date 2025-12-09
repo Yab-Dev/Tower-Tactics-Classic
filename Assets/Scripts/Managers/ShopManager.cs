@@ -9,11 +9,17 @@ public class ShopManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private List<TowerData> towerPool = new List<TowerData>();
     [SerializeField] private int shopSize = 5;
+    [SerializeField] private int towerTokens;
+    [SerializeField] private int startingTokenCount;
+    [SerializeField] private int waveRewardTokenCount;
 
     private List<TowerData> shopTowers = new List<TowerData>();
 
     public delegate void OnRefreshShopEventArgs(List<TowerData> shopData);
     public static event OnRefreshShopEventArgs OnRefreshShop;
+
+    public delegate void OnTowerTokensChangedEventArgs(int towerTokenAmount);
+    public static event OnTowerTokensChangedEventArgs OnTowerTokensChanged;
 
 
 
@@ -29,6 +35,8 @@ public class ShopManager : MonoBehaviour
         }
 
         GameManager.OnBuildPhaseStart += RefreshShop;
+        GameManager.OnGameStart += StartGame;
+        GameManager.OnDefensePhaseEnd += WaveComplete;
     }
 
     public static ShopManager GetInstance()
@@ -54,14 +62,49 @@ public class ShopManager : MonoBehaviour
         OnRefreshShop?.Invoke(shopTowers);
     }
 
-    public void BuyTower(int index)
+    public bool BuyTower(int index)
     {
+        if (shopTowers[index].cost > towerTokens)
+        {
+            return false;
+        }
+
         GameManager.GetInstance().SpawnTower(true, shopTowers[index]);
+        RemoveTowerTokens(shopTowers[index].cost);
         shopTowers[index] = null;
+        return true;
     }
 
     public List<TowerData> GetShop()
     {
         return shopTowers;
+    }
+
+    public void SetTowerTokens(int count)
+    {
+        towerTokens = count;
+        OnTowerTokensChanged?.Invoke(towerTokens);
+    }
+
+    public void AddTowerTokens(int count)
+    {
+        towerTokens += count;
+        OnTowerTokensChanged?.Invoke(towerTokens);
+    }
+
+    public void RemoveTowerTokens(int count)
+    {
+        towerTokens = Mathf.Max(0, towerTokens - count);
+        OnTowerTokensChanged?.Invoke(towerTokens);
+    }
+
+    private void StartGame()
+    {
+        SetTowerTokens(startingTokenCount);
+    }
+
+    private void WaveComplete(int waveCount)
+    {
+        AddTowerTokens(waveRewardTokenCount);
     }
 }

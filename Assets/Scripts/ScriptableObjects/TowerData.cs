@@ -7,6 +7,7 @@ public class TowerData : ScriptableObject
 {
     public string description;
     public List<TraitData> traits;
+    public int cost;
     public Sprite sprite;
     public Sprite destroyedSprite;
 

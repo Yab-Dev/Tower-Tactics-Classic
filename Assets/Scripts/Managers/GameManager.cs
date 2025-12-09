@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject towerObject;
     [SerializeField] private GameObject enemyObject;
 
+    public delegate void OnGameStartEventArgs();
+    public static event OnGameStartEventArgs OnGameStart;
+
     public delegate void OnBuildPhaseChangeEventArgs();
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseStart;
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseEnd;
@@ -44,12 +47,13 @@ public class GameManager : MonoBehaviour
 
         TowerDragDrop.OnAnyTowerMoveEnd += UpdateCurrentTowers;
         TooltipBaseUI.OnAssignTooltipObject += SetTooltip;
+        OnGameStart += StartGame;
     }
 
     private void Start()
     {
-        waveCount = 0;
-        SetBuildPhase();
+        OnGameStart?.Invoke();
+
     }
 
     public static GameManager GetInstance()
@@ -73,6 +77,12 @@ public class GameManager : MonoBehaviour
         {
             SetDefensePhase();
         }
+    }
+
+    private void StartGame()
+    {
+        waveCount = 0;
+        SetBuildPhase();
     }
 
     public void SetBuildPhase()

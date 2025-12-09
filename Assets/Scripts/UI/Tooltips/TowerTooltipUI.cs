@@ -17,6 +17,7 @@ public class TowerTooltipUI : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text towerHealthText;
     [SerializeField] private TMPro.TMP_Text towerHitspeedText;
     [SerializeField] private TMPro.TMP_Text towerDamageText;
+    [SerializeField] private TMPro.TMP_Text towerSellValueText;
     [SerializeField] private TMPro.TMP_Text towerLaneRangeText;
     [SerializeField] private TMPro.TMP_Text towerAreaRangeText;
     [SerializeField] private TMPro.TMP_Text towerHitCountText;
@@ -73,6 +74,7 @@ public class TowerTooltipUI : MonoBehaviour
         towerHealthText.text = $"Health: {tower.GetCurrentHealth()}/{towerData.stats[tower.GetLevel()-1].health}";
         towerHitspeedText.text = $"Hit Speed: {towerData.stats[tower.GetLevel() - 1].hitSpeed.ToString()}";
         towerDamageText.text = $"Damage: {towerData.stats[tower.GetLevel() - 1].damage.ToString()}";
+        towerSellValueText.text = $"Sell Value: {tower.GetSellValue()}";
         towerLaneRangeText.text = $"Lane Range: {towerData.stats[tower.GetLevel() - 1].laneRange.ToString()}";
         towerAreaRangeText.text = $"Area Range: {towerData.stats[tower.GetLevel() - 1].areaRange.ToString()}";
         towerHitCountText.text = "Hit Count: 1";
