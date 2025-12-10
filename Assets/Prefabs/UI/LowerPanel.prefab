@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 9097957131718143299}
   - component: {fileID: 6270900412631206530}
   - component: {fileID: 3596936586232000783}
+  - component: {fileID: 8343049310997792032}
   m_Layer: 5
   m_Name: StartWaveButton
   m_TagString: Untagged
@@ -576,6 +577,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8343049310997792032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3886135487144618647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c455ed1fecd8c04eab5d328c1c94a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
+  tooltipDelay: 1
+  description: Starts the next wave. Defeat all of the enemies in order to proceed
+    to the next build phase and make more tower tokens. If the enemies get past your
+    towers you lose, prepare yourself!
 --- !u!1 &4596094334602881827
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +740,7 @@ GameObject:
   - component: {fileID: 6607504179387310976}
   - component: {fileID: 1751500634400086108}
   - component: {fileID: 6819631486697430211}
+  - component: {fileID: 1421950829888881}
   m_Layer: 5
   m_Name: RefreshButton
   m_TagString: Untagged
@@ -831,6 +850,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1421950829888881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936031870214500844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c455ed1fecd8c04eab5d328c1c94a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
+  tooltipDelay: 1
+  description: Refreshes the current shop with new towers.
 --- !u!1 &5538759458503145785
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +979,7 @@ GameObject:
   - component: {fileID: 2644552265963670241}
   - component: {fileID: 2779660063065842458}
   - component: {fileID: 2440484627462471182}
+  - component: {fileID: 5949033665073714704}
   m_Layer: 5
   m_Name: TowerCapacityButton
   m_TagString: Untagged
@@ -1054,6 +1089,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5949033665073714704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513920044427187460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c455ed1fecd8c04eab5d328c1c94a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
+  tooltipDelay: 1
+  description: Increases your experience. When you level up, increase your tower
+    cap.
 --- !u!1 &7722919434007477327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,12 +1494,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3766225124679210964, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7002817149310266496}
+    - targetCorrespondingSourceObject: {fileID: 7931574886251990000, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7876986594083484055}
   m_SourcePrefab: {fileID: 100100000, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
 --- !u!224 &730889803455526940 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5500022059190818352, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
   m_PrefabInstance: {fileID: 5075737698129047084}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2909951937875011036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7931574886251990000, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+  m_PrefabInstance: {fileID: 5075737698129047084}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7876986594083484055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909951937875011036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c455ed1fecd8c04eab5d328c1c94a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
+  tooltipDelay: 1
+  description: Your current tower tokens. Use these to buy towers, refresh the shop,
+    and level up.
 --- !u!114 &5730563737767222226 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 718229380003001854, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
