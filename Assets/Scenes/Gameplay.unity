@@ -338,6 +338,8 @@ MonoBehaviour:
   towerTokens: 0
   startingTokenCount: 15
   waveRewardTokenCount: 10
+  refreshCost: 8
+  upgradeCost: 20
 --- !u!114 &471019754
 MonoBehaviour:
   m_ObjectHideFlags: 0

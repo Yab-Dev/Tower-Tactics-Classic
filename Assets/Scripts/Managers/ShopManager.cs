@@ -12,6 +12,8 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int towerTokens;
     [SerializeField] private int startingTokenCount;
     [SerializeField] private int waveRewardTokenCount;
+    [SerializeField] private int refreshCost;
+    [SerializeField] private int upgradeCost;
 
     private List<TowerData> shopTowers = new List<TowerData>();
 
@@ -62,6 +64,28 @@ public class ShopManager : MonoBehaviour
         OnRefreshShop?.Invoke(shopTowers);
     }
 
+    public void CheckRefreshCost()
+    {
+        if (refreshCost > towerTokens)
+        {
+            return;
+        }
+        RemoveTowerTokens(refreshCost);
+
+        RefreshShop();
+    }
+
+    public void UpgradeCapacity()
+    {
+        if (upgradeCost > towerTokens)
+        {
+            return;
+        }
+        RemoveTowerTokens(upgradeCost);
+
+        Debug.Log("Not implemented yet.");
+    }
+
     public bool BuyTower(int index)
     {
         if (shopTowers[index].cost > towerTokens)
@@ -96,6 +120,16 @@ public class ShopManager : MonoBehaviour
     {
         towerTokens = Mathf.Max(0, towerTokens - count);
         OnTowerTokensChanged?.Invoke(towerTokens);
+    }
+
+    public int GetRefreshCost()
+    {
+        return refreshCost;
+    }
+
+    public int GetUpgradeCost()
+    {
+        return upgradeCost;
     }
 
     private void StartGame()

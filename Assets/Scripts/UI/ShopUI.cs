@@ -8,7 +8,9 @@ public class ShopUI : MonoBehaviour
     [Header("Cache")]
     [SerializeField] private Transform shopButtonContent;
     [SerializeField] private Button refreshShopButton;
+    [SerializeField] private TMPro.TMP_Text refreshButtonCostText;
     [SerializeField] private Button upgradeCapacityButton;
+    [SerializeField] private TMPro.TMP_Text upgradeCapacityCostText;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject shopButton;
@@ -26,6 +28,12 @@ public class ShopUI : MonoBehaviour
 
         refreshShopButton.onClick.AddListener(RefreshButtonClick);
         upgradeCapacityButton.onClick.AddListener(UpgradeCapacityButtonClick);
+    }
+
+    private void Start()
+    {
+        refreshButtonCostText.text = ShopManager.GetInstance().GetRefreshCost().ToString();
+        upgradeCapacityCostText.text = ShopManager.GetInstance().GetUpgradeCost().ToString();
     }
 
     private void DisplayShop(List<TowerData> shopData)
@@ -63,12 +71,12 @@ public class ShopUI : MonoBehaviour
 
     private void RefreshButtonClick()
     {
-        ShopManager.GetInstance().RefreshShop();
+        ShopManager.GetInstance().CheckRefreshCost();
     }
 
     private void UpgradeCapacityButtonClick()
     {
-        Debug.Log("Not implemented yet!");
+        ShopManager.GetInstance().UpgradeCapacity();
     }
 
     public void DisableButtons()
