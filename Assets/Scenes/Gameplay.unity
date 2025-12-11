@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 212945125}
   - component: {fileID: 212945128}
   - component: {fileID: 212945127}
+  - component: {fileID: 212945129}
   m_Layer: 0
   m_Name: TowerBase
   m_TagString: TowerSlot
@@ -282,6 +283,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &212945129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212945123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c455ed1fecd8c04eab5d328c1c94a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
+  tooltipDelay: 1
+  description: This is your base. If it gets hit you'll lose a life, but all enemies
+    on screen will be destroyed.
 --- !u!224 &254569586 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6532014782245588443, guid: 1181a21bea2a0d1419f0b78ee92585f4, type: 3}
