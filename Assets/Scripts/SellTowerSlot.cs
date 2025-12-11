@@ -11,6 +11,7 @@ public class SellTowerSlot : TowerSlot
         {
             ShopManager.GetInstance().AddTowerTokens(towerBehavior.GetSellValue());
             Destroy(tower.gameObject);
+            GameManager.GetInstance().GetTooltipUI().ClearTooltip();
         }
     }
 }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private GamePhase gamePhase;
     [SerializeField] private int waveCount;
+    [SerializeField] private int startingLives;
     [SerializeField] private List<GameObject> currentTowers = new List<GameObject>();
     [SerializeField] private TooltipBaseUI tooltipObject;
 
@@ -16,8 +17,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject towerObject;
     [SerializeField] private GameObject enemyObject;
 
+    private int currentLives;
+    private bool gameLost = false;
+
     public delegate void OnGameStartEventArgs();
     public static event OnGameStartEventArgs OnGameStart;
+
+    public delegate void OnGameWinEventArgs();
+    public static event OnGameWinEventArgs OnGameWin;
+
+    public delegate void OnGameLostEventArgs();
+    public static event OnGameLostEventArgs OnGameLost;
 
     public delegate void OnBuildPhaseChangeEventArgs(int waveCount);
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseStart;
@@ -32,6 +42,9 @@ public class GameManager : MonoBehaviour
 
     public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> towers, List<(TraitData trait, int count)> traits);
     public static event OnCurrentTowersUpdatedEventArgs OnCurrentTowersUpdated;
+
+    public delegate void OnClearEnemiesEventArgs();
+    public static event OnClearEnemiesEventArgs OnClearEnemies;
 
 
     private void Awake()
@@ -48,12 +61,12 @@ public class GameManager : MonoBehaviour
         TowerDragDrop.OnAnyTowerMoveEnd += UpdateCurrentTowers;
         TooltipBaseUI.OnAssignTooltipObject += SetTooltip;
         OnGameStart += StartGame;
+        BaseBehavior.OnBaseAttacked += LoseLife;
     }
 
     private void Start()
     {
         OnGameStart?.Invoke();
-
     }
 
     public static GameManager GetInstance()
@@ -82,6 +95,7 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         waveCount = 0;
+        currentLives = startingLives;
         SetBuildPhase();
     }
 
@@ -111,7 +125,11 @@ public class GameManager : MonoBehaviour
         if (waveCount == totalWaves)
         {
             OnDefensePhaseEnd?.Invoke(waveCount);
-            Debug.Log("You Win!");
+            if (!gameLost)
+            {
+                Debug.Log("You Win!");
+                OnGameWin?.Invoke();
+            }
         }
         else
         {
@@ -188,6 +206,28 @@ public class GameManager : MonoBehaviour
     public TooltipBaseUI GetTooltipUI()
     {
         return tooltipObject;
+    }
+
+    private void LoseLife()
+    {
+        Debug.Log("Lost Life");
+        currentLives--;
+        if (currentLives <= 0)
+        {
+            GameLost();
+        }
+        else
+        {
+            OnClearEnemies?.Invoke();
+        }
+    }
+
+    private void GameLost()
+    {
+        Debug.Log("You lose!");
+        gameLost = true;
+        OnClearEnemies?.Invoke();
+        OnGameLost?.Invoke();
     }
 
     public enum GamePhase { Build, Defense, None }

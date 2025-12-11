@@ -21,6 +21,11 @@ public class WarningIcon : MonoBehaviour
         GameManager.OnBuildPhaseEnd += FadeIconOut;
     }
 
+    private void Start()
+    {
+        StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.0f));
+    }
+
     private void FadeIconIn(int waveCount)
     {
         LevelWaves.WaveData waveData = WaveManager.GetInstance().GetWaveData(waveCount);

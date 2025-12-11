@@ -24,7 +24,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
 
     private void Awake()
     {
-        
+        GameManager.OnClearEnemies += SelfDestruct;
     }
 
     private void Start()
@@ -76,14 +76,20 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         enemyData = data;
     }
 
+    private void SelfDestruct()
+    {
+        if (this == null) { return; }
+        isDestroyed = true;
+        OnEnemyDestroyed?.Invoke();
+        Destroy(gameObject);
+    }
+
     public void Damage(int amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0 && !isDestroyed)
         {
-            isDestroyed = true;
-            OnEnemyDestroyed?.Invoke();
-            Destroy(gameObject);
+            SelfDestruct();
         }
     }
 
