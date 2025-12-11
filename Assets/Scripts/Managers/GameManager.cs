@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public delegate void OnGameStartEventArgs();
     public static event OnGameStartEventArgs OnGameStart;
 
-    public delegate void OnBuildPhaseChangeEventArgs();
+    public delegate void OnBuildPhaseChangeEventArgs(int waveCount);
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseStart;
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseEnd;
 
@@ -93,14 +93,14 @@ public class GameManager : MonoBehaviour
         }
         waveCount++;
         gamePhase = GamePhase.Build;
-        OnBuildPhaseStart?.Invoke();
+        OnBuildPhaseStart?.Invoke(waveCount);
     }
 
     public void SetDefensePhase()
     {
         if (gamePhase == GamePhase.Build)
         {
-            OnBuildPhaseEnd?.Invoke();
+            OnBuildPhaseEnd?.Invoke(waveCount);
         }
         gamePhase = GamePhase.Defense;
         OnDefensePhaseStart?.Invoke(waveCount);

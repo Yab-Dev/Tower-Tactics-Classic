@@ -63,7 +63,7 @@ public class TowerBehavior : TooltipObject, IDamage
         }
     }
 
-    private void StartBuild()
+    private void StartBuild(int waveCount)
     {
         RepairTower();
     }

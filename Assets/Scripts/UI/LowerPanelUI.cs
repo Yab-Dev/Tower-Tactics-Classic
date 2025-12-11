@@ -39,7 +39,7 @@ public class LowerPanelUI : MonoBehaviour
         GameManager.GetInstance().SetDefensePhase();
     }
 
-    private void BuildPhaseStart()
+    private void BuildPhaseStart(int waveCount)
     {
         startWaveButton.interactable = true;
 
@@ -51,7 +51,7 @@ public class LowerPanelUI : MonoBehaviour
         StartCoroutine(MoveOverTime.MoveUIObjectOverTime(rectTransform, fadeInPosition, fadeDuration));
     }
 
-    private void FadePanelOut()
+    private void FadePanelOut(int waveCount)
     {
         StartCoroutine(MoveOverTime.MoveUIObjectOverTime(rectTransform, fadeOutPosition, fadeDuration));
     }

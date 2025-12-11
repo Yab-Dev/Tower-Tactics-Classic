@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    private static WaveManager instance;
+
     [Header("Attributes")]
     [SerializeField] private Vector2 topLaneSpawnPos;
     [SerializeField] private Vector2 midLaneSpawnPos;
@@ -17,9 +19,35 @@ public class WaveManager : MonoBehaviour
     private int spawnedEnemies;
 
 
+
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         GameManager.OnDefensePhaseStart += StartSpawningWave;
+    }
+
+    public static WaveManager GetInstance()
+    {
+        if (instance == null)
+        {
+            Debug.Log("WaveManager Instance Not Found");
+            return null;
+        }
+
+        return instance;
+    }
+
+    public LevelWaves.WaveData GetWaveData(int waveCount)
+    {
+        return levelWaves.waves[waveCount - 1];
     }
 
     private void StartSpawningWave(int waveCount)

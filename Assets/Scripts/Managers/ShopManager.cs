@@ -52,7 +52,7 @@ public class ShopManager : MonoBehaviour
         return instance;
     }
 
-    public void RefreshShop()
+    public void RefreshShop(int waveCount)
     {
         shopTowers.Clear();
 
@@ -72,7 +72,7 @@ public class ShopManager : MonoBehaviour
         }
         RemoveTowerTokens(refreshCost);
 
-        RefreshShop();
+        RefreshShop(0);
     }
 
     public void UpgradeCapacity()

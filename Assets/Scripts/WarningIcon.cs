@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WarningIcon : MonoBehaviour
+{
+    [Header("Attributes")]
+    [SerializeField] private LanePosition lanePosition;
+    [SerializeField] private Color fadeInColor;
+    [SerializeField] private Color fadeOutColor;
+
+    [Header("Cache")]
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private BoxCollider2D boxCollider;
+
+
+
+    private void Awake()
+    {
+        GameManager.OnBuildPhaseStart += FadeIconIn;
+        GameManager.OnBuildPhaseEnd += FadeIconOut;
+    }
+
+    private void FadeIconIn(int waveCount)
+    {
+        LevelWaves.WaveData waveData = WaveManager.GetInstance().GetWaveData(waveCount);
+        if
+        (
+            (waveData.topLaneHazard && lanePosition == LanePosition.Top) ||
+            (waveData.midLaneHazard && lanePosition == LanePosition.Middle) ||
+            (waveData.botLaneHazard && lanePosition == LanePosition.Bottom)
+        )
+        {
+            boxCollider.enabled = true;
+            StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeInColor, 0.2f));
+        }
+        else
+        {
+            FadeIconOut(waveCount);
+        }
+    }
+
+    private void FadeIconOut(int waveCount)
+    {
+        boxCollider.enabled = false;
+        StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.2f));
+    }
+
+    public enum LanePosition { Top, Middle, Bottom }
+}
