@@ -35,13 +35,18 @@ MonoBehaviour:
     botLaneEnemies:
     - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
   - spawnDelay: 1
-    topLaneHazard: 0
+    topLaneHazard: 1
     midLaneHazard: 1
-    botLaneHazard: 0
+    botLaneHazard: 1
     topLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
     - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
     midLaneEnemies:
     - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
     - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
     botLaneEnemies:
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
+    - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
     - {fileID: 11400000, guid: 02dd930b8aac86b4c8a508004343ae1b, type: 2}
