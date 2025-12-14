@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    [Header("Attributes")]
+    [SerializeField] private string singleplayerLevelName;
+
     [Header("Cache")]
     [SerializeField] private Button singleplayerButton;
     [SerializeField] private Button multiplayerButton;
@@ -23,7 +26,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void StartSingleplayer()
     {
-
+        LevelManager.GetInstance().LoadLevelWithTransition(singleplayerLevelName);
     }
 
     private void StartMultiplayer()
