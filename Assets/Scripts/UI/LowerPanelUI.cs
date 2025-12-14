@@ -23,7 +23,8 @@ public class LowerPanelUI : MonoBehaviour
         GameManager.OnBuildPhaseStart += BuildPhaseStart;
         GameManager.OnBuildPhaseEnd += FadePanelOut;
         TowerDragDrop.OnTowerPlaceStart += DisableButtons;
-        TowerDragDrop.OnTowerPlaceEnd += EnableButtons;
+        //TowerDragDrop.OnTowerPlaceEnd += EnableButtons;
+        GameManager.OnCurrentTowersUpdated += TowersUpdated;
 
         startWaveButton.onClick.AddListener(StartWave);
 
@@ -37,7 +38,8 @@ public class LowerPanelUI : MonoBehaviour
         GameManager.OnBuildPhaseStart -= BuildPhaseStart;
         GameManager.OnBuildPhaseEnd -= FadePanelOut;
         TowerDragDrop.OnTowerPlaceStart -= DisableButtons;
-        TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
+        //TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
+        GameManager.OnCurrentTowersUpdated -= TowersUpdated;
 
         startWaveButton.onClick.RemoveAllListeners();
     }
@@ -74,5 +76,17 @@ public class LowerPanelUI : MonoBehaviour
     private void EnableButtons()
     {
         startWaveButton.interactable = true;
+    }
+
+    private void TowersUpdated(List<GameObject> towers, List<(TraitData trait, int count)> traits, int towerCap)
+    {
+        if (towers.Count > towerCap)
+        {
+            startWaveButton.interactable = false;
+        }
+        else
+        {
+            startWaveButton.interactable = true;
+        }
     }
 }

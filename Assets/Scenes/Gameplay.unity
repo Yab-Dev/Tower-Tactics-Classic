@@ -526,6 +526,7 @@ MonoBehaviour:
   gamePhase: 0
   waveCount: 0
   startingLives: 3
+  startingTowerCap: 6
   currentTowers: []
   tooltipObject: {fileID: 0}
   towerObject: {fileID: 1421253106802044554, guid: 524b06f0d7d07eb4b8acc19f1956018a, type: 3}
@@ -2125,6 +2126,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3002649986577116964, guid: ba580374ee92cd54f8c9020e1c117eca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423961535256111684, guid: ba580374ee92cd54f8c9020e1c117eca, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423961535256111684, guid: ba580374ee92cd54f8c9020e1c117eca, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423961535256111684, guid: ba580374ee92cd54f8c9020e1c117eca, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423961535256111684, guid: ba580374ee92cd54f8c9020e1c117eca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423961535256111684, guid: ba580374ee92cd54f8c9020e1c117eca, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

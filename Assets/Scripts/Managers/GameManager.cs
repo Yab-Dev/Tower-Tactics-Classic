@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GamePhase gamePhase;
     [SerializeField] private int waveCount;
     [SerializeField] private int startingLives;
+    [SerializeField] private int startingTowerCap;
     [SerializeField] private List<GameObject> currentTowers = new List<GameObject>();
     [SerializeField] private TooltipBaseUI tooltipObject;
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject enemyObject;
 
     private int currentLives;
+    private int towerCap;
     private bool gameLost = false;
 
     public delegate void OnGameStartEventArgs();
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour
     public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> towers);
     public static event OnGetPlacedTowersEventArgs OnGetPlacedTowers;
 
-    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> towers, List<(TraitData trait, int count)> traits);
+    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> towers, List<(TraitData trait, int count)> traits, int towerCap);
     public static event OnCurrentTowersUpdatedEventArgs OnCurrentTowersUpdated;
 
     public delegate void OnClearEnemiesEventArgs();
@@ -106,6 +108,8 @@ public class GameManager : MonoBehaviour
     {
         waveCount = 0;
         currentLives = startingLives;
+        towerCap = startingTowerCap;
+        OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
         SetBuildPhase();
     }
 
@@ -171,7 +175,7 @@ public class GameManager : MonoBehaviour
         currentTowers.Clear();
         OnGetPlacedTowers?.Invoke(ref currentTowers);
 
-        OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits());
+        OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
     }
 
     private List<(TraitData trait, int count)> GetCurrentTraits()

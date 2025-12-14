@@ -34,21 +34,24 @@ public class MainMenuUI : MonoBehaviour
 
     private void StartSingleplayer()
     {
+        singleplayerButton.interactable = false;
         LevelManager.GetInstance().LoadLevelWithTransition(singleplayerLevelName);
     }
 
     private void StartMultiplayer()
     {
-
+        multiplayerButton.interactable = false;
     }
 
     private void OpenSettings()
     {
-
+        settingsButton.interactable = false;
     }
 
     private void QuitGame()
     {
+        quitButton.interactable = false;
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

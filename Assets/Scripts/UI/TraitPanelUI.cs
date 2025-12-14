@@ -22,7 +22,7 @@ public class TraitPanelUI : MonoBehaviour
         GameManager.OnCurrentTowersUpdated -= DisplayTraitIcons;
     }
 
-    private void DisplayTraitIcons(List<GameObject> towers, List<(TraitData trait, int count)> traits)
+    private void DisplayTraitIcons(List<GameObject> towers, List<(TraitData trait, int count)> traits, int towerCap)
     {
         foreach (Transform child in traitIconsContent)
         {
