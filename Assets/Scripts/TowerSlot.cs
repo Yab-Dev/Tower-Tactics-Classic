@@ -24,6 +24,18 @@ public class TowerSlot : MonoBehaviour
         GameManager.OnGetPlacedTowers += GetCurrentTower;
     }
 
+    private void OnDisable()
+    {
+        TowerDragDrop.OnAnyTowerMoveStart -= FadeSlotIn;
+        TowerDragDrop.OnAnyTowerMoveEnd -= FadeSlotOut;
+
+        GameManager.OnGetPlacedTowers -= GetCurrentTower;
+        if (currentTower != null)
+        {
+            currentTower.OnTowerMove -= ClearTower;
+        }
+    }
+
     private void Start()
     {
         sprite.color = fadeOutColor;

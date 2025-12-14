@@ -21,6 +21,12 @@ public class WarningIcon : MonoBehaviour
         GameManager.OnBuildPhaseEnd += FadeIconOut;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnBuildPhaseStart -= FadeIconIn;
+        GameManager.OnBuildPhaseEnd -= FadeIconOut;
+    }
+
     private void Start()
     {
         StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.0f));
@@ -28,6 +34,8 @@ public class WarningIcon : MonoBehaviour
 
     private void FadeIconIn(int waveCount)
     {
+        if (this == null) { return; }
+
         LevelWaves.WaveData waveData = WaveManager.GetInstance().GetWaveData(waveCount);
         if
         (
@@ -47,6 +55,8 @@ public class WarningIcon : MonoBehaviour
 
     private void FadeIconOut(int waveCount)
     {
+        if (this == null) { return; }
+
         boxCollider.enabled = false;
         StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.2f));
     }

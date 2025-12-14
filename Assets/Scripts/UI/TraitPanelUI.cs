@@ -17,6 +17,11 @@ public class TraitPanelUI : MonoBehaviour
         GameManager.OnCurrentTowersUpdated += DisplayTraitIcons;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnCurrentTowersUpdated -= DisplayTraitIcons;
+    }
+
     private void DisplayTraitIcons(List<GameObject> towers, List<(TraitData trait, int count)> traits)
     {
         foreach (Transform child in traitIconsContent)

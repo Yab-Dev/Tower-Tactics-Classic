@@ -16,6 +16,12 @@ public class EndingScreenUI : MonoBehaviour
         GameManager.OnGameLost += GameLose;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnGameWin -= GameWin;
+        GameManager.OnGameLost -= GameLose;
+    }
+
     private void GameWin()
     {
         Instantiate(winScreenPrefab, transform);

@@ -32,6 +32,16 @@ public class LowerPanelUI : MonoBehaviour
         fadeOutPosition = rectTransform.anchoredPosition - new Vector2(0, rectTransform.sizeDelta.y);
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnBuildPhaseStart -= BuildPhaseStart;
+        GameManager.OnBuildPhaseEnd -= FadePanelOut;
+        TowerDragDrop.OnTowerPlaceStart -= DisableButtons;
+        TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
+
+        startWaveButton.onClick.RemoveAllListeners();
+    }
+
     private void StartWave()
     {
         startWaveButton.interactable = false;

@@ -27,6 +27,11 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         GameManager.OnClearEnemies += SelfDestruct;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnClearEnemies -= SelfDestruct;
+    }
+
     private void Start()
     {
         sprite.sprite = enemyData.sprite;

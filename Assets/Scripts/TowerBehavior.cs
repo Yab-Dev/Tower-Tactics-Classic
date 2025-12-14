@@ -31,6 +31,13 @@ public class TowerBehavior : TooltipObject, IDamage
         GameManager.OnDefensePhaseEnd += EndDefense;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnBuildPhaseStart -= StartBuild;
+        GameManager.OnDefensePhaseStart -= StartDefense;
+        GameManager.OnDefensePhaseEnd -= EndDefense;
+    }
+
     private void Start()
     {
         LevelUp();

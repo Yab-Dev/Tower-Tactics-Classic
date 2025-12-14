@@ -41,6 +41,13 @@ public class ShopManager : MonoBehaviour
         GameManager.OnDefensePhaseEnd += WaveComplete;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnBuildPhaseStart -= RefreshShop;
+        GameManager.OnGameStart -= StartGame;
+        GameManager.OnDefensePhaseEnd -= WaveComplete;
+    }
+
     public static ShopManager GetInstance()
     {
         if (instance == null)

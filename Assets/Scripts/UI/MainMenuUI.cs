@@ -24,6 +24,14 @@ public class MainMenuUI : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
     }
 
+    private void OnDisable()
+    {
+        singleplayerButton.onClick.RemoveAllListeners();
+        multiplayerButton.onClick.RemoveAllListeners();
+        settingsButton.onClick.RemoveAllListeners();
+        quitButton.onClick.RemoveAllListeners();
+    }
+
     private void StartSingleplayer()
     {
         LevelManager.GetInstance().LoadLevelWithTransition(singleplayerLevelName);

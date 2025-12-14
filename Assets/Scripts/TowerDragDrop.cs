@@ -37,6 +37,12 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         GameManager.OnBuildPhaseEnd += SetUnDraggable;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnBuildPhaseStart -= SetDraggable;
+        GameManager.OnBuildPhaseEnd -= SetUnDraggable;
+    }
+
     private void Start()
     {
         if (startDragging)

@@ -58,10 +58,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+
+
         TowerDragDrop.OnAnyTowerMoveEnd += UpdateCurrentTowers;
         TooltipBaseUI.OnAssignTooltipObject += SetTooltip;
         OnGameStart += StartGame;
         BaseBehavior.OnBaseAttacked += LoseLife;
+    }
+
+    private void OnDisable()
+    {
+        TowerDragDrop.OnAnyTowerMoveEnd -= UpdateCurrentTowers;
+        TooltipBaseUI.OnAssignTooltipObject -= SetTooltip;
+        OnGameStart -= StartGame;
+        BaseBehavior.OnBaseAttacked -= LoseLife;
     }
 
     private void Start()

@@ -14,6 +14,11 @@ public class StatsPanelUI : MonoBehaviour
         ShopManager.OnTowerTokensChanged += UpdateTowerTokens;
     }
 
+    private void OnDisable()
+    {
+        ShopManager.OnTowerTokensChanged -= UpdateTowerTokens;
+    }
+
     private void UpdateTowerTokens(int towerTokenAmount)
     {
         towerTokensText.text = towerTokenAmount.ToString();

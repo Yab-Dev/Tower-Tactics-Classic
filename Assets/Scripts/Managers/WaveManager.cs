@@ -34,6 +34,11 @@ public class WaveManager : MonoBehaviour
         GameManager.OnDefensePhaseStart += StartSpawningWave;
     }
 
+    private void OnDisable()
+    {
+        GameManager.OnDefensePhaseStart -= StartSpawningWave;
+    }
+
     public static WaveManager GetInstance()
     {
         if (instance == null)

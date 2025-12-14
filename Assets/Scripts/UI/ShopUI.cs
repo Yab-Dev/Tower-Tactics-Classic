@@ -30,6 +30,16 @@ public class ShopUI : MonoBehaviour
         upgradeCapacityButton.onClick.AddListener(UpgradeCapacityButtonClick);
     }
 
+    private void OnDisable()
+    {
+        ShopManager.OnRefreshShop -= DisplayShop;
+        TowerDragDrop.OnTowerPlaceStart -= DisableButtons;
+        TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
+
+        refreshShopButton.onClick.RemoveAllListeners();
+        upgradeCapacityButton.onClick.RemoveAllListeners();
+    }
+
     private void Start()
     {
         refreshButtonCostText.text = ShopManager.GetInstance().GetRefreshCost().ToString();

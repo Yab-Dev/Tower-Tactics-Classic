@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 3901733352344905427}
   - component: {fileID: 312553408891657555}
   - component: {fileID: 6813269642163359123}
+  - component: {fileID: 1294476837301963168}
   m_Layer: 5
   m_Name: WinScreen
   m_TagString: Untagged
@@ -487,6 +488,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1294476837301963168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422062596819174147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a20d647ec551247b40f3f220b09b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameplayLevelName: Gameplay
+  mainMenuLevelName: MainMenu
+  playAgainButton: {fileID: 5077972161528168581}
+  mainMenuButton: {fileID: 3327256849561885034}
 --- !u!1 &4972845435070678942
 GameObject:
   m_ObjectHideFlags: 0
