@@ -567,7 +567,7 @@ MonoBehaviour:
   shopSize: 5
   towerTokens: 0
   startingTokenCount: 15
-  waveRewardTokenCount: 10
+  waveRewardTokenCount: 15
   refreshCost: 8
   upgradeCost: 20
 --- !u!114 &471019754
