@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TooltipBaseUI : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private Vector2 displayOffset;
+
+    [Header("Cache")]
+    [SerializeField] private Image dropShadowImage;
 
     public delegate void OnAssignTooltipObjectEventArgs(TooltipBaseUI tooltipObject);
     public static event OnAssignTooltipObjectEventArgs OnAssignTooltipObject;
@@ -41,6 +45,7 @@ public class TooltipBaseUI : MonoBehaviour
         ClearTooltip();
 
         GameObject tooltip = Instantiate(tooltipPrefab, transform);
+        dropShadowImage.enabled = true;
 
         return tooltip;
     }
@@ -51,5 +56,6 @@ public class TooltipBaseUI : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        dropShadowImage.enabled = false;
     }
 }
