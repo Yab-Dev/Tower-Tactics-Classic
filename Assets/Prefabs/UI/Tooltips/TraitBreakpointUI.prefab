@@ -208,8 +208,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -434,8 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93997a5754380334196d6d6f95a5a229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakpointReachedColor: {r: 0.86666673, g: 0.3647059, b: 0, a: 1}
-  breakpointNotReachedColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  breakpointReachedColor: {r: 0.86666673, g: 0.3647059, b: 0, a: 0}
+  breakpointNotReachedColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 0.39215687}
   breakpointBackground: {fileID: 3255031219196396467}
   breakpointCount: {fileID: 3939148751283964476}
   breakpointDescription: {fileID: 2687882358613288396}
