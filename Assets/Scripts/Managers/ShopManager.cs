@@ -90,7 +90,7 @@ public class ShopManager : MonoBehaviour
         }
         RemoveTowerTokens(upgradeCost);
 
-        Debug.Log("Not implemented yet.");
+        GameManager.GetInstance().IncreaseTowerCap();
     }
 
     public bool BuyTower(int index)
