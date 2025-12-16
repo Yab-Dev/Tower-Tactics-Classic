@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
     }
 
-    private List<(TraitData trait, int count)> GetCurrentTraits()
+    public List<(TraitData trait, int count)> GetCurrentTraits()
     {
         List<(TraitData trait, int count)> traitData = new List<(TraitData trait, int count)>();
         Dictionary<TraitData, int> traitDict = new Dictionary<TraitData, int>();
