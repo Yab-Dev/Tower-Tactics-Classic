@@ -7,6 +7,9 @@ public class TraitManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private TraitData gathererTrait;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject gathererFallingTokensPrefab;
+
 
 
     private void Awake()
@@ -22,12 +25,12 @@ public class TraitManager : MonoBehaviour
     private void DefenseStart(int waveCount)
     {
         List<(TraitData trait, int count)> traitData = GameManager.GetInstance().GetCurrentTraits();
-        (TraitData trait, int count) trait = GetTrait(traitData, gathererTrait);
-        if (trait.trait != null)
+        (TraitData trait, int count) gathererTraitData = GetTrait(traitData, gathererTrait);
+        if (gathererTraitData.trait != null)
         {
-            if (trait.count >= trait.trait.breakpoints[0].breakpointValue)
+            if (gathererTraitData.count >= gathererTraitData.trait.breakpoints[0].breakpointValue)
             {
-                Debug.Log("GATHERER BREAKPOINT REACHED");
+                Instantiate(gathererFallingTokensPrefab);
             }
         }
     }
