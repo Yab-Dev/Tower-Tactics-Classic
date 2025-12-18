@@ -14,6 +14,9 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject settingsUIPrefab;
+
 
 
     private void Awake()
@@ -22,6 +25,8 @@ public class MainMenuUI : MonoBehaviour
         multiplayerButton.onClick.AddListener(StartMultiplayer);
         settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
+
+        SettingsUI.OnSettingsExit += SettingsClosed;
     }
 
     private void OnDisable()
@@ -30,6 +35,8 @@ public class MainMenuUI : MonoBehaviour
         multiplayerButton.onClick.RemoveAllListeners();
         settingsButton.onClick.RemoveAllListeners();
         quitButton.onClick.RemoveAllListeners();
+
+        SettingsUI.OnSettingsExit -= SettingsClosed;
     }
 
     private void StartSingleplayer()
@@ -46,6 +53,7 @@ public class MainMenuUI : MonoBehaviour
     private void OpenSettings()
     {
         settingsButton.interactable = false;
+        Instantiate(settingsUIPrefab, transform);
     }
 
     private void QuitGame()
@@ -57,5 +65,10 @@ public class MainMenuUI : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    private void SettingsClosed()
+    {
+        settingsButton.interactable = true;
     }
 }

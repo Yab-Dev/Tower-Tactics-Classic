@@ -886,6 +886,7 @@ MonoBehaviour:
   multiplayerButton: {fileID: 880119441577587124}
   settingsButton: {fileID: 5561067677566430700}
   quitButton: {fileID: 1442412314718709021}
+  settingsUIPrefab: {fileID: 8809477439378319980, guid: 06723e3e203ea4141914204b033b3d8f, type: 3}
 --- !u!1 &7013835120757071434
 GameObject:
   m_ObjectHideFlags: 0
