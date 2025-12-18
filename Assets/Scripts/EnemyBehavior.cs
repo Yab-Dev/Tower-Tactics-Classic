@@ -20,6 +20,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     public delegate void OnEnemyDestroyedEventArgs();
     public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
 
+    private bool waitFrame = true;
 
 
     private void Awake()
@@ -53,9 +54,16 @@ public class EnemyBehavior : MonoBehaviour, IDamage
 
     private void FixedUpdate()
     {
+        if (waitFrame)
+        {
+            waitFrame = false;
+            return;
+        }
+
         if (!isAttacking)
         {
-            rigidbody.MovePosition(transform.position - new Vector3(enemyData.moveSpeed * Time.fixedDeltaTime, 0.0f, 0.0f));
+            Vector3 moveTarget = transform.position - new Vector3(enemyData.moveSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
+            rigidbody.MovePosition(moveTarget);
         }
     }
 
