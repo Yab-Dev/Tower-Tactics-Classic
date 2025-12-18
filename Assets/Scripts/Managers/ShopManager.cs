@@ -84,7 +84,7 @@ public class ShopManager : MonoBehaviour
 
     public void UpgradeCapacity()
     {
-        if (upgradeCost > towerTokens)
+        if (upgradeCost > towerTokens || GameManager.GetInstance().GetTowerCap() >= 21)
         {
             return;
         }

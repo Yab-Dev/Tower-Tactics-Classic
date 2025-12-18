@@ -208,7 +208,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2106933027
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.11743506, g: 0.5133951, b: 0.8584906, a: 1}
@@ -309,6 +309,7 @@ MonoBehaviour:
   startDragging: 0
   isDragging: 0
   currentDraggedSlot: {fileID: 0}
+  startingSlot: {fileID: 0}
 --- !u!114 &-1283180853759540893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +325,13 @@ MonoBehaviour:
   tooltipPrefab: {fileID: 4890056134145657256, guid: 66823c982b283674ebfc496462ee5ec5, type: 3}
   tooltipDelay: 0
   towerData: {fileID: 11400000, guid: c755c95c65cfc0445b3f3d39d5873dba, type: 2}
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
   currentHealth: 0
+  level: 0
+  currentExp: 0
+  maxExp: 0
+  totalExp: 1
+  sellValue: 0
   isFiring: 0
   isDestroyed: 0
   sprite: {fileID: 6357759981356025847}

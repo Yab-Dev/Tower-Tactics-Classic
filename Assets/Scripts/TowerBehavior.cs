@@ -6,6 +6,7 @@ public class TowerBehavior : TooltipObject, IDamage
 {
     [Header("Attributes")]
     [SerializeField] private TowerData towerData;
+    [SerializeField] private Color hurtColor;
     [SerializeField] private int currentHealth;
     [SerializeField] private int level;
     [SerializeField] private int currentExp;
@@ -169,6 +170,12 @@ public class TowerBehavior : TooltipObject, IDamage
         if (currentHealth <= 0)
         {
             DestroyTower();
+        }
+        else
+        {
+            Color originalColor = sprite.color;
+            sprite.color = hurtColor;
+            StartCoroutine(ColorFade.FadeSpriteColor(sprite, originalColor, 0.2f));
         }
     }
 

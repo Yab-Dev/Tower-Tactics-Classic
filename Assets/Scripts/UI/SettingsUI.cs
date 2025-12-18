@@ -32,6 +32,7 @@ public class SettingsUI : MonoBehaviour
 
     private void Start()
     {
+        gameSettings.LoadData();
         fullscreenToggle.isOn = gameSettings.fullscreen;
         masterVolumeSlider.value = gameSettings.masterVolume;
     }
@@ -56,6 +57,7 @@ public class SettingsUI : MonoBehaviour
 
     private void ExitSettings()
     {
+        gameSettings.SaveData();
         OnSettingsExit?.Invoke();
         Destroy(gameObject);
     }

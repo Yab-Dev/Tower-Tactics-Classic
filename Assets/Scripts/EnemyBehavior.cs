@@ -8,6 +8,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private int currentHealth;
     [SerializeField] private bool isAttacking;
+    [SerializeField] private Color hurtColor;
 
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
@@ -103,6 +104,12 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         if (currentHealth <= 0 && !isDestroyed)
         {
             SelfDestruct();
+        }
+        else
+        {
+            Color originalColor = sprite.color;
+            sprite.color = hurtColor;
+            StartCoroutine(ColorFade.FadeSpriteColor(sprite, originalColor, 0.2f));
         }
     }
 

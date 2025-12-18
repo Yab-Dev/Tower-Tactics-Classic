@@ -250,5 +250,10 @@ public class GameManager : MonoBehaviour
         OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
     }
 
+    public int GetTowerCap()
+    {
+        return towerCap;
+    }
+
     public enum GamePhase { Build, Defense, None }
 }
