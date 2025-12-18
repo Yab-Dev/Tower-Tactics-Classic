@@ -39,6 +39,14 @@ public class SettingsUI : MonoBehaviour
     private void SetFullscreen(bool fullscreen)
     {
         gameSettings.fullscreen = fullscreen;
+        if (gameSettings.fullscreen)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        }
+        else
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
     }
 
     private void SetMasterVolume(float value)
