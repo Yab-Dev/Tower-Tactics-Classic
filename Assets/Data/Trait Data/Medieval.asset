@@ -15,5 +15,12 @@ MonoBehaviour:
   description: Castles, Knights, Dragons oh my!
   traitIcon: {fileID: -4910884339419480979, guid: 759ed7abb8893a345ac7931dbca1eb2e, type: 3}
   breakpoints:
-  - breakpointValue: 0
-    breakpointDescription: 
+  - breakpointValue: 2
+    breakpointDescription: When a medieval tower is destroyed, fire arrows in an
+      area around the tower.
+  - breakpointValue: 4
+    breakpointDescription: All medieval towers gain attack speed for each destroyed
+      tower.
+  - breakpointValue: 6
+    breakpointDescription: Periodically each medieval tower fires arrows towards
+      a random enemy.

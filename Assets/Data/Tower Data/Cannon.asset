@@ -26,4 +26,4 @@ MonoBehaviour:
     laneRange: 30
     areaRange: 3
   bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
-  bulletSpeed: 5
+  bulletSpeed: 8

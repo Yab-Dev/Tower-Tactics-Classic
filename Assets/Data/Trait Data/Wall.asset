@@ -16,8 +16,8 @@ MonoBehaviour:
   traitIcon: {fileID: 2306664096213449541, guid: 10fd6047f9b70694b9843cd300d1bf74, type: 3}
   breakpoints:
   - breakpointValue: 2
-    breakpointDescription: Walls have extra health.
+    breakpointDescription: Walls will deal damage back towards their attackers.
   - breakpointValue: 4
-    breakpointDescription: Walls will slowly heal over time in the defense phase.
+    breakpointDescription: Walls have extra health based on their level.
   - breakpointValue: 6
-    breakpointDescription: All towers have extra health.
+    breakpointDescription: Walls will slowly heal over time in the defense phase.

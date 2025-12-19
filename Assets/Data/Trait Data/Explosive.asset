@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Kaboom
   traitIcon: {fileID: 5589389877838285156, guid: 8f719b1b54c0d254094e8f1b6bda807b, type: 3}
-  breakpoints: []
+  breakpoints:
+  - breakpointValue: 2
+    breakpointDescription: Bullets fired from explosive towers deal damage to nearby
+      enemies as well.
+  - breakpointValue: 4
+    breakpointDescription: Bullet explosion radius range massively increased. Can
+      hit enemies in other lanes.

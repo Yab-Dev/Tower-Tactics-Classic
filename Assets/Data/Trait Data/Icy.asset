@@ -15,8 +15,8 @@ MonoBehaviour:
   description: Uses the power of ice
   traitIcon: {fileID: -2840521585152295393, guid: 699cd3ba1cde62c4fb1e4cbbcea47f3b, type: 3}
   breakpoints:
-  - breakpointValue: 3
+  - breakpointValue: 1
     breakpointDescription: Spawns an icy rock tower at the start of the shop phase.
       Is destroyed at the end of defense.
-  - breakpointValue: 6
+  - breakpointValue: 4
     breakpointDescription: Spawns 3 icy rocks instead.

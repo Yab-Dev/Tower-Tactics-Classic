@@ -17,5 +17,5 @@ MonoBehaviour:
   breakpoints:
   - breakpointValue: 2
     breakpointDescription: Bullets will deal more damage the further they have traveled.
-  - breakpointValue: 5
+  - breakpointValue: 4
     breakpointDescription: Towers placed in the back row will fire twice.
