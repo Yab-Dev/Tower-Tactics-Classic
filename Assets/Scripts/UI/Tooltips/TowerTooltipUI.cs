@@ -59,6 +59,7 @@ public class TowerTooltipUI : MonoBehaviour
         }
 
         towerIcon.sprite = towerData.sprite;
+        towerIcon.SetNativeSize();
 
         foreach (Transform child in towerTraitsContent)
         {

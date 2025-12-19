@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb57f06c0cf7b7348bea0832acc4d22b, type: 3}
-  m_Name: Test Enemy
+  m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
+  m_Name: Earthy
   m_EditorClassIdentifier: 
-  description: An enemy for testing
-  sprite: {fileID: 7482667652216324306, guid: 15379a794a4e89c40bd645dea2956403, type: 3}
-  health: 50
-  hitSpeed: 1
-  damage: 1
-  range: 1.2
-  moveSpeed: 1
+  description: Uses the power of earth
+  traitIcon: {fileID: -1825098913617826676, guid: 3b655935a89579e43816b9ed9f0122d8, type: 3}
+  breakpoints: []

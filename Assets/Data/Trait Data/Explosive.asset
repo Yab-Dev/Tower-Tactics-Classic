@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb57f06c0cf7b7348bea0832acc4d22b, type: 3}
-  m_Name: Test Enemy
+  m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
+  m_Name: Explosive
   m_EditorClassIdentifier: 
-  description: An enemy for testing
-  sprite: {fileID: 7482667652216324306, guid: 15379a794a4e89c40bd645dea2956403, type: 3}
-  health: 50
-  hitSpeed: 1
-  damage: 1
-  range: 1.2
-  moveSpeed: 1
+  description: Kaboom
+  traitIcon: {fileID: 5589389877838285156, guid: 8f719b1b54c0d254094e8f1b6bda807b, type: 3}
+  breakpoints: []

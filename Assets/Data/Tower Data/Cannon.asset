@@ -10,28 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c8e7663ec163d241b0036e439d6b702, type: 3}
-  m_Name: Test Tower
+  m_Name: Cannon
   m_EditorClassIdentifier: 
-  description: A tower for testing
+  description: Shoots explosive cannonballs
   traits:
-  - {fileID: 11400000, guid: d9ef9c8931c9551428e545738ece9164, type: 2}
+  - {fileID: 11400000, guid: 493010597a2e3f144a5fbf611a4954dd, type: 2}
+  - {fileID: 11400000, guid: 03972b8c73c48dd439361b0399c37ec4, type: 2}
   cost: 5
-  sprite: {fileID: -2135585597343286014, guid: 377daaf42d5fb004c983324f7690f590, type: 3}
-  destroyedSprite: {fileID: 7482667652216324306, guid: 9caa2f69bdb3b7f4681e35cf76642948, type: 3}
+  sprite: {fileID: 3322948986396454299, guid: 5ef8838e87b4442449e6762df2a17dcd, type: 3}
+  destroyedSprite: {fileID: 0}
   stats:
   - health: 5
-    hitSpeed: 1
-    damage: 1
-    laneRange: 30
-    areaRange: 3
-  - health: 7
-    hitSpeed: 1
-    damage: 2
-    laneRange: 30
-    areaRange: 3
-  - health: 10
-    hitSpeed: 1
-    damage: 3
+    hitSpeed: 2
+    damage: 10
     laneRange: 30
     areaRange: 3
   bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}

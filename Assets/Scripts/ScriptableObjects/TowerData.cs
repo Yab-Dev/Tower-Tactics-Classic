@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Tower Data", menuName = "Tower Data")]
 public class TowerData : ScriptableObject
 {
+    [TextArea]
     public string description;
     public List<TraitData> traits;
     public int cost;
