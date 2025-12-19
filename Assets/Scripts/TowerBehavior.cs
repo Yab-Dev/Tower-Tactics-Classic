@@ -22,7 +22,7 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private TargetDetection targetDetection;
 
     private float shootCooldown;
-
+    private Color originalColor;
 
 
     private void Awake()
@@ -41,6 +41,7 @@ public class TowerBehavior : TooltipObject, IDamage
 
     private void Start()
     {
+        originalColor = sprite.color;
         LevelUp(1);
     }
 
@@ -186,7 +187,6 @@ public class TowerBehavior : TooltipObject, IDamage
         }
         else
         {
-            Color originalColor = sprite.color;
             sprite.color = hurtColor;
             StartCoroutine(ColorFade.FadeSpriteColor(sprite, originalColor, 0.2f));
         }

@@ -18,10 +18,11 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     private float attackCooldown;
     private bool isDestroyed;
 
+    private bool waitFrame = true;
+    private Color originalColor;
+
     public delegate void OnEnemyDestroyedEventArgs();
     public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
-
-    private bool waitFrame = true;
 
 
     private void Awake()
@@ -36,6 +37,8 @@ public class EnemyBehavior : MonoBehaviour, IDamage
 
     private void Start()
     {
+        originalColor = sprite.color;
+
         sprite.sprite = enemyData.sprite;
         currentHealth = enemyData.health;
         targetDetection.SetSize(enemyData.range, 0.5f);
@@ -107,7 +110,6 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         }
         else
         {
-            Color originalColor = sprite.color;
             sprite.color = hurtColor;
             StartCoroutine(ColorFade.FadeSpriteColor(sprite, originalColor, 0.2f));
         }
