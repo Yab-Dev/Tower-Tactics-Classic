@@ -100,7 +100,7 @@ public class ShopManager : MonoBehaviour
             return false;
         }
 
-        GameManager.GetInstance().SpawnTower(true, shopTowers[index]);
+        GameManager.GetInstance().SpawnTower(true, shopTowers[index], Vector2.zero);
         RemoveTowerTokens(shopTowers[index].cost);
         shopTowers[index] = null;
         return true;

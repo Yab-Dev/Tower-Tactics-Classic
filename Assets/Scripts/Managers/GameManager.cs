@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int startingLives;
     [SerializeField] private int startingTowerCap;
     [SerializeField] private List<GameObject> currentTowers = new List<GameObject>();
+    [SerializeField] private TowerData startingTower;
+    [SerializeField] private List<TowerSlot> startingSlots = new List<TowerSlot>();
     [SerializeField] private TooltipBaseUI tooltipObject;
 
     [Header("Prefabs")]
@@ -60,8 +62,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-
-
         TowerDragDrop.OnAnyTowerMoveEnd += UpdateCurrentTowers;
         TooltipBaseUI.OnAssignTooltipObject += SetTooltip;
         OnGameStart += StartGame;
@@ -109,6 +109,19 @@ public class GameManager : MonoBehaviour
         waveCount = 0;
         currentLives = startingLives;
         towerCap = startingTowerCap;
+
+        // Spawn starting towers
+        for (int i = 0; i < startingSlots.Count; i++)
+        {
+            GameObject tower = SpawnTower(false, startingTower, startingSlots[i].transform.position);
+            TowerDragDrop towerDragDrop = tower.GetComponent<TowerDragDrop>();
+
+            startingSlots[i].ClearTower();
+            startingSlots[i].OnSlotTowerMoved += towerDragDrop.SetStartingSlot;
+            startingSlots[i].SetCurrentTower(towerDragDrop);
+        }
+
+        UpdateCurrentTowers();
         OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
         SetBuildPhase();
     }
@@ -151,14 +164,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SpawnTower(bool startDragging, TowerData towerData)
+    public GameObject SpawnTower(bool startDragging, TowerData towerData, Vector2 position)
     {
         GameObject tower = Instantiate(towerObject, Vector2.zero, Quaternion.identity);
+        tower.transform.position = position;
         TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
         TowerDragDrop towerDragDrop = tower.GetComponent<TowerDragDrop>();
 
         towerBehavior.SetTowerData(towerData);
-        towerDragDrop.StartDraggable(startDragging);
+        if (startDragging)
+        {
+            towerDragDrop.StartDraggable(startDragging);
+        }
+
+        towerBehavior.LevelUp(1);
+
+        return tower;
     }
 
     public EnemyBehavior SpawnEnemy(EnemyData enemyData, Vector2 startingPos)

@@ -205,7 +205,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         canDrag = false;
     }
 
-    private void SetStartingSlot(GameObject slot)
+    public void SetStartingSlot(GameObject slot)
     {
         startingSlot = slot;
     }

@@ -8,7 +8,7 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private TowerData towerData;
     [SerializeField] private Color hurtColor;
     [SerializeField] private int currentHealth;
-    [SerializeField] private int level;
+    [SerializeField] private int level = 1;
     [SerializeField] private int currentExp;
     [SerializeField] private int maxExp;
     [SerializeField] private int totalExp = 1;
@@ -41,7 +41,7 @@ public class TowerBehavior : TooltipObject, IDamage
 
     private void Start()
     {
-        LevelUp();
+        LevelUp(1);
     }
 
     protected override void Update()
@@ -141,14 +141,27 @@ public class TowerBehavior : TooltipObject, IDamage
         return sellValue;
     }
 
+    public void SetStats()
+    {
+        sellValue = Mathf.FloorToInt(towerData.cost / 2.0f) * level;
+        RepairTower();
+        targetDetection.SetSize(towerData.stats[level - 1].laneRange, towerData.stats[level - 1].areaRange);
+    }
+
     public void LevelUp()
     {
         level = Mathf.Min(level + 1, towerData.stats.Count);
         currentExp = 0;
         maxExp = 1 + level;
-        sellValue = Mathf.FloorToInt(towerData.cost / 2.0f) * level;
-        RepairTower();
-        targetDetection.SetSize(towerData.stats[level - 1].laneRange, towerData.stats[level - 1].areaRange);
+        SetStats();
+    }
+
+    public void LevelUp(int towerLevel)
+    {
+        level = Mathf.Min(towerLevel, towerData.stats.Count);
+        currentExp = 0;
+        maxExp = 1 + level;
+        SetStats();
     }
 
     public void AddExp(int count)
