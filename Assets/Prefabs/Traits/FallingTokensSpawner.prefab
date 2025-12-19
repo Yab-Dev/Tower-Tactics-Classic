@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnXLevelBounds: {x: -8, y: 8}
   spawnYLevel: 5
-  spawningSpeed: 2.5
+  spawningSpeed: 1.9
   fallingTokenObject: {fileID: 6924298942969895558, guid: 2019ed589b4128f47a54f0a525b75a58, type: 3}
