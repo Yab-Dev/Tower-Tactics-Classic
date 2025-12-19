@@ -20,18 +20,18 @@ MonoBehaviour:
   destroyedSprite: {fileID: 0}
   stats:
   - health: 5
-    hitSpeed: 1
-    damage: 3
+    hitSpeed: 1.3
+    damage: 4
     laneRange: 30
     areaRange: 3
   - health: 7
-    hitSpeed: 1
-    damage: 6
+    hitSpeed: 1.3
+    damage: 8
     laneRange: 30
     areaRange: 3
   - health: 10
-    hitSpeed: 1
-    damage: 9
+    hitSpeed: 1.3
+    damage: 12
     laneRange: 30
     areaRange: 3
   bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
