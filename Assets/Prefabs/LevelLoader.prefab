@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionDuration: 1
+  gameSettings: {fileID: 11400000, guid: 56272de75d6365a4da3a7a48e8308975, type: 2}
   transitionAnimator: {fileID: 7437564505164330271}
 --- !u!1 &5278666427053400911
 GameObject:

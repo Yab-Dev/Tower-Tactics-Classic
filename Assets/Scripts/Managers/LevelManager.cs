@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float transitionDuration;
+    [SerializeField] private GameSettings gameSettings;
 
     [Header("Cache")]
     [SerializeField] private Animator transitionAnimator;
@@ -26,6 +27,11 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        gameSettings.LoadData();
     }
 
     public static LevelManager GetInstance()
