@@ -44,7 +44,7 @@ public class FallingTokensSpawner : MonoBehaviour
         }
     }
 
-    private void DestroySelf(int waveCount)
+    private void DestroySelf(int _waveCount)
     {
         Destroy(gameObject);
     }

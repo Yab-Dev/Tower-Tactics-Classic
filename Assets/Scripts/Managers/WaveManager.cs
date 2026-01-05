@@ -50,29 +50,29 @@ public class WaveManager : MonoBehaviour
         return instance;
     }
 
-    public LevelWaves.WaveData GetWaveData(int waveCount)
+    public LevelWaves.WaveData GetWaveData(int _waveCount)
     {
-        return levelWaves.waves[waveCount - 1];
+        return levelWaves.waves[_waveCount - 1];
     }
 
-    private void StartSpawningWave(int waveCount)
+    private void StartSpawningWave(int _waveCount)
     {
         topEnemiesToSpawn.Clear();
         midEnemiesToSpawn.Clear();
         botEnemiesToSpawn.Clear();
 
-        StartCoroutine(SpawnWave(levelWaves.waves[waveCount-1]));
+        StartCoroutine(SpawnWave(levelWaves.waves[_waveCount - 1]));
     }
 
-    private IEnumerator SpawnWave(LevelWaves.WaveData waveData)
+    private IEnumerator SpawnWave(LevelWaves.WaveData _waveData)
     {
-        topEnemiesToSpawn.AddRange(waveData.topLaneEnemies);
-        midEnemiesToSpawn.AddRange(waveData.midLaneEnemies);
-        botEnemiesToSpawn.AddRange(waveData.botLaneEnemies);
+        topEnemiesToSpawn.AddRange(_waveData.topLaneEnemies);
+        midEnemiesToSpawn.AddRange(_waveData.midLaneEnemies);
+        botEnemiesToSpawn.AddRange(_waveData.botLaneEnemies);
 
         while (topEnemiesToSpawn.Count > 0 || midEnemiesToSpawn.Count > 0 || botEnemiesToSpawn.Count > 0)
         {
-            yield return new WaitForSeconds(waveData.spawnDelay);
+            yield return new WaitForSeconds(_waveData.spawnDelay);
 
             var (enemyToSpawn, lane) = GetEnemyToSpawn();
 
@@ -127,14 +127,14 @@ public class WaveManager : MonoBehaviour
         return (enemyToSpawn, laneToSpawn);
     }
 
-    private EnemyData GetEnemyFromList(ref List<EnemyData> list)
+    private EnemyData GetEnemyFromList(ref List<EnemyData> _list)
     {
-        if (list.Count == 0)
+        if (_list.Count == 0)
         {
             return null;
         }
-        EnemyData enemyToSpawn = list[0];
-        list.RemoveAt(0);
+        EnemyData enemyToSpawn = _list[0];
+        _list.RemoveAt(0);
         return enemyToSpawn;
     }
 }

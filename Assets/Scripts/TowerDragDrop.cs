@@ -195,23 +195,23 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
     }
 
-    private void SetDraggable(int waveCount)
+    private void SetDraggable(int _waveCount)
     {
         canDrag = true;
     }
 
-    private void SetUnDraggable(int waveCount)
+    private void SetUnDraggable(int _waveCount)
     {
         canDrag = false;
     }
 
-    public void SetStartingSlot(GameObject slot)
+    public void SetStartingSlot(GameObject _slot)
     {
-        startingSlot = slot;
+        startingSlot = _slot;
     }
 
-    public void StartDraggable(bool draggable)
+    public void StartDraggable(bool _draggable)
     {
-        startDragging = draggable;
+        startDragging = _draggable;
     }
 }

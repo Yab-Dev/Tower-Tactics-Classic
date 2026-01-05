@@ -26,14 +26,14 @@ public class TargetDetection : MonoBehaviour
         return targetList;
     }
 
-    public GameObject GetClosestTarget(Vector2 position)
+    public GameObject GetClosestTarget(Vector2 _position)
     {
         if (targetList.Count == 0) { return null; }
 
         GameObject closestTarget = targetList[0];
         foreach (GameObject target in targetList)
         {
-            if (Vector2.Distance(position, target.transform.position) <= Vector2.Distance(position, closestTarget.transform.position))
+            if (Vector2.Distance(_position, target.transform.position) <= Vector2.Distance(_position, closestTarget.transform.position))
             {
                 closestTarget = target;
             }

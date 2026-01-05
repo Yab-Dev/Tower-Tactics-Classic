@@ -71,11 +71,11 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         }
     }
 
-    private void EnemyAttacking(GameObject target)
+    private void EnemyAttacking(GameObject _target)
     {
         if (attackCooldown <= 0.0f)
         {
-            IDamage damageInterface = target.GetComponent<IDamage>();
+            IDamage damageInterface = _target.GetComponent<IDamage>();
             if (damageInterface != null)
             {
                 damageInterface.Damage(enemyData.damage);
@@ -88,9 +88,9 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         }
     }
 
-    public void SetEnemyData(EnemyData data)
+    public void SetEnemyData(EnemyData _data)
     {
-        enemyData = data;
+        enemyData = _data;
     }
 
     private void SelfDestruct()
@@ -101,9 +101,9 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         Destroy(gameObject);
     }
 
-    public void Damage(int amount)
+    public void Damage(int _amount)
     {
-        currentHealth -= amount;
+        currentHealth -= _amount;
         if (currentHealth <= 0 && !isDestroyed)
         {
             SelfDestruct();

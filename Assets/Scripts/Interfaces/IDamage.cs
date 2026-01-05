@@ -11,5 +11,5 @@ public interface IDamage
         Enemy,
     }
     public Team GetTeam();
-    public void Damage(int amount);
+    public void Damage(int _amount);
 }

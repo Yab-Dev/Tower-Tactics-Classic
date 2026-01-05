@@ -37,9 +37,9 @@ public class SettingsUI : MonoBehaviour
         masterVolumeSlider.value = gameSettings.masterVolume;
     }
 
-    private void SetFullscreen(bool fullscreen)
+    private void SetFullscreen(bool _fullscreen)
     {
-        gameSettings.fullscreen = fullscreen;
+        gameSettings.fullscreen = _fullscreen;
         if (gameSettings.fullscreen)
         {
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
@@ -50,9 +50,9 @@ public class SettingsUI : MonoBehaviour
         }
     }
 
-    private void SetMasterVolume(float value)
+    private void SetMasterVolume(float _value)
     {
-        gameSettings.masterVolume = value;
+        gameSettings.masterVolume = _value;
     }
 
     private void ExitSettings()

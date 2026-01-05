@@ -7,9 +7,9 @@ public class DescriptionUI : TooltipObject
     [Header("Attributes")]
     [SerializeField] [TextArea] private string description;
 
-    protected override void DisplayTooltip(GameObject tooltip)
+    protected override void DisplayTooltip(GameObject _tooltip)
     {
-        DescriptionTooltipUI descriptionTooltip = tooltip.GetComponent<DescriptionTooltipUI>();
+        DescriptionTooltipUI descriptionTooltip = _tooltip.GetComponent<DescriptionTooltipUI>();
         if (descriptionTooltip != null)
         {
             descriptionTooltip.DisplayDescription(description);

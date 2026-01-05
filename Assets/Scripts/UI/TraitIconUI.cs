@@ -17,36 +17,36 @@ public class TraitIconUI : TooltipObject
 
 
 
-    public void SetTraitData(TraitData trait, int count)
+    public void SetTraitData(TraitData _trait, int _count)
     {
-        currentTrait = trait;
-        traitCount = count;
+        currentTrait = _trait;
+        traitCount = _count;
 
-        DisplayTraitData(trait, count);
+        DisplayTraitData(_trait, _count);
     }
 
-    protected override void DisplayTooltip(GameObject tooltip)
+    protected override void DisplayTooltip(GameObject _tooltip)
     {
-        TraitTooltipUI traitTooltipUI = tooltip.GetComponent<TraitTooltipUI>();
+        TraitTooltipUI traitTooltipUI = _tooltip.GetComponent<TraitTooltipUI>();
         if (traitTooltipUI != null)
         {
             traitTooltipUI.DisplayTraitData(currentTrait, traitCount);
         }
     }
 
-    private void DisplayTraitData(TraitData trait, int count)
+    private void DisplayTraitData(TraitData _trait, int _count)
     {
         traitImage.sprite = currentTrait.traitIcon;
         traitCountText.text = traitCount.ToString();
 
-        for (int i = 0; i < trait.breakpoints.Count; i++)
+        for (int i = 0; i < _trait.breakpoints.Count; i++)
         {
-            if (count < trait.breakpoints[i].breakpointValue)
+            if (_count < _trait.breakpoints[i].breakpointValue)
             {
                 backgroundImage.color = breakpointColors[i];
                 return;
             }
         }
-        backgroundImage.color = breakpointColors[trait.breakpoints.Count];
+        backgroundImage.color = breakpointColors[_trait.breakpoints.Count];
     }
 }

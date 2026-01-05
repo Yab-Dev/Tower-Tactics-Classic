@@ -16,7 +16,7 @@ public class TraitTooltipUI : MonoBehaviour
 
 
 
-    public void DisplayTraitData(TraitData traitData, int traitCount)
+    public void DisplayTraitData(TraitData _traitData, int _traitCount)
     {
         foreach (GameObject traitBreakpointObject in traitBreakpointObjects)
         {
@@ -24,10 +24,10 @@ public class TraitTooltipUI : MonoBehaviour
         }
         traitBreakpointObjects.Clear();
 
-        traitNameText.text = traitData.name;
-        traitIcon.sprite = traitData.traitIcon;
+        traitNameText.text = _traitData.name;
+        traitIcon.sprite = _traitData.traitIcon;
 
-        for (int i = 0; i < traitData.breakpoints.Count; i++)
+        for (int i = 0; i < _traitData.breakpoints.Count; i++)
         {
             GameObject traitBreakpointObject = Instantiate(traitBreakpointPrefab, transform);
             traitBreakpointObjects.Add(traitBreakpointObject);
@@ -35,7 +35,7 @@ public class TraitTooltipUI : MonoBehaviour
             TraitBreakpointTooltipUI breakpointTooltipUI = traitBreakpointObject.GetComponent<TraitBreakpointTooltipUI>();
             if (breakpointTooltipUI != null)
             {
-                breakpointTooltipUI.SetBreakpointData(traitData.breakpoints[i], traitCount);
+                breakpointTooltipUI.SetBreakpointData(_traitData.breakpoints[i], _traitCount);
             }
         }
     }

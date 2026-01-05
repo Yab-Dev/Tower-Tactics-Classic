@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SellTowerSlot : TowerSlot
 {
-    public override void SetCurrentTower(TowerDragDrop tower)
+    public override void SetCurrentTower(TowerDragDrop _tower)
     {
-        TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
+        TowerBehavior towerBehavior = _tower.GetComponent<TowerBehavior>();
         if (towerBehavior != null)
         {
             ShopManager.GetInstance().AddTowerTokens(towerBehavior.GetSellValue());
-            Destroy(tower.gameObject);
+            Destroy(_tower.gameObject);
             GameManager.GetInstance().GetTooltipUI().ClearTooltip();
         }
     }

@@ -12,7 +12,7 @@ public class TowerSlot : MonoBehaviour
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
 
-    public delegate void OnSlotTowerMovedEventArgs(GameObject slot);
+    public delegate void OnSlotTowerMovedEventArgs(GameObject _slot);
     public event OnSlotTowerMovedEventArgs OnSlotTowerMoved;
 
 
@@ -41,9 +41,9 @@ public class TowerSlot : MonoBehaviour
         sprite.color = fadeOutColor;
     }
 
-    public virtual void SetCurrentTower(TowerDragDrop tower)
+    public virtual void SetCurrentTower(TowerDragDrop _tower)
     {
-        currentTower = tower;
+        currentTower = _tower;
         currentTower.OnTowerMove += ClearTower;
     }
 
@@ -77,11 +77,11 @@ public class TowerSlot : MonoBehaviour
         StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.2f));
     }
 
-    private void GetCurrentTower(ref List<GameObject> towers)
+    private void GetCurrentTower(ref List<GameObject> _towers)
     {
         if (currentTower != null)
         {
-            towers.Add(currentTower.gameObject);
+            _towers.Add(currentTower.gameObject);
         }
     }
 }

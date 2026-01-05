@@ -8,8 +8,8 @@ public class DescriptionTooltipUI : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text descriptionText;
 
 
-    public void DisplayDescription(string description)
+    public void DisplayDescription(string _description)
     {
-        descriptionText.text = description;
+        descriptionText.text = _description;
     }
 }

@@ -33,17 +33,17 @@ public class LevelManager : MonoBehaviour
         return instance;
     }
 
-    public void LoadLevelWithTransition(string levelName)
+    public void LoadLevelWithTransition(string _levelName)
     {
         transitionAnimator.SetTrigger(LevelTransitionTriggerName);
 
-        StartCoroutine(LoadLevelDelay(levelName, transitionDuration));
+        StartCoroutine(LoadLevelDelay(_levelName, transitionDuration));
     }
 
-    private IEnumerator LoadLevelDelay(string levelName, float delay)
+    private IEnumerator LoadLevelDelay(string _levelName, float _delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(_delay);
 
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(_levelName);
     }
 }

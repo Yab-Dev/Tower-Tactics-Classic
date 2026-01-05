@@ -17,10 +17,10 @@ public class ShopManager : MonoBehaviour
 
     private List<TowerData> shopTowers = new List<TowerData>();
 
-    public delegate void OnRefreshShopEventArgs(List<TowerData> shopData);
+    public delegate void OnRefreshShopEventArgs(List<TowerData> _shopData);
     public static event OnRefreshShopEventArgs OnRefreshShop;
 
-    public delegate void OnTowerTokensChangedEventArgs(int towerTokenAmount);
+    public delegate void OnTowerTokensChangedEventArgs(int _towerTokenAmount);
     public static event OnTowerTokensChangedEventArgs OnTowerTokensChanged;
 
 
@@ -59,7 +59,7 @@ public class ShopManager : MonoBehaviour
         return instance;
     }
 
-    public void RefreshShop(int waveCount)
+    public void RefreshShop(int _waveCount)
     {
         shopTowers.Clear();
 
@@ -93,16 +93,16 @@ public class ShopManager : MonoBehaviour
         GameManager.GetInstance().IncreaseTowerCap();
     }
 
-    public bool BuyTower(int index)
+    public bool BuyTower(int _index)
     {
-        if (shopTowers[index].cost > towerTokens)
+        if (shopTowers[_index].cost > towerTokens)
         {
             return false;
         }
 
-        GameManager.GetInstance().SpawnTower(true, shopTowers[index], Vector2.zero);
-        RemoveTowerTokens(shopTowers[index].cost);
-        shopTowers[index] = null;
+        GameManager.GetInstance().SpawnTower(true, shopTowers[_index], Vector2.zero);
+        RemoveTowerTokens(shopTowers[_index].cost);
+        shopTowers[_index] = null;
         return true;
     }
 
@@ -111,21 +111,21 @@ public class ShopManager : MonoBehaviour
         return shopTowers;
     }
 
-    public void SetTowerTokens(int count)
+    public void SetTowerTokens(int _count)
     {
-        towerTokens = count;
+        towerTokens = _count;
         OnTowerTokensChanged?.Invoke(towerTokens);
     }
 
-    public void AddTowerTokens(int count)
+    public void AddTowerTokens(int _count)
     {
-        towerTokens += count;
+        towerTokens += _count;
         OnTowerTokensChanged?.Invoke(towerTokens);
     }
 
-    public void RemoveTowerTokens(int count)
+    public void RemoveTowerTokens(int _count)
     {
-        towerTokens = Mathf.Max(0, towerTokens - count);
+        towerTokens = Mathf.Max(0, towerTokens - _count);
         OnTowerTokensChanged?.Invoke(towerTokens);
     }
 
@@ -144,7 +144,7 @@ public class ShopManager : MonoBehaviour
         SetTowerTokens(startingTokenCount);
     }
 
-    private void WaveComplete(int waveCount)
+    private void WaveComplete(int _waveCount)
     {
         AddTowerTokens(waveRewardTokenCount);
     }

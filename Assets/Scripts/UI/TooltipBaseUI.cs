@@ -11,7 +11,7 @@ public class TooltipBaseUI : MonoBehaviour
     [Header("Cache")]
     [SerializeField] private Image dropShadowImage;
 
-    public delegate void OnAssignTooltipObjectEventArgs(TooltipBaseUI tooltipObject);
+    public delegate void OnAssignTooltipObjectEventArgs(TooltipBaseUI _tooltipObject);
     public static event OnAssignTooltipObjectEventArgs OnAssignTooltipObject;
 
     private RectTransform rectTransform;
@@ -40,11 +40,11 @@ public class TooltipBaseUI : MonoBehaviour
         rectTransform.pivot = viewPortPos;
     }
 
-    public GameObject SetTooltip(GameObject tooltipPrefab)
+    public GameObject SetTooltip(GameObject _tooltipPrefab)
     {
         ClearTooltip();
 
-        GameObject tooltip = Instantiate(tooltipPrefab, transform);
+        GameObject tooltip = Instantiate(_tooltipPrefab, transform);
         dropShadowImage.enabled = true;
 
         return tooltip;

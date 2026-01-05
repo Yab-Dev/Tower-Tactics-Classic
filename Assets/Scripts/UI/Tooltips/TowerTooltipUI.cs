@@ -29,9 +29,9 @@ public class TowerTooltipUI : MonoBehaviour
 
 
 
-    public void DisplayTowerData(TowerBehavior tower)
+    public void DisplayTowerData(TowerBehavior _tower)
     {
-        TowerData towerData = tower.GetTowerData();
+        TowerData towerData = _tower.GetTowerData();
 
         foreach (Transform child in towerTraitsContent)
         {
@@ -39,19 +39,19 @@ public class TowerTooltipUI : MonoBehaviour
         }
 
         towerNameText.text = towerData.name;
-        if (tower.GetLevel() == towerData.stats.Count)
+        if (_tower.GetLevel() == towerData.stats.Count)
         {
             towerLevelText.text = $"Lv. Max";
         }
         else
         {
-            towerLevelText.text = $"Lv. {tower.GetLevel().ToString()}";
+            towerLevelText.text = $"Lv. {_tower.GetLevel().ToString()}";
 
-            for (int i = 0; i < tower.GetExp().max; i++)
+            for (int i = 0; i < _tower.GetExp().max; i++)
             {
                 GameObject expObject = Instantiate(towerExpPrefab, towerExpContent);
                 Image expImage = expObject.GetComponent<Image>();
-                if (i < tower.GetExp().current)
+                if (i < _tower.GetExp().current)
                 {
                     expImage.color = expColor;
                 }
@@ -72,12 +72,12 @@ public class TowerTooltipUI : MonoBehaviour
             traitText.text = towerData.traits[i].name;
         }
 
-        towerHealthText.text = $"Health: {tower.GetCurrentHealth()}/{towerData.stats[tower.GetLevel()-1].health}";
-        towerHitspeedText.text = $"Hit Speed: {towerData.stats[tower.GetLevel() - 1].hitSpeed.ToString()}";
-        towerDamageText.text = $"Damage: {towerData.stats[tower.GetLevel() - 1].damage.ToString()}";
-        towerSellValueText.text = $"Sell Value: {tower.GetSellValue()}";
-        towerLaneRangeText.text = $"Lane Range: {towerData.stats[tower.GetLevel() - 1].laneRange.ToString()}";
-        towerAreaRangeText.text = $"Area Range: {towerData.stats[tower.GetLevel() - 1].areaRange.ToString()}";
+        towerHealthText.text = $"Health: {_tower.GetCurrentHealth()}/{towerData.stats[_tower.GetLevel()-1].health}";
+        towerHitspeedText.text = $"Hit Speed: {towerData.stats[_tower.GetLevel() - 1].hitSpeed.ToString()}";
+        towerDamageText.text = $"Damage: {towerData.stats[_tower.GetLevel() - 1].damage.ToString()}";
+        towerSellValueText.text = $"Sell Value: {_tower.GetSellValue()}";
+        towerLaneRangeText.text = $"Lane Range: {towerData.stats[_tower.GetLevel() - 1].laneRange.ToString()}";
+        towerAreaRangeText.text = $"Area Range: {towerData.stats[_tower.GetLevel() - 1].areaRange.ToString()}";
         towerHitCountText.text = "Hit Count: 1";
 
         towerDescriptionText.text = towerData.description;

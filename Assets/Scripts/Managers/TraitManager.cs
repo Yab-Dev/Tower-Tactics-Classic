@@ -22,7 +22,7 @@ public class TraitManager : MonoBehaviour
         GameManager.OnDefensePhaseStart -= DefenseStart;
     }
 
-    private void DefenseStart(int waveCount)
+    private void DefenseStart(int _waveCount)
     {
         List<(TraitData trait, int count)> traitData = GameManager.GetInstance().GetCurrentTraits();
         (TraitData trait, int count) gathererTraitData = GetTrait(traitData, gathererTrait);
@@ -35,13 +35,13 @@ public class TraitManager : MonoBehaviour
         }
     }
 
-    private (TraitData trait, int count) GetTrait(List<(TraitData trait, int count)> traitData, TraitData trait)
+    private (TraitData trait, int count) GetTrait(List<(TraitData trait, int count)> _traitData, TraitData _trait)
     {
-        for (int i = 0; i < traitData.Count; i++)
+        for (int i = 0; i < _traitData.Count; i++)
         {
-            if (traitData[i].trait == trait)
+            if (_traitData[i].trait == _trait)
             {
-                return traitData[i];
+                return _traitData[i];
             }
         }
 

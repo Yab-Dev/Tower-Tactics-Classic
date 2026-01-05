@@ -5,17 +5,17 @@ using UnityEngine.U2D;
 
 public class MoveOverTime : MonoBehaviour
 {
-    public static IEnumerator MoveUIObjectOverTime(RectTransform targetTransform, Vector2 endPosition, float duration)
+    public static IEnumerator MoveUIObjectOverTime(RectTransform _targetTransform, Vector2 _endPosition, float _duration)
     {
-        Vector2 startingPosition = targetTransform.anchoredPosition;
+        Vector2 startingPosition = _targetTransform.anchoredPosition;
 
         float elapsedTime = 0.0f;
-        while (elapsedTime < duration)
+        while (elapsedTime < _duration)
         {
-            targetTransform.anchoredPosition = Vector2.Lerp(startingPosition, endPosition, elapsedTime / duration);
+            _targetTransform.anchoredPosition = Vector2.Lerp(startingPosition, _endPosition, elapsedTime / _duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        targetTransform.anchoredPosition = endPosition;
+        _targetTransform.anchoredPosition = _endPosition;
     }
 }

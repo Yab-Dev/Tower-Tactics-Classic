@@ -78,9 +78,9 @@ public class LowerPanelUI : MonoBehaviour
         startWaveButton.interactable = true;
     }
 
-    private void TowersUpdated(List<GameObject> towers, List<(TraitData trait, int count)> traits, int towerCap)
+    private void TowersUpdated(List<GameObject> _towers, List<(TraitData trait, int count)> _traits, int _towerCap)
     {
-        if (towers.Count > towerCap)
+        if (_towers.Count > _towerCap)
         {
             startWaveButton.interactable = false;
         }

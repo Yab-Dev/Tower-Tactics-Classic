@@ -46,7 +46,7 @@ public class ShopUI : MonoBehaviour
         upgradeCapacityCostText.text = ShopManager.GetInstance().GetUpgradeCost().ToString();
     }
 
-    private void DisplayShop(List<TowerData> shopData)
+    private void DisplayShop(List<TowerData> _shopData)
     {
         shopButtons.Clear();
         foreach (Transform child in shopButtonContent)
@@ -54,9 +54,9 @@ public class ShopUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < shopData.Count; i++)
+        for (int i = 0; i < _shopData.Count; i++)
         {
-            if (shopData[i] == null)
+            if (_shopData[i] == null)
             {
                 GameObject emptyButton = Instantiate(emptyShopButton, shopButtonContent);
                 shopButtons.Add(null);
@@ -65,16 +65,16 @@ public class ShopUI : MonoBehaviour
 
             GameObject button = Instantiate(shopButton, shopButtonContent);
             TowerShopButtonUI shopButtonUI = button.GetComponent<TowerShopButtonUI>();
-            shopButtonUI.towerInfo.SetTowerInfo(shopData[i]);
+            shopButtonUI.towerInfo.SetTowerInfo(_shopData[i]);
             int index = i;
             shopButtonUI.shopButton.onClick.AddListener(() => BuyTowerButtonClick(index));
             shopButtons.Add(shopButtonUI);
         }
     }
 
-    private void BuyTowerButtonClick(int index)
+    private void BuyTowerButtonClick(int _index)
     {
-        ShopManager.GetInstance().BuyTower(index);
+        ShopManager.GetInstance().BuyTower(_index);
 
         DisplayShop(ShopManager.GetInstance().GetShop());
     }

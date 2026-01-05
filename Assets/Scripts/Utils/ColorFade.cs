@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ColorFade : MonoBehaviour
 {
-    public static IEnumerator FadeSpriteColor(SpriteRenderer sprite, Color targetColor, float duration)
+    public static IEnumerator FadeSpriteColor(SpriteRenderer _sprite, Color _targetColor, float _duration)
     {
-        Color startingColor = sprite.color;
+        Color startingColor = _sprite.color;
 
         float elapsedTime = 0.0f;
-        while (elapsedTime < duration)
+        while (elapsedTime < _duration)
         {
-            sprite.color = Color.Lerp(startingColor, targetColor, elapsedTime / duration);
+            _sprite.color = Color.Lerp(startingColor, _targetColor, elapsedTime / _duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        sprite.color = targetColor;
+        _sprite.color = _targetColor;
     }
 }

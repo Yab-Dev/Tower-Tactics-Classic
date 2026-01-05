@@ -33,18 +33,18 @@ public class GameManager : MonoBehaviour
     public delegate void OnGameLostEventArgs();
     public static event OnGameLostEventArgs OnGameLost;
 
-    public delegate void OnBuildPhaseChangeEventArgs(int waveCount);
+    public delegate void OnBuildPhaseChangeEventArgs(int _waveCount);
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseStart;
     public static event OnBuildPhaseChangeEventArgs OnBuildPhaseEnd;
 
-    public delegate void OnDefensePhaseChangeEventArgs(int waveCount);
+    public delegate void OnDefensePhaseChangeEventArgs(int _waveCount);
     public static event OnDefensePhaseChangeEventArgs OnDefensePhaseStart;
     public static event OnDefensePhaseChangeEventArgs OnDefensePhaseEnd;
 
-    public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> towers);
+    public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> _towers);
     public static event OnGetPlacedTowersEventArgs OnGetPlacedTowers;
 
-    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> towers, List<(TraitData trait, int count)> traits, int towerCap);
+    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> _towers, List<(TraitData trait, int count)> _traits, int _towerCap);
     public static event OnCurrentTowersUpdatedEventArgs OnCurrentTowersUpdated;
 
     public delegate void OnClearEnemiesEventArgs();
@@ -147,9 +147,9 @@ public class GameManager : MonoBehaviour
         OnDefensePhaseStart?.Invoke(waveCount);
     }
 
-    public void CompleteWave(int totalWaves)
+    public void CompleteWave(int _totalWaves)
     {
-        if (waveCount == totalWaves)
+        if (waveCount == _totalWaves)
         {
             OnDefensePhaseEnd?.Invoke(waveCount);
             if (!gameLost)
@@ -164,17 +164,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject SpawnTower(bool startDragging, TowerData towerData, Vector2 position)
+    public GameObject SpawnTower(bool _startDragging, TowerData _towerData, Vector2 _position)
     {
         GameObject tower = Instantiate(towerObject, Vector2.zero, Quaternion.identity);
-        tower.transform.position = position;
+        tower.transform.position = _position;
         TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
         TowerDragDrop towerDragDrop = tower.GetComponent<TowerDragDrop>();
 
-        towerBehavior.SetTowerData(towerData);
-        if (startDragging)
+        towerBehavior.SetTowerData(_towerData);
+        if (_startDragging)
         {
-            towerDragDrop.StartDraggable(startDragging);
+            towerDragDrop.StartDraggable(_startDragging);
         }
 
         towerBehavior.LevelUp(1);
@@ -182,11 +182,11 @@ public class GameManager : MonoBehaviour
         return tower;
     }
 
-    public EnemyBehavior SpawnEnemy(EnemyData enemyData, Vector2 startingPos)
+    public EnemyBehavior SpawnEnemy(EnemyData _enemyData, Vector2 _startingPos)
     {
-        GameObject enemy = Instantiate(enemyObject, startingPos, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyObject, _startingPos, Quaternion.identity);
         EnemyBehavior enemyBehavior = enemy.GetComponent<EnemyBehavior>();
-        enemyBehavior.SetEnemyData(enemyData);
+        enemyBehavior.SetEnemyData(_enemyData);
 
         return enemyBehavior;
     }
@@ -233,9 +233,9 @@ public class GameManager : MonoBehaviour
         return traitData;
     }
 
-    private void SetTooltip(TooltipBaseUI tooltipObject)
+    private void SetTooltip(TooltipBaseUI _tooltipObject)
     {
-        this.tooltipObject = tooltipObject;
+        this.tooltipObject = _tooltipObject;
     }
 
     public TooltipBaseUI GetTooltipUI()

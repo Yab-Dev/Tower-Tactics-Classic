@@ -59,11 +59,11 @@ public class TowerBehavior : TooltipObject, IDamage
         }
     }
 
-    private void TowerFiring(GameObject target)
+    private void TowerFiring(GameObject _target)
     {
         if (shootCooldown <= 0.0f)
         {
-            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, target, IDamage.Team.Tower, towerData.stats[level - 1].damage, towerData.bulletSpeed);
+            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, _target, IDamage.Team.Tower, towerData.stats[level - 1].damage, towerData.bulletSpeed);
             shootCooldown = towerData.stats[level - 1].hitSpeed;
         }
         else
@@ -72,26 +72,26 @@ public class TowerBehavior : TooltipObject, IDamage
         }
     }
 
-    private void StartBuild(int waveCount)
+    private void StartBuild(int _waveCount)
     {
         RepairTower();
     }
 
-    private void StartDefense(int waveCount)
+    private void StartDefense(int _waveCount)
     {
         shootCooldown = towerData.stats[level - 1].hitSpeed;
         isFiring = true;
     }
 
-    private void EndDefense(int waveCount)
+    private void EndDefense(int _waveCount)
     {
         shootCooldown = towerData.stats[level - 1].hitSpeed;
         isFiring = false;
     }
 
-    public void SetTowerData(TowerData data)
+    public void SetTowerData(TowerData _data)
     {
-        towerData = data;
+        towerData = _data;
     }
 
     private void DestroyTower()
@@ -157,17 +157,17 @@ public class TowerBehavior : TooltipObject, IDamage
         SetStats();
     }
 
-    public void LevelUp(int towerLevel)
+    public void LevelUp(int _towerLevel)
     {
-        level = Mathf.Min(towerLevel, towerData.stats.Count);
+        level = Mathf.Min(_towerLevel, towerData.stats.Count);
         currentExp = 0;
         maxExp = 1 + level;
         SetStats();
     }
 
-    public void AddExp(int count)
+    public void AddExp(int _count)
     {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < _count; i++)
         {
             currentExp++;
             totalExp++;
@@ -178,9 +178,9 @@ public class TowerBehavior : TooltipObject, IDamage
         }
     }
 
-    public void Damage(int amount)
+    public void Damage(int _amount)
     {
-        currentHealth -= amount;
+        currentHealth -= _amount;
         if (currentHealth <= 0)
         {
             DestroyTower();
@@ -197,9 +197,9 @@ public class TowerBehavior : TooltipObject, IDamage
         return IDamage.Team.Tower;
     }
 
-    protected override void DisplayTooltip(GameObject tooltip)
+    protected override void DisplayTooltip(GameObject _tooltip)
     {
-        TowerTooltipUI towerTooltip = tooltip.GetComponent<TowerTooltipUI>();
+        TowerTooltipUI towerTooltip = _tooltip.GetComponent<TowerTooltipUI>();
         if (towerTooltip != null)
         {
             towerTooltip.DisplayTowerData(this);

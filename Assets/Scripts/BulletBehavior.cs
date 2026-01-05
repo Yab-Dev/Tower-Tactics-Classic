@@ -12,17 +12,17 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private GameObject target;
 
 
-    public static void CreateBullet(GameObject bulletObject, Vector2 position, GameObject target, IDamage.Team team, int damage, float speed, float lifetime = 5.0f)
+    public static void CreateBullet(GameObject _bulletObject, Vector2 _position, GameObject _target, IDamage.Team _team, int _damage, float _speed, float _lifetime = 5.0f)
     {
-        GameObject bullet = Instantiate(bulletObject, position, Quaternion.identity);
+        GameObject bullet = Instantiate(_bulletObject, _position, Quaternion.identity);
         BulletBehavior bulletBehavior = bullet.GetComponent<BulletBehavior>();
         if (bulletBehavior != null)
         {
-            bulletBehavior.team = team;
-            bulletBehavior.damage = damage;
-            bulletBehavior.speed = speed;
-            bulletBehavior.lifetime = lifetime;
-            bulletBehavior.target = target;
+            bulletBehavior.team = _team;
+            bulletBehavior.damage = _damage;
+            bulletBehavior.speed = _speed;
+            bulletBehavior.lifetime = _lifetime;
+            bulletBehavior.target = _target;
         }
         else
         {

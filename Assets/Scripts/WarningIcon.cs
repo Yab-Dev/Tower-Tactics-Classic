@@ -32,11 +32,11 @@ public class WarningIcon : MonoBehaviour
         StartCoroutine(ColorFade.FadeSpriteColor(sprite, fadeOutColor, 0.0f));
     }
 
-    private void FadeIconIn(int waveCount)
+    private void FadeIconIn(int _waveCount)
     {
         if (this == null) { return; }
 
-        LevelWaves.WaveData waveData = WaveManager.GetInstance().GetWaveData(waveCount);
+        LevelWaves.WaveData waveData = WaveManager.GetInstance().GetWaveData(_waveCount);
         if
         (
             (waveData.topLaneHazard && lanePosition == LanePosition.Top) ||
@@ -49,11 +49,11 @@ public class WarningIcon : MonoBehaviour
         }
         else
         {
-            FadeIconOut(waveCount);
+            FadeIconOut(_waveCount);
         }
     }
 
-    private void FadeIconOut(int waveCount)
+    private void FadeIconOut(int _waveCount)
     {
         if (this == null) { return; }
 

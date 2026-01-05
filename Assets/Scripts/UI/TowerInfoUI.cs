@@ -14,21 +14,21 @@ public class TowerInfoUI : MonoBehaviour
     
 
 
-    public void SetTowerInfo(TowerData towerData)
+    public void SetTowerInfo(TowerData _towerData)
     {
-        nameText.text = towerData.name;
-        towerCostText.text = towerData.cost.ToString();
+        nameText.text = _towerData.name;
+        towerCostText.text = _towerData.cost.ToString();
 
         foreach (Transform child in traitTextContent)
         {
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < towerData.traits.Count; i++)
+        for (int i = 0; i < _towerData.traits.Count; i++)
         {
             GameObject textObject = Instantiate(traitTextObject, traitTextContent);
             TMPro.TMP_Text traitText = textObject.GetComponent<TMPro.TMP_Text>();
-            traitText.text = towerData.traits[i].name;
+            traitText.text = _towerData.traits[i].name;
         }
     }
 }
