@@ -23,6 +23,7 @@ public class ShopUI : MonoBehaviour
     private void Awake()
     {
         ShopManager.OnRefreshShop += DisplayShop;
+        ShopManager.OnUpgradeCostChanged += SetUpgradeCost;
         TowerDragDrop.OnTowerPlaceStart += DisableButtons;
         TowerDragDrop.OnTowerPlaceEnd += EnableButtons;
 
@@ -33,6 +34,7 @@ public class ShopUI : MonoBehaviour
     private void OnDisable()
     {
         ShopManager.OnRefreshShop -= DisplayShop;
+        ShopManager.OnUpgradeCostChanged -= SetUpgradeCost;
         TowerDragDrop.OnTowerPlaceStart -= DisableButtons;
         TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
 
@@ -43,7 +45,6 @@ public class ShopUI : MonoBehaviour
     private void Start()
     {
         refreshButtonCostText.text = ShopManager.GetInstance().RefreshCost.ToString();
-        upgradeCapacityCostText.text = ShopManager.GetInstance().UpgradeCost.ToString();
     }
 
     private void DisplayShop(List<TowerData> _shopData)
@@ -105,5 +106,10 @@ public class ShopUI : MonoBehaviour
         refreshShopButton.interactable = true;
         upgradeCapacityButton.interactable = true;
         DisplayShop(ShopManager.GetInstance().Shop);
+    }
+
+    private void SetUpgradeCost(int _upgradeCostAmount)
+    {
+        upgradeCapacityCostText.text = _upgradeCostAmount.ToString();
     }
 }

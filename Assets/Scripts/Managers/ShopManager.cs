@@ -13,7 +13,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int startingTokenCount;
     [SerializeField] private int waveRewardTokenCount;
     [SerializeField] private int refreshCost;
+    [SerializeField] private int startingUpgradeCost;
     [SerializeField] private int upgradeCost;
+    [SerializeField] private int upgradeCostScalar;
 
     private List<TowerData> shopTowers = new List<TowerData>();
 
@@ -22,6 +24,9 @@ public class ShopManager : MonoBehaviour
 
     public delegate void OnTowerTokensChangedEventArgs(int _towerTokenAmount);
     public static event OnTowerTokensChangedEventArgs OnTowerTokensChanged;
+
+    public delegate void OnUpgradeCostChangedEventArgs(int _upgradeCostAmount);
+    public static event OnUpgradeCostChangedEventArgs OnUpgradeCostChanged;
 
 
 
@@ -91,6 +96,8 @@ public class ShopManager : MonoBehaviour
         TowerTokens -= upgradeCost;
 
         GameManager.GetInstance().IncreaseTowerCap();
+
+        UpgradeCost *= upgradeCostScalar;
     }
 
     public bool BuyTower(int _index)
@@ -109,6 +116,7 @@ public class ShopManager : MonoBehaviour
     private void StartGame()
     {
         TowerTokens = startingTokenCount;
+        UpgradeCost = startingUpgradeCost;
     }
 
     private void WaveComplete(int _waveCount)
@@ -142,6 +150,10 @@ public class ShopManager : MonoBehaviour
     public int UpgradeCost
     {
         get { return upgradeCost; }
-        private set { upgradeCost = value; }
+        private set 
+        {
+            upgradeCost = value; 
+            OnUpgradeCostChanged?.Invoke(upgradeCost);
+        }
     }
 }
