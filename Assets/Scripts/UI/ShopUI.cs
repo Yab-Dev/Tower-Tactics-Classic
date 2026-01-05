@@ -11,6 +11,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text refreshButtonCostText;
     [SerializeField] private Button upgradeCapacityButton;
     [SerializeField] private TMPro.TMP_Text upgradeCapacityCostText;
+    [SerializeField] private TMPro.TMP_Text waveCountText;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject shopButton;
@@ -26,6 +27,7 @@ public class ShopUI : MonoBehaviour
         ShopManager.OnUpgradeCostChanged += SetUpgradeCost;
         TowerDragDrop.OnTowerPlaceStart += DisableButtons;
         TowerDragDrop.OnTowerPlaceEnd += EnableButtons;
+        GameManager.OnBuildPhaseStart += BuildPhaseStart;
 
         refreshShopButton.onClick.AddListener(RefreshButtonClick);
         upgradeCapacityButton.onClick.AddListener(UpgradeCapacityButtonClick);
@@ -37,6 +39,7 @@ public class ShopUI : MonoBehaviour
         ShopManager.OnUpgradeCostChanged -= SetUpgradeCost;
         TowerDragDrop.OnTowerPlaceStart -= DisableButtons;
         TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
+        GameManager.OnBuildPhaseStart -= BuildPhaseStart;
 
         refreshShopButton.onClick.RemoveAllListeners();
         upgradeCapacityButton.onClick.RemoveAllListeners();
@@ -111,5 +114,10 @@ public class ShopUI : MonoBehaviour
     private void SetUpgradeCost(int _upgradeCostAmount)
     {
         upgradeCapacityCostText.text = _upgradeCostAmount.ToString();
+    }
+
+    private void BuildPhaseStart(int _waveCount)
+    {
+        waveCountText.text = $"Wave {_waveCount}";
     }
 }

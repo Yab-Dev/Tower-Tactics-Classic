@@ -15,7 +15,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int refreshCost;
     [SerializeField] private int startingUpgradeCost;
     [SerializeField] private int upgradeCost;
-    [SerializeField] private int upgradeCostScalar;
+    [SerializeField] private float upgradeCostScalar;
 
     private List<TowerData> shopTowers = new List<TowerData>();
 
@@ -97,7 +97,9 @@ public class ShopManager : MonoBehaviour
 
         GameManager.GetInstance().IncreaseTowerCap();
 
-        UpgradeCost *= upgradeCostScalar;
+        float cost = UpgradeCost;
+        cost *= upgradeCostScalar;
+        UpgradeCost = Mathf.RoundToInt(cost);
     }
 
     public bool BuyTower(int _index)
