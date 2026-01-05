@@ -171,10 +171,10 @@ public class GameManager : MonoBehaviour
         TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
         TowerDragDrop towerDragDrop = tower.GetComponent<TowerDragDrop>();
 
-        towerBehavior.SetTowerData(_towerData);
+        towerBehavior.TowerData = _towerData;
         if (_startDragging)
         {
-            towerDragDrop.StartDraggable(_startDragging);
+            towerDragDrop.StartDraggable = _startDragging;
         }
 
         towerBehavior.LevelUp(1);
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject enemy = Instantiate(enemyObject, _startingPos, Quaternion.identity);
         EnemyBehavior enemyBehavior = enemy.GetComponent<EnemyBehavior>();
-        enemyBehavior.SetEnemyData(_enemyData);
+        enemyBehavior.EnemyData = _enemyData;
 
         return enemyBehavior;
     }
@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour
             TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
             if (towerBehavior == null) { continue; }
 
-            List<TraitData> towerTraits = towerBehavior.GetTowerData().traits;
+            List<TraitData> towerTraits = towerBehavior.TowerData.traits;
             foreach (TraitData trait in towerTraits)
             {
                 if (traitDict.ContainsKey(trait))
@@ -271,9 +271,10 @@ public class GameManager : MonoBehaviour
         OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
     }
 
-    public int GetTowerCap()
+    public int TowerCap
     {
-        return towerCap;
+        get { return towerCap; }
+        private set { towerCap = value; }
     }
 
     public enum GamePhase { Build, Defense, None }

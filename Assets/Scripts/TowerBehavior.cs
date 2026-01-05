@@ -25,6 +25,7 @@ public class TowerBehavior : TooltipObject, IDamage
     private Color originalColor;
 
 
+
     private void Awake()
     {
         GameManager.OnBuildPhaseStart += StartBuild;
@@ -89,11 +90,6 @@ public class TowerBehavior : TooltipObject, IDamage
         isFiring = false;
     }
 
-    public void SetTowerData(TowerData _data)
-    {
-        towerData = _data;
-    }
-
     private void DestroyTower()
     {
         isDestroyed = true;
@@ -110,36 +106,6 @@ public class TowerBehavior : TooltipObject, IDamage
             currentHealth = towerData.stats[level - 1].health;
             sprite.sprite = towerData.sprite;
         }
-    }
-
-    public TowerData GetTowerData()
-    {
-        return towerData;
-    }
-
-    public int GetCurrentHealth()
-    {
-        return currentHealth;
-    }
-
-    public int GetLevel()
-    {
-        return level;
-    }
-
-    public (int current, int max) GetExp()
-    {
-        return (currentExp, maxExp);
-    }
-
-    public int GetTotalExp()
-    {
-        return totalExp;
-    }
-
-    public int GetSellValue()
-    {
-        return sellValue;
     }
 
     public void SetStats()
@@ -204,5 +170,45 @@ public class TowerBehavior : TooltipObject, IDamage
         {
             towerTooltip.DisplayTowerData(this);
         }
+    }
+
+    public TowerData TowerData
+    {
+        get { return towerData; }
+        set { towerData = value; }
+    }
+
+    public int CurrentHealth
+    {
+        get { return currentHealth; }
+        private set { currentHealth = value; }
+    }
+
+    public int Level
+    {
+        get { return level; }
+        private set { level = value; }
+    }
+
+    public (int current, int max) Exp
+    {
+        get { return (currentExp, maxExp); }
+        private set 
+        { 
+            currentExp = value.current; 
+            maxExp = value.max;
+        }
+    }
+
+    public int TotalExp
+    {
+        get { return totalExp; }
+        private set { totalExp = value; }
+    }
+
+    public int SellValue
+    {
+        get { return sellValue; }
+        private set { sellValue = value; }
     }
 }

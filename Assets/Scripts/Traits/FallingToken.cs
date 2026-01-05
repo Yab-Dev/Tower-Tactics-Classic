@@ -26,7 +26,7 @@ public class FallingToken : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        ShopManager.GetInstance().AddTowerTokens(tokenValue);
+        ShopManager.GetInstance().TowerTokens += tokenValue;
         Destroy(gameObject);
     }
 }

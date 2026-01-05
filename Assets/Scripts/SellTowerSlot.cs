@@ -9,7 +9,7 @@ public class SellTowerSlot : TowerSlot
         TowerBehavior towerBehavior = _tower.GetComponent<TowerBehavior>();
         if (towerBehavior != null)
         {
-            ShopManager.GetInstance().AddTowerTokens(towerBehavior.GetSellValue());
+            ShopManager.GetInstance().TowerTokens += towerBehavior.SellValue;
             Destroy(_tower.gameObject);
             GameManager.GetInstance().GetTooltipUI().ClearTooltip();
         }

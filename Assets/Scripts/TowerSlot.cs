@@ -52,11 +52,6 @@ public class TowerSlot : MonoBehaviour
         return currentTower != null;
     }
 
-    public TowerDragDrop GetTower()
-    {
-        return currentTower;
-    }
-
     public void ClearTower()
     {
         if (currentTower != null)
@@ -83,5 +78,11 @@ public class TowerSlot : MonoBehaviour
         {
             _towers.Add(currentTower.gameObject);
         }
+    }
+
+    public TowerDragDrop CurrentTower
+    {
+        get { return currentTower; }
+        private set { currentTower = value; }
     }
 }

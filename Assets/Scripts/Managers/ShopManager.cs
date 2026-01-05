@@ -77,18 +77,18 @@ public class ShopManager : MonoBehaviour
         {
             return;
         }
-        RemoveTowerTokens(refreshCost);
+        TowerTokens -= refreshCost;
 
         RefreshShop(0);
     }
 
     public void UpgradeCapacity()
     {
-        if (upgradeCost > towerTokens || GameManager.GetInstance().GetTowerCap() >= 21)
+        if (upgradeCost > towerTokens || GameManager.GetInstance().TowerCap >= 21)
         {
             return;
         }
-        RemoveTowerTokens(upgradeCost);
+        TowerTokens -= upgradeCost;
 
         GameManager.GetInstance().IncreaseTowerCap();
     }
@@ -101,51 +101,47 @@ public class ShopManager : MonoBehaviour
         }
 
         GameManager.GetInstance().SpawnTower(true, shopTowers[_index], Vector2.zero);
-        RemoveTowerTokens(shopTowers[_index].cost);
+        TowerTokens -= shopTowers[_index].cost;
         shopTowers[_index] = null;
         return true;
     }
 
-    public List<TowerData> GetShop()
-    {
-        return shopTowers;
-    }
-
-    public void SetTowerTokens(int _count)
-    {
-        towerTokens = _count;
-        OnTowerTokensChanged?.Invoke(towerTokens);
-    }
-
-    public void AddTowerTokens(int _count)
-    {
-        towerTokens += _count;
-        OnTowerTokensChanged?.Invoke(towerTokens);
-    }
-
-    public void RemoveTowerTokens(int _count)
-    {
-        towerTokens = Mathf.Max(0, towerTokens - _count);
-        OnTowerTokensChanged?.Invoke(towerTokens);
-    }
-
-    public int GetRefreshCost()
-    {
-        return refreshCost;
-    }
-
-    public int GetUpgradeCost()
-    {
-        return upgradeCost;
-    }
-
     private void StartGame()
     {
-        SetTowerTokens(startingTokenCount);
+        TowerTokens = startingTokenCount;
     }
 
     private void WaveComplete(int _waveCount)
     {
-        AddTowerTokens(waveRewardTokenCount);
+        TowerTokens += waveRewardTokenCount;
+    }
+
+    public List<TowerData> Shop
+    {
+        get { return shopTowers; }
+        private set { shopTowers = value; }
+    }
+
+    public int TowerTokens
+    {
+        get { return towerTokens; }
+        set 
+        { 
+            towerTokens = value; 
+            towerTokens = Mathf.Max(0, towerTokens);
+            OnTowerTokensChanged?.Invoke(towerTokens);
+        }
+    }
+
+    public int RefreshCost
+    {
+        get { return refreshCost; }
+        private set {  refreshCost = value; }
+    }
+
+    public int UpgradeCost
+    {
+        get { return upgradeCost; }
+        private set { upgradeCost = value; }
     }
 }

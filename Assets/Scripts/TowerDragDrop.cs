@@ -91,14 +91,14 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             {
                 currentDraggedSlot = collision.gameObject;
             }
-            else if (towerSlot.HasTower()) 
+            else if (towerSlot.HasTower())
             {
-                TowerBehavior slotBehavior = towerSlot.GetTower().GetComponent<TowerBehavior>();
+                TowerBehavior slotBehavior = towerSlot.CurrentTower.GetComponent<TowerBehavior>();
                 if (slotBehavior == null) { return; }
                 TowerBehavior towerBehavior = GetComponent<TowerBehavior>();
                 if (towerBehavior == null) { return; };
 
-                if (slotBehavior.GetTowerData().name == towerBehavior.GetTowerData().name && slotBehavior.GetLevel() != slotBehavior.GetTowerData().stats.Count)
+                if (slotBehavior.TowerData.name == towerBehavior.TowerData.name && slotBehavior.Level != slotBehavior.TowerData.stats.Count)
                 {
                     currentDraggedSlot = collision.gameObject;
                 }
@@ -153,14 +153,14 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
             if (towerSlot.HasTower())
             {
-                TowerBehavior slotTowerBehavior = towerSlot.GetTower().GetComponent<TowerBehavior>();
+                TowerBehavior slotTowerBehavior = towerSlot.CurrentTower.GetComponent<TowerBehavior>();
                 if (slotTowerBehavior == null) { return; }
                 TowerBehavior towerBehavior = GetComponent<TowerBehavior>();
                 if (towerBehavior == null) { return; }
-                
-                if (slotTowerBehavior.GetTowerData().name == towerBehavior.GetTowerData().name && slotTowerBehavior.GetLevel() != slotTowerBehavior.GetTowerData().stats.Count)
+
+                if (slotTowerBehavior.TowerData.name == towerBehavior.TowerData.name && slotTowerBehavior.Level != slotTowerBehavior.TowerData.stats.Count)
                 {
-                    slotTowerBehavior.AddExp(towerBehavior.GetTotalExp());
+                    slotTowerBehavior.AddExp(towerBehavior.TotalExp);
                     OnAnyTowerMoveEnd?.Invoke();
                     if (initialPlace)
                     {
@@ -175,8 +175,8 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
                     TowerSlot slot = startingSlot.GetComponent<TowerSlot>();
                     if (slot == null) { return; }
                     slot.ClearTower();
-                    slot.SetCurrentTower(towerSlot.GetTower());
-                    slot.GetTower().transform.position = startingSlot.transform.position;
+                    slot.SetCurrentTower(towerSlot.CurrentTower);
+                    slot.CurrentTower.transform.position = startingSlot.transform.position;
                 }
             }
 
@@ -210,8 +210,9 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         startingSlot = _slot;
     }
 
-    public void StartDraggable(bool _draggable)
+    public bool StartDraggable 
     {
-        startDragging = _draggable;
+        private get { return startDragging; } 
+        set { startDragging = value; } 
     }
 }

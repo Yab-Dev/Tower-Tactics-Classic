@@ -88,11 +88,6 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         }
     }
 
-    public void SetEnemyData(EnemyData _data)
-    {
-        enemyData = _data;
-    }
-
     private void SelfDestruct()
     {
         if (this == null) { return; }
@@ -118,5 +113,11 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     public IDamage.Team GetTeam()
     {
         return IDamage.Team.Enemy;
+    }
+
+    public EnemyData EnemyData
+    {
+        private get { return enemyData; }
+        set { enemyData = value; }
     }
 }

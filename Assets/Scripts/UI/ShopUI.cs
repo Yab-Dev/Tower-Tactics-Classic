@@ -42,8 +42,8 @@ public class ShopUI : MonoBehaviour
 
     private void Start()
     {
-        refreshButtonCostText.text = ShopManager.GetInstance().GetRefreshCost().ToString();
-        upgradeCapacityCostText.text = ShopManager.GetInstance().GetUpgradeCost().ToString();
+        refreshButtonCostText.text = ShopManager.GetInstance().RefreshCost.ToString();
+        upgradeCapacityCostText.text = ShopManager.GetInstance().UpgradeCost.ToString();
     }
 
     private void DisplayShop(List<TowerData> _shopData)
@@ -76,7 +76,7 @@ public class ShopUI : MonoBehaviour
     {
         ShopManager.GetInstance().BuyTower(_index);
 
-        DisplayShop(ShopManager.GetInstance().GetShop());
+        DisplayShop(ShopManager.GetInstance().Shop);
     }
 
     private void RefreshButtonClick()
@@ -104,6 +104,6 @@ public class ShopUI : MonoBehaviour
     {
         refreshShopButton.interactable = true;
         upgradeCapacityButton.interactable = true;
-        DisplayShop(ShopManager.GetInstance().GetShop());
+        DisplayShop(ShopManager.GetInstance().Shop);
     }
 }
