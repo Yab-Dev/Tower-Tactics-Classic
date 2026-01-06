@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerInfoUI : MonoBehaviour
 {
@@ -8,14 +9,18 @@ public class TowerInfoUI : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text nameText;
     [SerializeField] private Transform traitTextContent;
     [SerializeField] private TMPro.TMP_Text towerCostText;
+    [SerializeField] private Image towerImage;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject traitTextObject;
-    
+
+    private TowerData towerData;
 
 
     public void SetTowerInfo(TowerData _towerData)
     {
+        towerData = _towerData;
+
         nameText.text = _towerData.name;
         towerCostText.text = _towerData.cost.ToString();
 
@@ -30,5 +35,14 @@ public class TowerInfoUI : MonoBehaviour
             TMPro.TMP_Text traitText = textObject.GetComponent<TMPro.TMP_Text>();
             traitText.text = _towerData.traits[i].name;
         }
+
+        towerImage.sprite = _towerData.sprite;
+        towerImage.SetNativeSize();
+    }
+
+    public TowerData TowerData
+    {
+        get { return towerData; }
+        private set { towerData = value; }
     }
 }

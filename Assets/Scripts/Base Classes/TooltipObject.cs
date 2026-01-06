@@ -16,7 +16,7 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
 
     protected virtual void Update()
     {
-        if (hovering)
+        if (hovering && tooltipPrefab != null)
         {
             tooltipTimer += Time.deltaTime;
             if (tooltipTimer >= tooltipDelay && displaying == false)
