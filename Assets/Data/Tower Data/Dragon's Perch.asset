@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8e7663ec163d241b0036e439d6b702, type: 3}
+  m_Name: Dragon's Perch
+  m_EditorClassIdentifier: 
+  description: A powerful dragon that breathes fire.
+  traits:
+  - {fileID: 11400000, guid: 493010597a2e3f144a5fbf611a4954dd, type: 2}
+  - {fileID: 11400000, guid: aeae83cf2c15a5545a5297fb83253000, type: 2}
+  cost: 5
+  sprite: {fileID: -3258975612573839350, guid: bf5790629c2d8204d81062abef4da349, type: 3}
+  destroyedSprite: {fileID: 0}
+  stats:
+  - health: 4
+    hitSpeed: 0.7
+    damage: 3
+    laneRange: 30
+    areaRange: 5
+  - health: 7
+    hitSpeed: 0.6
+    damage: 5
+    laneRange: 30
+    areaRange: 5
+  - health: 10
+    hitSpeed: 0.5
+    damage: 7
+    laneRange: 30
+    areaRange: 5
+  bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
+  bulletSpeed: 6
