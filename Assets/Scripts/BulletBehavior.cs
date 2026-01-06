@@ -30,6 +30,16 @@ public class BulletBehavior : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        GameManager.OnDefensePhaseEnd += SelfDestruct;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnDefensePhaseEnd -= SelfDestruct;
+    }
+
     private void Update()
     {
         if (target == null)
@@ -57,5 +67,10 @@ public class BulletBehavior : MonoBehaviour
             damageInterface.Damage(damage);
             Destroy(gameObject);
         }
+    }
+
+    private void SelfDestruct(int _waveCount)
+    {
+        Destroy(gameObject);
     }
 }
