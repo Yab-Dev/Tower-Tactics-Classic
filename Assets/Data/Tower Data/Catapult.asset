@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c8e7663ec163d241b0036e439d6b702, type: 3}
-  m_Name: Cannon
+  m_Name: Catapult
   m_EditorClassIdentifier: 
-  description: Shoots explosive cannonballs
+  description: Fires heavy projectiles from a distance.
   traits:
   - {fileID: 11400000, guid: 493010597a2e3f144a5fbf611a4954dd, type: 2}
-  - {fileID: 11400000, guid: 03972b8c73c48dd439361b0399c37ec4, type: 2}
+  - {fileID: 11400000, guid: dc4dad2ba7cae0e48923facb34505aa9, type: 2}
   cost: 5
-  sprite: {fileID: 3322948986396454299, guid: 5ef8838e87b4442449e6762df2a17dcd, type: 3}
+  sprite: {fileID: -2173256751517959608, guid: ed6d53e1da2a56d4188e3f050bb48dfd, type: 3}
   destroyedSprite: {fileID: 0}
   stats:
-  - health: 5
-    hitSpeed: 2
-    damage: 10
+  - health: 3
+    hitSpeed: 2.5
+    damage: 15
     laneRange: 30
-    areaRange: 3
-  - health: 8
-    hitSpeed: 2
-    damage: 20
+    areaRange: 1
+  - health: 3
+    hitSpeed: 2.25
+    damage: 29
     laneRange: 30
-    areaRange: 3
-  - health: 12
+    areaRange: 1
+  - health: 4
     hitSpeed: 2
-    damage: 30
+    damage: 42
     laneRange: 30
-    areaRange: 3
+    areaRange: 1
   bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
-  bulletSpeed: 8
+  bulletSpeed: 4
