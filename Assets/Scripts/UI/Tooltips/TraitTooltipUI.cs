@@ -8,6 +8,7 @@ public class TraitTooltipUI : MonoBehaviour
     [Header("Cache")]
     [SerializeField] private TMPro.TMP_Text traitNameText;
     [SerializeField] private Image traitIcon;
+    [SerializeField] private TMPro.TMP_Text traitDescriptionText;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject traitBreakpointPrefab;
@@ -26,6 +27,7 @@ public class TraitTooltipUI : MonoBehaviour
 
         traitNameText.text = _traitData.name;
         traitIcon.sprite = _traitData.traitIcon;
+        traitDescriptionText.text = _traitData.description;
 
         for (int i = 0; i < _traitData.breakpoints.Count; i++)
         {
