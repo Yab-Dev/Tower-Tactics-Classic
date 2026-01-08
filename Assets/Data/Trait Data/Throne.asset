@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
+  m_Name: Throne
+  m_EditorClassIdentifier: 
+  description: A throne fit for a king.
+  traitIcon: {fileID: -846724359101184623, guid: c4bf1d20a1f83964dbc32c635b2c60aa, type: 3}
+  breakpoints:
+  - breakpointValue: 1
+    breakpointDescription: Every few seconds, all medieval towers gain a damage or
+      attack speed boost.

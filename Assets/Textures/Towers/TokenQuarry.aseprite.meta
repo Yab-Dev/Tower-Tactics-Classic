@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8f719b1b54c0d254094e8f1b6bda807b
+guid: 29552022a0a9c46428e5bac90579fbb6
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639017005788936815
+  platformSettingsDirtyTick: 639033978950187792
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -122,10 +122,10 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: ExplosiveSymbol
+  - name: TokenQuarry
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 16
       height: 16
-    spriteID: d19c84b3d04e19648bf61d5bd9e20b35
+    spriteID: 7cde07b25093dce49bfbcaeae206acc7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -146,17 +146,17 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2470847229
+      value0: 1323961707
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: ExplosiveSymbol
+    name: TokenQuarry
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: ExplosiveSymbol
+    - name: TokenQuarry
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -164,7 +164,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: d19c84b3d04e19648bf61d5bd9e20b35
+      spriteId: 7cde07b25093dce49bfbcaeae206acc7
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -183,7 +183,7 @@ ScriptedImporter:
   - name: DefaultTexturePlatform
     overridden: 0
     ignorePlatformSupport: 0
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
