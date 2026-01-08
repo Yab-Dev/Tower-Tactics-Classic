@@ -25,12 +25,12 @@ MonoBehaviour:
     damage: 15
     laneRange: 30
     areaRange: 1
-  - health: 3
+  - health: 4
     hitSpeed: 2.25
-    damage: 29
+    damage: 28
     laneRange: 30
     areaRange: 1
-  - health: 4
+  - health: 5
     hitSpeed: 2
     damage: 42
     laneRange: 30
