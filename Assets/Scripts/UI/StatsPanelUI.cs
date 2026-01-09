@@ -9,6 +9,7 @@ public class StatsPanelUI : MonoBehaviour
     [SerializeField] private Color invalidTowerCapTextColor;
 
     [Header("Cache")]
+    [SerializeField] private TMPro.TMP_Text livesText;
     [SerializeField] private TMPro.TMP_Text towerTokensText;
     [SerializeField] private TMPro.TMP_Text towerCapText;
 
@@ -16,14 +17,21 @@ public class StatsPanelUI : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.OnLivesChanged += UpdateLives;
         ShopManager.OnTowerTokensChanged += UpdateTowerTokens;
         GameManager.OnCurrentTowersUpdated += UpdateTowerCap;
     }
 
     private void OnDisable()
     {
+        GameManager.OnLivesChanged -= UpdateLives;
         ShopManager.OnTowerTokensChanged -= UpdateTowerTokens;
         GameManager.OnCurrentTowersUpdated -= UpdateTowerCap;
+    }
+
+    private void UpdateLives(int _currentLives)
+    {
+        livesText.text = _currentLives.ToString();
     }
 
     private void UpdateTowerTokens(int _towerTokenAmount)

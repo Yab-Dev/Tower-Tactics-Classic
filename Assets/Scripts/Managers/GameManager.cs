@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
     public delegate void OnClearEnemiesEventArgs();
     public static event OnClearEnemiesEventArgs OnClearEnemies;
 
+    public delegate void OnLivesChangedEventArgs(int _currentLives);
+    public static event OnLivesChangedEventArgs OnLivesChanged;
+
 
     private void Awake()
     {
@@ -108,6 +111,7 @@ public class GameManager : MonoBehaviour
     {
         waveCount = 0;
         currentLives = startingLives;
+        OnLivesChanged?.Invoke(currentLives);
         towerCap = startingTowerCap;
 
         // Spawn starting towers
@@ -247,6 +251,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Lost Life");
         currentLives--;
+        OnLivesChanged?.Invoke(currentLives);
         if (currentLives <= 0)
         {
             GameLost();
