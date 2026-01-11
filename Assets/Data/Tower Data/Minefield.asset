@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8e7663ec163d241b0036e439d6b702, type: 3}
+  m_Name: Minefield
+  m_EditorClassIdentifier: 
+  description: Dangerous mines that explode everything in their path.
+  traits:
+  - {fileID: 11400000, guid: ff8f70c5aac94724ea30a49eb43e705d, type: 2}
+  - {fileID: 11400000, guid: 03972b8c73c48dd439361b0399c37ec4, type: 2}
+  cost: 5
+  sprite: {fileID: 2664962687551159730, guid: 2c55c957b6cb2f74da4b6e43cb89cc34, type: 3}
+  destroyedSprite: {fileID: 0}
+  stats:
+  - health: 6
+    hitSpeed: 3
+    damage: 24
+    laneRange: 30
+    areaRange: 1
+  - health: 10
+    hitSpeed: 3
+    damage: 48
+    laneRange: 30
+    areaRange: 1
+  - health: 14
+    hitSpeed: 3
+    damage: 72
+    laneRange: 30
+    areaRange: 1
+  bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
+  bulletSpeed: 2

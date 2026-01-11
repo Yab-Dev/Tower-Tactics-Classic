@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8e7663ec163d241b0036e439d6b702, type: 3}
+  m_Name: Shiver Tower
+  m_EditorClassIdentifier: 
+  description: Fires icy magic from a distance.
+  traits:
+  - {fileID: 11400000, guid: dd4104b6bf02a4c46be6af93859aaa1f, type: 2}
+  - {fileID: 11400000, guid: dc4dad2ba7cae0e48923facb34505aa9, type: 2}
+  cost: 5
+  sprite: {fileID: -357877167981417599, guid: 2b71adb3b2ef670418f4e18e1fa27381, type: 3}
+  destroyedSprite: {fileID: 0}
+  stats:
+  - health: 3
+    hitSpeed: 2.2
+    damage: 9
+    laneRange: 30
+    areaRange: 3
+  - health: 5
+    hitSpeed: 2.2
+    damage: 18
+    laneRange: 30
+    areaRange: 3
+  - health: 7
+    hitSpeed: 2.2
+    damage: 27
+    laneRange: 30
+    areaRange: 3
+  bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
+  bulletSpeed: 4
