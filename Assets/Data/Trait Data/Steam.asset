@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
   m_Name: Steam
   m_EditorClassIdentifier: 
-  description: 
-  traitIcon: {fileID: 0}
+  description: The roar of industry
+  traitIcon: {fileID: -2241017508619644081, guid: 94ac73d4199d2c74092d3b712d748ac3, type: 3}
   breakpoints:
   - breakpointValue: 1
-    breakpointDescription: 
+    breakpointDescription: Pressure will slowly build, and when released will deal
+      damage to all enemies and push them back. Wait too long and the the tower will
+      overheat!
