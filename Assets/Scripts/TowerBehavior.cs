@@ -21,6 +21,9 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private BoxCollider2D towerCollision;
     [SerializeField] private TargetDetection targetDetection;
 
+    public delegate void OnAnyTowerDestroyedEventArgs(TowerData _towerData, Vector2 _destroyPosition);
+    public static event OnAnyTowerDestroyedEventArgs OnAnyTowerDestroyed;
+
     private float shootCooldown;
     private Color originalColor;
 
@@ -95,6 +98,7 @@ public class TowerBehavior : TooltipObject, IDamage
         isDestroyed = true;
         towerCollision.enabled = false;
         sprite.sprite = towerData.destroyedSprite;
+        OnAnyTowerDestroyed?.Invoke(towerData, transform.position);
     }
 
     private void RepairTower()

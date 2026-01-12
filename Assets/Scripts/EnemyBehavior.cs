@@ -93,8 +93,8 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     {
         if (this == null) { return; }
         isDestroyed = true;
-        OnEnemyDestroyed?.Invoke(gameObject.transform.position);
-        OnAnyEnemyDestroyed?.Invoke(gameObject.transform.position);
+        OnEnemyDestroyed?.Invoke(transform.position);
+        OnAnyEnemyDestroyed?.Invoke(transform.position);
         Destroy(gameObject);
     }
 
