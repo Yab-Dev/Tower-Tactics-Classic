@@ -9,42 +9,37 @@ public class TraitManager : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
+    [SerializeField] private GameObject gathererStaticTokenPrefab;
 
 
 
     private void Awake()
     {
-        GameManager.OnDefensePhaseStart += DefenseStart;
+        GameManager.OnDefensePhaseStart += GathererBreakpoint1;
+        EnemyBehavior.OnAnyEnemyDestroyed += GathererBreakpoint2;
     }
 
     private void OnDisable()
     {
-        GameManager.OnDefensePhaseStart -= DefenseStart;
+        GameManager.OnDefensePhaseStart -= GathererBreakpoint1;
+        EnemyBehavior.OnAnyEnemyDestroyed -= GathererBreakpoint2;
     }
 
-    private void DefenseStart(int _waveCount)
+
+
+    private void GathererBreakpoint1(int _waveCount)
     {
-        List<(TraitData trait, int count)> traitData = GameManager.GetInstance().GetCurrentTraits();
-        (TraitData trait, int count) gathererTraitData = GetTrait(traitData, gathererTrait);
-        if (gathererTraitData.trait != null)
+        if (TraitUtils.CheckTraitBreakpoint(gathererTrait, 0))
         {
-            if (gathererTraitData.count >= gathererTraitData.trait.breakpoints[0].breakpointValue)
-            {
-                Instantiate(gathererFallingTokensPrefab);
-            }
+            Instantiate(gathererFallingTokensPrefab);
         }
     }
 
-    private (TraitData trait, int count) GetTrait(List<(TraitData trait, int count)> _traitData, TraitData _trait)
+    private void GathererBreakpoint2(Vector2 _deathPosition)
     {
-        for (int i = 0; i < _traitData.Count; i++)
+        if (TraitUtils.CheckTraitBreakpoint(gathererTrait, 1))
         {
-            if (_traitData[i].trait == _trait)
-            {
-                return _traitData[i];
-            }
+            Instantiate(gathererStaticTokenPrefab, _deathPosition, Quaternion.identity);
         }
-
-        return (null, 0);
     }
 }

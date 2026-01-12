@@ -21,8 +21,9 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     private bool waitFrame = true;
     private Color originalColor;
 
-    public delegate void OnEnemyDestroyedEventArgs();
+    public delegate void OnEnemyDestroyedEventArgs(Vector2 _deathPosition);
     public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
+    public static event OnEnemyDestroyedEventArgs OnAnyEnemyDestroyed;
 
 
     private void Awake()
@@ -92,7 +93,8 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     {
         if (this == null) { return; }
         isDestroyed = true;
-        OnEnemyDestroyed?.Invoke();
+        OnEnemyDestroyed?.Invoke(gameObject.transform.position);
+        OnAnyEnemyDestroyed?.Invoke(gameObject.transform.position);
         Destroy(gameObject);
     }
 

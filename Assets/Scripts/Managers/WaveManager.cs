@@ -99,7 +99,7 @@ public class WaveManager : MonoBehaviour
         GameManager.GetInstance().CompleteWave(levelWaves.waves.Count);
     }
 
-    private void EnemyDestroyed()
+    private void EnemyDestroyed(Vector2 _deathPosition)
     {
         spawnedEnemies--;
     }
