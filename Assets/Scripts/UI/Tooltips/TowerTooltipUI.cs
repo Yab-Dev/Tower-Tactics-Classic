@@ -89,20 +89,26 @@ public class TowerTooltipUI : MonoBehaviour
         }
 
         int towerLevel = 0;
+        TowerData.LevelStats towerStats;
         if (_tower != null)
         {
             towerLevel = _tower.Level - 1;
+            towerStats = _tower.CurrentStats;
+        }
+        else
+        {
+            towerStats = _towerData.stats[towerLevel];
         }
 
-        string healthText = $"Health: {_towerData.stats[towerLevel].health}";
+        string healthText = $"Health: {towerStats.health}";
         if (_tower != null)
         {
-            healthText = $"Health: {_tower.CurrentHealth}/{_towerData.stats[towerLevel].health}";
+            healthText = $"Health: {_tower.CurrentHealth}/{towerStats.health}";
         }
         towerHealthText.text = healthText;
 
-        towerHitspeedText.text = $"Hit Speed: {_towerData.stats[towerLevel].hitSpeed.ToString()}";
-        towerDamageText.text = $"Damage: {_towerData.stats[towerLevel].damage.ToString()}";
+        towerHitspeedText.text = $"Hit Speed: {towerStats.hitSpeed.ToString()}";
+        towerDamageText.text = $"Damage: {towerStats.damage.ToString()}";
 
         string sellValueText = $"Sell Value: N/A";
         if (_tower != null)
@@ -111,8 +117,8 @@ public class TowerTooltipUI : MonoBehaviour
         }
         towerSellValueText.text = sellValueText;
 
-        towerLaneRangeText.text = $"Lane Range: {_towerData.stats[towerLevel].laneRange.ToString()}";
-        towerAreaRangeText.text = $"Area Range: {_towerData.stats[towerLevel].areaRange.ToString()}";
+        towerLaneRangeText.text = $"Lane Range: {towerStats.laneRange.ToString()}";
+        towerAreaRangeText.text = $"Area Range: {towerStats.areaRange.ToString()}";
         towerHitCountText.text = "Hit Count: 1";
 
         towerDescriptionText.text = _towerData.description;

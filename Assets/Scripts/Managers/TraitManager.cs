@@ -21,6 +21,7 @@ public class TraitManager : MonoBehaviour
         EnemyBehavior.OnAnyEnemyDestroyed += GathererBreakpoint2;
 
         TowerBehavior.OnAnyTowerDestroyed += MedievalBreakpoint1;
+        TowerBehavior.OnAnyTowerDestroyed += MedievalBreakpoint2;
     }
 
     private void OnDisable()
@@ -29,6 +30,7 @@ public class TraitManager : MonoBehaviour
         EnemyBehavior.OnAnyEnemyDestroyed -= GathererBreakpoint2;
 
         TowerBehavior.OnAnyTowerDestroyed -= MedievalBreakpoint1;
+        TowerBehavior.OnAnyTowerDestroyed -= MedievalBreakpoint2;
     }
 
 
@@ -53,5 +55,16 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(medievalTrait, 0)) { return; }
 
         Instantiate(medievalDestroyedArrowInteractPrefab, _destroyPosition, Quaternion.identity);
+    }
+
+    private void MedievalBreakpoint2(TowerData _towerData, Vector2 _destroyPosition)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(medievalTrait, 1)) { return; }
+
+        List<TowerBehavior> medievalTowers = GameManager.GetInstance().GetTowersOfTrait(medievalTrait);
+        foreach (TowerBehavior tower in medievalTowers)
+        {
+            tower.AddStatModification(_hitSpeed: -0.05f);
+        }
     }
 }

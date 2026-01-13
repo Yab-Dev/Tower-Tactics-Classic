@@ -8,6 +8,7 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private TowerData towerData;
     [SerializeField] private Color hurtColor;
     [SerializeField] private int currentHealth;
+    [SerializeField] private TowerData.LevelStats statModifier;
     [SerializeField] private int level = 1;
     [SerializeField] private int currentExp;
     [SerializeField] private int maxExp;
@@ -34,6 +35,8 @@ public class TowerBehavior : TooltipObject, IDamage
         GameManager.OnBuildPhaseStart += StartBuild;
         GameManager.OnDefensePhaseStart += StartDefense;
         GameManager.OnDefensePhaseEnd += EndDefense;
+
+        GameManager.OnGetTowersOfTrait += FetchTowerTraitData;
     }
 
     private void OnDisable()
@@ -41,12 +44,13 @@ public class TowerBehavior : TooltipObject, IDamage
         GameManager.OnBuildPhaseStart -= StartBuild;
         GameManager.OnDefensePhaseStart -= StartDefense;
         GameManager.OnDefensePhaseEnd -= EndDefense;
+
+        GameManager.OnGetTowersOfTrait -= FetchTowerTraitData;
     }
 
     private void Start()
     {
         originalColor = sprite.color;
-        LevelUp(1);
     }
 
     protected override void Update()
@@ -67,8 +71,8 @@ public class TowerBehavior : TooltipObject, IDamage
     {
         if (shootCooldown <= 0.0f)
         {
-            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, _target, IDamage.Team.Tower, towerData.stats[level - 1].damage, towerData.bulletSpeed);
-            shootCooldown = towerData.stats[level - 1].hitSpeed;
+            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, _target, IDamage.Team.Tower, CurrentStats.damage, towerData.bulletSpeed);
+            shootCooldown = CurrentStats.hitSpeed;
         }
         else
         {
@@ -83,14 +87,15 @@ public class TowerBehavior : TooltipObject, IDamage
 
     private void StartDefense(int _waveCount)
     {
-        shootCooldown = towerData.stats[level - 1].hitSpeed;
+        shootCooldown = CurrentStats.hitSpeed;
         isFiring = true;
     }
 
     private void EndDefense(int _waveCount)
     {
-        shootCooldown = towerData.stats[level - 1].hitSpeed;
+        shootCooldown = CurrentStats.hitSpeed;
         isFiring = false;
+        ClearStatModifications();
     }
 
     private void DestroyTower()
@@ -107,7 +112,7 @@ public class TowerBehavior : TooltipObject, IDamage
         {
             isDestroyed = false;
             towerCollision.enabled = true;
-            currentHealth = towerData.stats[level - 1].health;
+            currentHealth = CurrentStats.health;
             sprite.sprite = towerData.sprite;
         }
     }
@@ -116,7 +121,7 @@ public class TowerBehavior : TooltipObject, IDamage
     {
         sellValue = Mathf.FloorToInt(towerData.cost / 2.0f) * level;
         RepairTower();
-        targetDetection.SetSize(towerData.stats[level - 1].laneRange, towerData.stats[level - 1].areaRange);
+        targetDetection.SetSize(CurrentStats.laneRange, CurrentStats.areaRange);
     }
 
     public void LevelUp()
@@ -176,6 +181,33 @@ public class TowerBehavior : TooltipObject, IDamage
         }
     }
 
+    public void ClearStatModifications()
+    {
+        statModifier.health = 0;
+        statModifier.hitSpeed = 1;
+        statModifier.damage = 0;
+        statModifier.laneRange = 0;
+        statModifier.areaRange = 0;
+    }
+
+    public void AddStatModification(int _health = 0, float _hitSpeed = 0, int _damage = 0, int _laneRange = 0, int _areaRange = 0)
+    {
+        statModifier.health += _health;
+        statModifier.hitSpeed += _hitSpeed;
+        statModifier.damage += _damage;
+        statModifier.laneRange += _laneRange;
+        statModifier.areaRange += _areaRange;
+    }
+
+    private void FetchTowerTraitData(ref List<TowerBehavior> _towers, TraitData _trait)
+    {
+        if (_trait == null || (_trait != null && towerData.traits.Contains(_trait)))
+        {
+            _towers.Add(this);
+            return;
+        }
+    }
+
     public TowerData TowerData
     {
         get { return towerData; }
@@ -214,5 +246,10 @@ public class TowerBehavior : TooltipObject, IDamage
     {
         get { return sellValue; }
         private set { sellValue = value; }
+    }
+
+    public TowerData.LevelStats CurrentStats
+    {
+        get { return towerData.stats[level-1] + statModifier; }
     }
 }

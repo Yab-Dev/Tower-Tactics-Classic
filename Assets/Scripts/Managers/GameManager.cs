@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> _towers);
     public static event OnGetPlacedTowersEventArgs OnGetPlacedTowers;
 
+    public delegate void OnGetTowersOfTraitEventArgs(ref List<TowerBehavior> _towers, TraitData _trait);
+    public static event OnGetTowersOfTraitEventArgs OnGetTowersOfTrait;
+
     public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> _towers, List<(TraitData trait, int count)> _traits, int _towerCap);
     public static event OnCurrentTowersUpdatedEventArgs OnCurrentTowersUpdated;
 
@@ -181,6 +184,7 @@ public class GameManager : MonoBehaviour
             towerDragDrop.StartDraggable = _startDragging;
         }
 
+        towerBehavior.ClearStatModifications();
         towerBehavior.LevelUp(1);
 
         return tower;
@@ -274,6 +278,13 @@ public class GameManager : MonoBehaviour
     {
         towerCap++;
         OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
+    }
+
+    public List<TowerBehavior> GetTowersOfTrait(TraitData _trait)
+    {
+        List<TowerBehavior> foundTowers = new List<TowerBehavior>();
+        OnGetTowersOfTrait?.Invoke(ref foundTowers, _trait);
+        return foundTowers;
     }
 
     public int TowerCap

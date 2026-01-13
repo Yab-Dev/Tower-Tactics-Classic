@@ -20,6 +20,19 @@ public class TowerData : ScriptableObject
         public int damage;
         public float laneRange = 30.0f;
         public float areaRange;
+
+        public static LevelStats operator + (LevelStats original, LevelStats modifier)
+        {
+            LevelStats ret = new LevelStats ();
+
+            ret.health = original.health + modifier.health;
+            ret.hitSpeed = original.hitSpeed * modifier.hitSpeed;
+            ret.damage = original.damage + modifier.damage;
+            ret.laneRange = original.laneRange + modifier.laneRange;
+            ret.areaRange = original.areaRange + modifier.areaRange;
+
+            return ret;
+        }
     }
     public List<LevelStats> stats = new List<LevelStats>();
 
