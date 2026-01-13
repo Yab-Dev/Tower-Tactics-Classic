@@ -6,7 +6,7 @@ public class BulletBehavior : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private IDamage.Team team;
-    [SerializeField] private int damage;
+    [SerializeField] protected int damage;
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
     [SerializeField] private GameObject target;
@@ -64,9 +64,14 @@ public class BulletBehavior : MonoBehaviour
         {
             if (damageInterface.GetTeam() == team) { return; }
 
-            damageInterface.Damage(damage);
+            OnHit(collision, damageInterface);
             Destroy(gameObject);
         }
+    }
+
+    protected virtual void OnHit(Collider2D _collision, IDamage _damageInterface)
+    {
+        _damageInterface.Damage(damage);
     }
 
     private void SelfDestruct(int _waveCount)

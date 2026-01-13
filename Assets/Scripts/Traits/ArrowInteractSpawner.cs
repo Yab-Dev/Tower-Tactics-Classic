@@ -33,7 +33,6 @@ public class ArrowInteractSpawner : MonoBehaviour
     {
         if (spawnTimer <= 0.0f)
         {
-            Debug.Log("SPAWN");
             List<EnemyBehavior> enemyList = WaveManager.GetInstance().GetEnemies();
             Instantiate(arrowInteractPrefab, enemyList[Random.Range(0, enemyList.Count-1)].transform);
 
