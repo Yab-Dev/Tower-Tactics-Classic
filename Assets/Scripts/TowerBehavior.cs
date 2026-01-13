@@ -21,6 +21,7 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private BoxCollider2D towerCollision;
     [SerializeField] private TargetDetection targetDetection;
+    [SerializeField] private ParticleSystem buffParticles;
 
     public delegate void OnAnyTowerDestroyedEventArgs(TowerData _towerData, Vector2 _destroyPosition);
     public static event OnAnyTowerDestroyedEventArgs OnAnyTowerDestroyed;
@@ -104,6 +105,8 @@ public class TowerBehavior : TooltipObject, IDamage
         towerCollision.enabled = false;
         sprite.sprite = towerData.destroyedSprite;
         OnAnyTowerDestroyed?.Invoke(towerData, transform.position);
+
+        buffParticles.Stop();
     }
 
     private void RepairTower()
@@ -188,6 +191,8 @@ public class TowerBehavior : TooltipObject, IDamage
         statModifier.damage = 0;
         statModifier.laneRange = 0;
         statModifier.areaRange = 0;
+
+        buffParticles.Stop();
     }
 
     public void AddStatModification(int _health = 0, float _hitSpeed = 0, int _damage = 0, int _laneRange = 0, int _areaRange = 0)
@@ -197,10 +202,13 @@ public class TowerBehavior : TooltipObject, IDamage
         statModifier.damage += _damage;
         statModifier.laneRange += _laneRange;
         statModifier.areaRange += _areaRange;
+
+        buffParticles.Play();
     }
 
     private void FetchTowerTraitData(ref List<TowerBehavior> _towers, TraitData _trait)
     {
+        if (isDestroyed) { return; }
         if (_trait == null || (_trait != null && towerData.traits.Contains(_trait)))
         {
             _towers.Add(this);
