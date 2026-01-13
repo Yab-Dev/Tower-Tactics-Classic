@@ -12,6 +12,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject gathererFallingTokensPrefab;
     [SerializeField] private GameObject gathererStaticTokenPrefab;
     [SerializeField] private GameObject medievalDestroyedArrowInteractPrefab;
+    [SerializeField] private GameObject medievalArrowTargetSpawnerPrefab;
 
 
 
@@ -22,6 +23,7 @@ public class TraitManager : MonoBehaviour
 
         TowerBehavior.OnAnyTowerDestroyed += MedievalBreakpoint1;
         TowerBehavior.OnAnyTowerDestroyed += MedievalBreakpoint2;
+        GameManager.OnDefensePhaseStart += MedievalBreakpoint3;
     }
 
     private void OnDisable()
@@ -31,6 +33,7 @@ public class TraitManager : MonoBehaviour
 
         TowerBehavior.OnAnyTowerDestroyed -= MedievalBreakpoint1;
         TowerBehavior.OnAnyTowerDestroyed -= MedievalBreakpoint2;
+        GameManager.OnDefensePhaseStart -= MedievalBreakpoint3;
     }
 
 
@@ -66,5 +69,12 @@ public class TraitManager : MonoBehaviour
         {
             tower.AddStatModification(_hitSpeed: -0.05f);
         }
+    }
+
+    private void MedievalBreakpoint3(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(medievalTrait, 2)) { return; }
+
+        Instantiate(medievalArrowTargetSpawnerPrefab);
     }
 }

@@ -18,6 +18,9 @@ public class WaveManager : MonoBehaviour
 
     private int spawnedEnemies;
 
+    public delegate void OnGetEnemiesEventArgs(ref List<EnemyBehavior> _enemies);
+    public static event OnGetEnemiesEventArgs OnGetEnemies;
+
 
 
     private void Awake()
@@ -136,5 +139,14 @@ public class WaveManager : MonoBehaviour
         EnemyData enemyToSpawn = _list[0];
         _list.RemoveAt(0);
         return enemyToSpawn;
+    }
+
+    public List<EnemyBehavior> GetEnemies()
+    {
+        List<EnemyBehavior> enemyList = new List<EnemyBehavior>();
+
+        OnGetEnemies?.Invoke(ref enemyList);
+
+        return enemyList;
     }
 }

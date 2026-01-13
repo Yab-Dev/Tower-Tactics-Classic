@@ -29,11 +29,13 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     private void Awake()
     {
         GameManager.OnClearEnemies += SelfDestruct;
+        WaveManager.OnGetEnemies += FetchEnemyData;
     }
 
     private void OnDisable()
     {
         GameManager.OnClearEnemies -= SelfDestruct;
+        WaveManager.OnGetEnemies -= FetchEnemyData;
     }
 
     private void Start()
@@ -97,6 +99,11 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         OnAnyEnemyDestroyed?.Invoke(transform.position);
         Destroy(gameObject);
     }
+
+    private void FetchEnemyData(ref List<EnemyBehavior> _enemyData)
+    {
+        _enemyData.Add(this);
+    }    
 
     public void Damage(int _amount)
     {

@@ -22,6 +22,7 @@ public class ArrowInteract : MonoBehaviour, IPointerDownHandler
     [SerializeField] private SpriteRenderer baseSprite;
     [SerializeField] private SpriteRenderer ringSprite;
     [SerializeField] private Animator ringAnimator;
+    [SerializeField] private TraitData medievalTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject arrowBullet;
@@ -59,7 +60,7 @@ public class ArrowInteract : MonoBehaviour, IPointerDownHandler
                 StartCoroutine(BulletArrowVolley());
                 break;
             case ArrowMode.Target:
-
+                StartCoroutine(TargetArrowVolley());
                 break;
         }
     }
@@ -81,6 +82,17 @@ public class ArrowInteract : MonoBehaviour, IPointerDownHandler
         for (int i = 0; i < arrowCount; i++)
         {
             BulletBehavior.CreateBullet(arrowBullet, new Vector2(arrowSpawnX, transform.position.y + Random.Range(-0.5f, 0.5f)), null, IDamage.Team.Tower, arrowDamage, arrowSpeed);
+            yield return new WaitForSeconds(arrowDelay);
+        }
+        Destroy(gameObject);
+    }
+
+    private IEnumerator TargetArrowVolley()
+    {
+        List<TowerBehavior> medievalTowers = GameManager.GetInstance().GetTowersOfTrait(medievalTrait);
+        foreach (TowerBehavior tower in medievalTowers)
+        {
+            BulletBehavior.CreateBullet(arrowBullet, tower.transform.position, transform.parent.gameObject, IDamage.Team.Tower, arrowDamage, arrowSpeed);
             yield return new WaitForSeconds(arrowDelay);
         }
         Destroy(gameObject);
