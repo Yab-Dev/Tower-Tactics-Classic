@@ -72,7 +72,7 @@ public class TowerBehavior : TooltipObject, IDamage
     {
         if (shootCooldown <= 0.0f)
         {
-            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, _target, IDamage.Team.Tower, CurrentStats.damage, towerData.bulletSpeed);
+            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, _target, IDamage.Team.Tower, CurrentStats.damage, towerData.bulletSpeed, _towerData: towerData);
             shootCooldown = CurrentStats.hitSpeed;
         }
         else
@@ -214,6 +214,11 @@ public class TowerBehavior : TooltipObject, IDamage
             _towers.Add(this);
             return;
         }
+    }
+
+    public void ApplyTags(List<BulletBehavior.BulletTags> _tags)
+    {
+        
     }
 
     public TowerData TowerData

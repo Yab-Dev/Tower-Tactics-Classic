@@ -20,11 +20,11 @@ public class ExplosiveBulletBehavior : BulletBehavior
     {
         if (TraitUtils.CheckTraitBreakpoint(explosiveTrait, 1))
         {
-            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius);
+            //ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius);
         }
         else if (TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0))
         {
-            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint1Radius);
+            //ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint1Radius);
         }
         else
         {

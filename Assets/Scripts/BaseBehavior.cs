@@ -16,4 +16,9 @@ public class BaseBehavior : MonoBehaviour, IDamage
     {
         return IDamage.Team.Tower;
     }
+
+    public void ApplyTags(List<BulletBehavior.BulletTags> _tags)
+    {
+        
+    }
 }

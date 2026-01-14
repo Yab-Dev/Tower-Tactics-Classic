@@ -10,9 +10,21 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
     [SerializeField] private GameObject target;
+    [SerializeField] private List<BulletTags> tags = new List<BulletTags>();
+
+    [Header("Static Attributes")]
+    [SerializeField] private float explosionBreakpoint2Radius;
+    [SerializeField] private float explosionBreakpoint1Radius;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject explosionPrefab;
+
+    public delegate void OnApplyBulletTagsEventArgs(ref List<BulletTags> _tags, TowerData _towerData);
+    public static event OnApplyBulletTagsEventArgs OnApplyBulletTags;
 
 
-    public static void CreateBullet(GameObject _bulletObject, Vector2 _position, GameObject _target, IDamage.Team _team, int _damage, float _speed, float _lifetime = 5.0f)
+
+    public static void CreateBullet(GameObject _bulletObject, Vector2 _position, GameObject _target, IDamage.Team _team, int _damage, float _speed, float _lifetime = 5.0f, TowerData _towerData = null)
     {
         GameObject bullet = Instantiate(_bulletObject, _position, Quaternion.identity);
         BulletBehavior bulletBehavior = bullet.GetComponent<BulletBehavior>();
@@ -23,6 +35,8 @@ public class BulletBehavior : MonoBehaviour
             bulletBehavior.speed = _speed;
             bulletBehavior.lifetime = _lifetime;
             bulletBehavior.target = _target;
+
+            OnApplyBulletTags?.Invoke(ref bulletBehavior.tags, _towerData);
         }
         else
         {
@@ -71,11 +85,25 @@ public class BulletBehavior : MonoBehaviour
 
     protected virtual void OnHit(Collider2D _collision, IDamage _damageInterface)
     {
-        _damageInterface.Damage(damage);
+        if (tags.Contains(BulletTags.Explosive2))
+        {
+            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius, tags);
+        }
+        else if (tags.Contains(BulletTags.Explosive1))
+        {
+            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint1Radius, tags);
+        }
+        else
+        {
+            _damageInterface.Damage(damage);
+            _damageInterface.ApplyTags(tags);
+        }
     }
 
     private void SelfDestruct(int _waveCount)
     {
         Destroy(gameObject);
     }
+
+    public enum BulletTags { Explosive1, Explosive2, Sniper, Earthy }
 }

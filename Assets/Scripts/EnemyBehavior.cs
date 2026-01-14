@@ -124,6 +124,11 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         return IDamage.Team.Enemy;
     }
 
+    public void ApplyTags(List<BulletBehavior.BulletTags> _tags)
+    {
+        
+    }
+
     public EnemyData EnemyData
     {
         private get { return enemyData; }

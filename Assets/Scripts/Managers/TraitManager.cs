@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static BulletBehavior;
 
 public class TraitManager : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private TraitData gathererTrait;
     [SerializeField] private TraitData medievalTrait;
+    [SerializeField] private TraitData explosiveTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -24,6 +26,9 @@ public class TraitManager : MonoBehaviour
         TowerBehavior.OnAnyTowerDestroyed += MedievalBreakpoint1;
         TowerBehavior.OnAnyTowerDestroyed += MedievalBreakpoint2;
         GameManager.OnDefensePhaseStart += MedievalBreakpoint3;
+
+        BulletBehavior.OnApplyBulletTags += ExplosionBreakpoint1;
+        BulletBehavior.OnApplyBulletTags += ExplosionBreakpoint2;
     }
 
     private void OnDisable()
@@ -34,6 +39,9 @@ public class TraitManager : MonoBehaviour
         TowerBehavior.OnAnyTowerDestroyed -= MedievalBreakpoint1;
         TowerBehavior.OnAnyTowerDestroyed -= MedievalBreakpoint2;
         GameManager.OnDefensePhaseStart -= MedievalBreakpoint3;
+
+        BulletBehavior.OnApplyBulletTags -= ExplosionBreakpoint1;
+        BulletBehavior.OnApplyBulletTags -= ExplosionBreakpoint2;
     }
 
 
@@ -76,5 +84,21 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(medievalTrait, 2)) { return; }
 
         Instantiate(medievalArrowTargetSpawnerPrefab);
+    }
+
+    private void ExplosionBreakpoint1(ref List<BulletTags> _tags, TowerData _towerData)
+    {
+        if (!_towerData.traits.Contains(explosiveTrait)) { return; }
+        if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0)) { return; }
+
+        _tags.Add(BulletTags.Explosive1);
+    }
+
+    private void ExplosionBreakpoint2(ref List<BulletTags> _tags, TowerData _towerData)
+    {
+        if (!_towerData.traits.Contains(explosiveTrait)) { return; }
+        if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0)) { return; }
+
+        _tags.Add(BulletTags.Explosive2);
     }
 }

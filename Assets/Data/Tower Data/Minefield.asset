@@ -35,5 +35,5 @@ MonoBehaviour:
     damage: 72
     laneRange: 30
     areaRange: 1
-  bulletObject: {fileID: 7881638063591568286, guid: fadbbf4e4af7a6b4d9565a37a62ae5fc, type: 3}
+  bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
   bulletSpeed: 2
