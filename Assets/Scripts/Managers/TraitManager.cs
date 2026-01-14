@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static BulletBehavior;
 
 public class TraitManager : MonoBehaviour
 {
     [Header("Attributes")]
+    [SerializeField] private float medievalBreakpoint2AttackSpeedBoost = -0.05f;
+
+    [Header("Cache")]
     [SerializeField] private TraitData gathererTrait;
     [SerializeField] private TraitData medievalTrait;
     [SerializeField] private TraitData explosiveTrait;
+    [SerializeField] private TraitData sniperTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -29,6 +32,9 @@ public class TraitManager : MonoBehaviour
 
         BulletBehavior.OnApplyBulletTags += ExplosionBreakpoint1;
         BulletBehavior.OnApplyBulletTags += ExplosionBreakpoint2;
+
+        BulletBehavior.OnApplyBulletTags += SniperBreakpoint1;
+        GameManager.OnApplyStaticEffects += SniperBreakpoint2;
     }
 
     private void OnDisable()
@@ -42,6 +48,9 @@ public class TraitManager : MonoBehaviour
 
         BulletBehavior.OnApplyBulletTags -= ExplosionBreakpoint1;
         BulletBehavior.OnApplyBulletTags -= ExplosionBreakpoint2;
+
+        BulletBehavior.OnApplyBulletTags -= SniperBreakpoint1;
+        GameManager.OnApplyStaticEffects -= SniperBreakpoint2;
     }
 
 
@@ -75,7 +84,7 @@ public class TraitManager : MonoBehaviour
         List<TowerBehavior> medievalTowers = GameManager.GetInstance().GetTowersOfTrait(medievalTrait);
         foreach (TowerBehavior tower in medievalTowers)
         {
-            tower.AddStatModification(_hitSpeed: -0.05f);
+            tower.AddStatModification(_hitSpeed: medievalBreakpoint2AttackSpeedBoost);
         }
     }
 
@@ -86,19 +95,41 @@ public class TraitManager : MonoBehaviour
         Instantiate(medievalArrowTargetSpawnerPrefab);
     }
 
-    private void ExplosionBreakpoint1(ref List<BulletTags> _tags, TowerData _towerData)
+    private void ExplosionBreakpoint1(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
     {
         if (!_towerData.traits.Contains(explosiveTrait)) { return; }
         if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0)) { return; }
 
-        _tags.Add(BulletTags.Explosive1);
+        _tags.Add(BulletBehavior.BulletTags.Explosive1);
     }
 
-    private void ExplosionBreakpoint2(ref List<BulletTags> _tags, TowerData _towerData)
+    private void ExplosionBreakpoint2(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
     {
         if (!_towerData.traits.Contains(explosiveTrait)) { return; }
         if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0)) { return; }
 
-        _tags.Add(BulletTags.Explosive2);
+        _tags.Add(BulletBehavior.BulletTags.Explosive2);
+    }
+
+    private void SniperBreakpoint1(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
+    {
+        if (!_towerData.traits.Contains(sniperTrait)) { return; }
+        if (!TraitUtils.CheckTraitBreakpoint(sniperTrait, 0)) { return; }
+
+        _tags.Add(BulletBehavior.BulletTags.Sniper);
+    }
+
+    private void SniperBreakpoint2()
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(sniperTrait, 1)) { return; }
+
+        List<TowerBehavior> towers = GameManager.GetInstance().GetTowersOfTrait(null);
+        foreach (TowerBehavior tower in towers)
+        {
+            if (tower.GetComponent<TowerDragDrop>().IsInRearSlot)
+            {
+                tower.AddStatModification(_hitCount: tower.TowerData.stats[tower.Level - 1].hitCount);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TowerBehavior : TooltipObject, IDamage
 {
@@ -38,6 +39,8 @@ public class TowerBehavior : TooltipObject, IDamage
         GameManager.OnDefensePhaseEnd += EndDefense;
 
         GameManager.OnGetTowersOfTrait += FetchTowerTraitData;
+
+        GameManager.OnClearStaticEffects += ClearStatModifications;
     }
 
     private void OnDisable()
@@ -47,6 +50,8 @@ public class TowerBehavior : TooltipObject, IDamage
         GameManager.OnDefensePhaseEnd -= EndDefense;
 
         GameManager.OnGetTowersOfTrait -= FetchTowerTraitData;
+
+        GameManager.OnClearStaticEffects -= ClearStatModifications;
     }
 
     private void Start()
@@ -72,12 +77,21 @@ public class TowerBehavior : TooltipObject, IDamage
     {
         if (shootCooldown <= 0.0f)
         {
-            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, _target, IDamage.Team.Tower, CurrentStats.damage, towerData.bulletSpeed, _towerData: towerData);
+            StartCoroutine(ShootBullets(_target));
             shootCooldown = CurrentStats.hitSpeed;
         }
         else
         {
             shootCooldown -= Time.deltaTime;
+        }
+    }
+
+    private IEnumerator ShootBullets(GameObject _target)
+    {
+        for (int i = 0; i < CurrentStats.hitCount; i++)
+        {
+            BulletBehavior.CreateBullet(towerData.bulletObject, transform.position, _target, IDamage.Team.Tower, CurrentStats.damage, towerData.bulletSpeed, _towerData: towerData);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -191,17 +205,19 @@ public class TowerBehavior : TooltipObject, IDamage
         statModifier.damage = 0;
         statModifier.laneRange = 0;
         statModifier.areaRange = 0;
+        statModifier.hitCount = 0;
 
         buffParticles.Stop();
     }
 
-    public void AddStatModification(int _health = 0, float _hitSpeed = 0, int _damage = 0, int _laneRange = 0, int _areaRange = 0)
+    public void AddStatModification(int _health = 0, float _hitSpeed = 0, int _damage = 0, int _laneRange = 0, int _areaRange = 0, int _hitCount = 0)
     {
         statModifier.health += _health;
         statModifier.hitSpeed += _hitSpeed;
         statModifier.damage += _damage;
         statModifier.laneRange += _laneRange;
         statModifier.areaRange += _areaRange;
+        statModifier.hitCount += _hitCount;
 
         buffParticles.Play();
     }

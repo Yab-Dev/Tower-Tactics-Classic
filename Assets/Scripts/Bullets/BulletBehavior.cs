@@ -15,12 +15,15 @@ public class BulletBehavior : MonoBehaviour
     [Header("Static Attributes")]
     [SerializeField] private float explosionBreakpoint2Radius;
     [SerializeField] private float explosionBreakpoint1Radius;
+    [SerializeField] private float sniperBreakpoint1DamageScaling;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject explosionPrefab;
 
     public delegate void OnApplyBulletTagsEventArgs(ref List<BulletTags> _tags, TowerData _towerData);
     public static event OnApplyBulletTagsEventArgs OnApplyBulletTags;
+
+    private float distanceTraveled;
 
 
 
@@ -64,6 +67,7 @@ public class BulletBehavior : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
+        distanceTraveled += speed * Time.deltaTime;
         lifetime -= Time.deltaTime;
         if (lifetime <= 0.0f)
         {
@@ -85,6 +89,12 @@ public class BulletBehavior : MonoBehaviour
 
     protected virtual void OnHit(Collider2D _collision, IDamage _damageInterface)
     {
+        if (tags.Contains(BulletTags.Sniper))
+        {
+            float scalar = 1 + distanceTraveled * sniperBreakpoint1DamageScaling;
+            damage = Mathf.RoundToInt(damage * scalar);
+        }
+
         if (tags.Contains(BulletTags.Explosive2))
         {
             ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius, tags);

@@ -119,7 +119,7 @@ public class TowerTooltipUI : MonoBehaviour
 
         towerLaneRangeText.text = $"Lane Range: {towerStats.laneRange.ToString()}";
         towerAreaRangeText.text = $"Area Range: {towerStats.areaRange.ToString()}";
-        towerHitCountText.text = "Hit Count: 1";
+        towerHitCountText.text = $"Hit Count: {towerStats.hitCount.ToString()}";
 
         towerDescriptionText.text = _towerData.description;
     }

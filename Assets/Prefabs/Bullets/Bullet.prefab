@@ -141,4 +141,5 @@ MonoBehaviour:
   tags: 
   explosionBreakpoint2Radius: 2
   explosionBreakpoint1Radius: 1
+  sniperBreakpoint1DamageScaling: 0.04
   explosionPrefab: {fileID: 8185730215968909104, guid: 63561afc5c7c1ab4695e897647fa0bcd, type: 3}

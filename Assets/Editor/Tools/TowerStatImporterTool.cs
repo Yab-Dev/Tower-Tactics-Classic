@@ -262,6 +262,7 @@ public class TowerStatImporterTool : EditorWindow
                 dataFile.stats[towerIdentifier.towerLevel - 1].hitSpeed = towerData[towerIdentifier].attackSpeed;
                 dataFile.stats[towerIdentifier.towerLevel - 1].damage = towerData[towerIdentifier].attackDamage;
                 dataFile.stats[towerIdentifier.towerLevel - 1].areaRange = towerData[towerIdentifier].areaRange;
+                dataFile.stats[towerIdentifier.towerLevel - 1].hitCount = 1;
 
                 if (EditorGUI.EndChangeCheck())
                 {

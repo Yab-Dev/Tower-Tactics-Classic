@@ -8,6 +8,7 @@ public class TowerSlot : MonoBehaviour
     [SerializeField] private TowerDragDrop currentTower;
     [SerializeField] private Color fadeInColor;
     [SerializeField] private Color fadeOutColor;
+    [SerializeField] private bool isRearSlot;
 
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
@@ -44,6 +45,7 @@ public class TowerSlot : MonoBehaviour
     public virtual void SetCurrentTower(TowerDragDrop _tower)
     {
         currentTower = _tower;
+        currentTower.IsInRearSlot = isRearSlot;
         currentTower.OnTowerMove += ClearTower;
     }
 

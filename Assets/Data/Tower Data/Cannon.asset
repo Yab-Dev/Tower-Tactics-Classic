@@ -25,15 +25,18 @@ MonoBehaviour:
     damage: 10
     laneRange: 30
     areaRange: 3
+    hitCount: 1
   - health: 8
     hitSpeed: 2
     damage: 20
     laneRange: 30
     areaRange: 3
+    hitCount: 1
   - health: 12
     hitSpeed: 2
     damage: 30
     laneRange: 30
     areaRange: 3
+    hitCount: 1
   bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
   bulletSpeed: 8

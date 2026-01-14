@@ -28,6 +28,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public static event OnTowerPlaceEventArgs OnTowerPlaceEnd;
 
     private bool initialPlace = true;
+    private bool isInRearSlot;
 
 
 
@@ -214,5 +215,11 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         private get { return startDragging; } 
         set { startDragging = value; } 
+    }
+
+    public bool IsInRearSlot
+    {
+        get { return isInRearSlot; }
+        set { isInRearSlot = value; }
     }
 }

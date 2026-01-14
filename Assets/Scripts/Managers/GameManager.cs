@@ -56,6 +56,13 @@ public class GameManager : MonoBehaviour
     public delegate void OnLivesChangedEventArgs(int _currentLives);
     public static event OnLivesChangedEventArgs OnLivesChanged;
 
+    public delegate void OnClearStaticEffectsEventArgs();
+    public static event OnClearStaticEffectsEventArgs OnClearStaticEffects;
+
+    public delegate void OnApplyStaticEffectsEventArgs();
+    public static event OnApplyStaticEffectsEventArgs OnApplyStaticEffects;
+
+
 
     private void Awake()
     {
@@ -141,6 +148,7 @@ public class GameManager : MonoBehaviour
         }
         waveCount++;
         gamePhase = GamePhase.Build;
+        UpdateCurrentTowers();
         OnBuildPhaseStart?.Invoke(waveCount);
     }
 
@@ -151,6 +159,7 @@ public class GameManager : MonoBehaviour
             OnBuildPhaseEnd?.Invoke(waveCount);
         }
         gamePhase = GamePhase.Defense;
+        UpdateCurrentTowers();
         OnDefensePhaseStart?.Invoke(waveCount);
     }
 
@@ -205,6 +214,9 @@ public class GameManager : MonoBehaviour
         OnGetPlacedTowers?.Invoke(ref currentTowers);
 
         OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
+
+        OnClearStaticEffects?.Invoke();
+        OnApplyStaticEffects?.Invoke();
     }
 
     public List<(TraitData trait, int count)> GetCurrentTraits()
