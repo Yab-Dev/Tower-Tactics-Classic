@@ -20,6 +20,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject gathererStaticTokenPrefab;
     [SerializeField] private GameObject medievalDestroyedArrowInteractPrefab;
     [SerializeField] private GameObject medievalArrowTargetSpawnerPrefab;
+    [SerializeField] private GameObject wallHealerPrefab;
 
 
 
@@ -40,6 +41,7 @@ public class TraitManager : MonoBehaviour
 
         GameManager.OnApplyStaticEffects += WallBreakpoint1;
         TowerBehavior.OnAnyTowerHit += WallBreakpoint2;
+        GameManager.OnDefensePhaseStart += WallBreakpoint3;
     }
 
     private void OnDisable()
@@ -105,6 +107,7 @@ public class TraitManager : MonoBehaviour
 
     private void ExplosionBreakpoint1(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
     {
+        if (_towerData == null) { return; }
         if (!_towerData.traits.Contains(explosiveTrait)) { return; }
         if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0)) { return; }
 
@@ -113,6 +116,7 @@ public class TraitManager : MonoBehaviour
 
     private void ExplosionBreakpoint2(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
     {
+        if (_towerData == null) { return; }
         if (!_towerData.traits.Contains(explosiveTrait)) { return; }
         if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0)) { return; }
 
@@ -121,6 +125,7 @@ public class TraitManager : MonoBehaviour
 
     private void SniperBreakpoint1(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
     {
+        if (_towerData == null) { return; }
         if (!_towerData.traits.Contains(sniperTrait)) { return; }
         if (!TraitUtils.CheckTraitBreakpoint(sniperTrait, 0)) { return; }
 
@@ -155,6 +160,15 @@ public class TraitManager : MonoBehaviour
 
     private void WallBreakpoint2(TowerBehavior _towerBehavior)
     {
+        if (!TraitUtils.CheckTraitBreakpoint(wallTrait, 1)) { return; }
 
+        BulletBehavior.CreateBullet(_towerBehavior.TowerData.bulletObject, _towerBehavior.transform.position, null, IDamage.Team.Tower, _towerBehavior.CurrentStats.damage / 2, 5.0f, _towerData: _towerBehavior.TowerData);
+    }
+
+    private void WallBreakpoint3(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(wallTrait, 2)) { return; }
+
+        Instantiate(wallHealerPrefab);
     }
 }

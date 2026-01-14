@@ -24,6 +24,9 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private TargetDetection targetDetection;
     [SerializeField] private ParticleSystem buffParticles;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject healParticlesPrefab;
+
     public delegate void OnAnyTowerDestroyedEventArgs(TowerData _towerData, Vector2 _destroyPosition);
     public static event OnAnyTowerDestroyedEventArgs OnAnyTowerDestroyed;
 
@@ -235,6 +238,13 @@ public class TowerBehavior : TooltipObject, IDamage
             _towers.Add(this);
             return;
         }
+    }
+
+    public void HealTower(int _healAmount)
+    {
+        currentHealth += _healAmount;
+        currentHealth = Mathf.Min(currentHealth, CurrentStats.health);
+        Instantiate(healParticlesPrefab, transform);
     }
 
     public void ApplyTags(List<BulletBehavior.BulletTags> _tags)

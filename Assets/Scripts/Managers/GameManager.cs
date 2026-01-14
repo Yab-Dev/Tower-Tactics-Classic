@@ -148,8 +148,8 @@ public class GameManager : MonoBehaviour
         }
         waveCount++;
         gamePhase = GamePhase.Build;
-        UpdateCurrentTowers();
         OnBuildPhaseStart?.Invoke(waveCount);
+        UpdateCurrentTowers();
     }
 
     public void SetDefensePhase()
@@ -159,8 +159,8 @@ public class GameManager : MonoBehaviour
             OnBuildPhaseEnd?.Invoke(waveCount);
         }
         gamePhase = GamePhase.Defense;
-        UpdateCurrentTowers();
         OnDefensePhaseStart?.Invoke(waveCount);
+        UpdateCurrentTowers();
     }
 
     public void CompleteWave(int _totalWaves)
