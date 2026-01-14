@@ -118,7 +118,7 @@ public class TraitManager : MonoBehaviour
     {
         if (_towerData == null) { return; }
         if (!_towerData.traits.Contains(explosiveTrait)) { return; }
-        if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 0)) { return; }
+        if (!TraitUtils.CheckTraitBreakpoint(explosiveTrait, 1)) { return; }
 
         _tags.Add(BulletBehavior.BulletTags.Explosive2);
     }

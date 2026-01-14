@@ -7,6 +7,8 @@ public class TowerTooltipUI : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private Color expColor;
+    [SerializeField] private Color statTextColor;
+    [SerializeField] private Color buffedStatTextColor;
 
     [Header("Cache")]
     [SerializeField] private TMPro.TMP_Text towerNameText;
@@ -90,14 +92,17 @@ public class TowerTooltipUI : MonoBehaviour
 
         int towerLevel = 0;
         TowerData.LevelStats towerStats;
+        TowerData.LevelStats towerBaseStats;
         if (_tower != null)
         {
             towerLevel = _tower.Level - 1;
             towerStats = _tower.CurrentStats;
+            towerBaseStats = _tower.TowerData.stats[towerLevel];
         }
         else
         {
             towerStats = _towerData.stats[towerLevel];
+            towerBaseStats = towerStats;
         }
 
         string healthText = $"Health: {towerStats.health}";
@@ -106,9 +111,12 @@ public class TowerTooltipUI : MonoBehaviour
             healthText = $"Health: {_tower.CurrentHealth}/{towerStats.health}";
         }
         towerHealthText.text = healthText;
+        ChangeStatTextColor(ref towerHealthText, towerStats.health != towerBaseStats.health);
 
         towerHitspeedText.text = $"Hit Speed: {towerStats.hitSpeed.ToString()}";
+        ChangeStatTextColor(ref towerHitspeedText, towerStats.hitSpeed != towerBaseStats.hitSpeed);
         towerDamageText.text = $"Damage: {towerStats.damage.ToString()}";
+        ChangeStatTextColor(ref towerDamageText, towerStats.damage != towerBaseStats.damage);
 
         string sellValueText = $"Sell Value: N/A";
         if (_tower != null)
@@ -116,11 +124,26 @@ public class TowerTooltipUI : MonoBehaviour
             sellValueText = $"Sell Value: {_tower.SellValue}";
         }
         towerSellValueText.text = sellValueText;
-
+        
         towerLaneRangeText.text = $"Lane Range: {towerStats.laneRange.ToString()}";
+        ChangeStatTextColor(ref towerLaneRangeText, towerStats.laneRange != towerBaseStats.laneRange);
         towerAreaRangeText.text = $"Area Range: {towerStats.areaRange.ToString()}";
+        ChangeStatTextColor(ref towerAreaRangeText, towerStats.areaRange != towerBaseStats.areaRange);
         towerHitCountText.text = $"Hit Count: {towerStats.hitCount.ToString()}";
+        ChangeStatTextColor(ref towerHitCountText, towerStats.hitCount != towerBaseStats.hitCount);
 
         towerDescriptionText.text = _towerData.description;
+    }
+
+    private void ChangeStatTextColor(ref TMPro.TMP_Text _textElement, bool _isStatBuffed)
+    {
+        if (_isStatBuffed)
+        {
+            _textElement.color = buffedStatTextColor;
+        }
+        else
+        {
+            _textElement.color = statTextColor;
+        }
     }
 }

@@ -1043,6 +1043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expColor: {r: 0.14538093, g: 0.9339623, b: 0.84079874, a: 1}
+  statTextColor: {r: 1, g: 1, b: 1, a: 1}
+  buffedStatTextColor: {r: 1, g: 0.6136364, b: 0, a: 1}
   towerNameText: {fileID: 2814299380356446868}
   towerLevelText: {fileID: 2148982359513514117}
   towerExpContent: {fileID: 3688339218167788868}
