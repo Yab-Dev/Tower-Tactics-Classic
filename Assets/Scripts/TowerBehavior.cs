@@ -27,6 +27,9 @@ public class TowerBehavior : TooltipObject, IDamage
     public delegate void OnAnyTowerDestroyedEventArgs(TowerData _towerData, Vector2 _destroyPosition);
     public static event OnAnyTowerDestroyedEventArgs OnAnyTowerDestroyed;
 
+    public delegate void OnAnyTowerHitEventArgs(TowerBehavior _towerBehavior);
+    public static event OnAnyTowerHitEventArgs OnAnyTowerHit;
+
     private float shootCooldown;
     private Color originalColor;
 
@@ -181,6 +184,7 @@ public class TowerBehavior : TooltipObject, IDamage
         {
             sprite.color = hurtColor;
             StartCoroutine(ColorFade.FadeSpriteColor(sprite, originalColor, 0.2f));
+            OnAnyTowerHit?.Invoke(this);
         }
     }
 
@@ -200,6 +204,7 @@ public class TowerBehavior : TooltipObject, IDamage
 
     public void ClearStatModifications()
     {
+        currentHealth = Mathf.Max(1, currentHealth - statModifier.health);
         statModifier.health = 0;
         statModifier.hitSpeed = 1;
         statModifier.damage = 0;
@@ -246,7 +251,7 @@ public class TowerBehavior : TooltipObject, IDamage
     public int CurrentHealth
     {
         get { return currentHealth; }
-        private set { currentHealth = value; }
+        set { currentHealth = value; }
     }
 
     public int Level

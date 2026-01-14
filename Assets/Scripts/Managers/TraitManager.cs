@@ -6,12 +6,14 @@ public class TraitManager : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private float medievalBreakpoint2AttackSpeedBoost = -0.05f;
+    [SerializeField] private int wallBreakpoint1HealthPerLevel = 6;
 
     [Header("Cache")]
     [SerializeField] private TraitData gathererTrait;
     [SerializeField] private TraitData medievalTrait;
     [SerializeField] private TraitData explosiveTrait;
     [SerializeField] private TraitData sniperTrait;
+    [SerializeField] private TraitData wallTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -35,6 +37,9 @@ public class TraitManager : MonoBehaviour
 
         BulletBehavior.OnApplyBulletTags += SniperBreakpoint1;
         GameManager.OnApplyStaticEffects += SniperBreakpoint2;
+
+        GameManager.OnApplyStaticEffects += WallBreakpoint1;
+        TowerBehavior.OnAnyTowerHit += WallBreakpoint2;
     }
 
     private void OnDisable()
@@ -51,6 +56,9 @@ public class TraitManager : MonoBehaviour
 
         BulletBehavior.OnApplyBulletTags -= SniperBreakpoint1;
         GameManager.OnApplyStaticEffects -= SniperBreakpoint2;
+
+        GameManager.OnApplyStaticEffects -= WallBreakpoint1;
+        TowerBehavior.OnAnyTowerHit -= WallBreakpoint2;
     }
 
 
@@ -131,5 +139,22 @@ public class TraitManager : MonoBehaviour
                 tower.AddStatModification(_hitCount: tower.TowerData.stats[tower.Level - 1].hitCount);
             }
         }
+    }
+
+    private void WallBreakpoint1()
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(wallTrait, 0)) { return; }
+
+        List<TowerBehavior> wallTowers = GameManager.GetInstance().GetTowersOfTrait(wallTrait);
+        foreach (TowerBehavior tower in wallTowers)
+        {
+            tower.AddStatModification(_health: wallBreakpoint1HealthPerLevel * tower.Level);
+            tower.CurrentHealth = tower.CurrentStats.health;
+        }
+    }
+
+    private void WallBreakpoint2(TowerBehavior _towerBehavior)
+    {
+
     }
 }
