@@ -23,8 +23,10 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject medievalArrowTargetSpawnerPrefab;
     [SerializeField] private GameObject wallHealerPrefab;
     [SerializeField] private GameObject igniteWallPrefab;
+    [SerializeField] private GameObject fieryDamageAllPrefab;
 
     private GameObject igniteWallObject;
+    private GameObject fieryDamageAllObject;
 
 
 
@@ -48,6 +50,7 @@ public class TraitManager : MonoBehaviour
         GameManager.OnDefensePhaseStart += WallBreakpoint3;
 
         GameManager.OnApplyStaticEffects += FieryBreakpoint1;
+        GameManager.OnApplyStaticEffects += FieryBreakpoint2;
     }
 
     private void OnDisable()
@@ -69,6 +72,7 @@ public class TraitManager : MonoBehaviour
         TowerBehavior.OnAnyTowerHit -= WallBreakpoint2;
 
         GameManager.OnApplyStaticEffects -= FieryBreakpoint1;
+        GameManager.OnApplyStaticEffects -= FieryBreakpoint2;
     }
 
 
@@ -190,6 +194,19 @@ public class TraitManager : MonoBehaviour
         else if (igniteWallObject != null)
         {
             Destroy(igniteWallObject);
+        }
+    }
+
+    private void FieryBreakpoint2()
+    {
+        if (TraitUtils.CheckTraitBreakpoint(fieryTrait, 1))
+        {
+            if (fieryDamageAllObject != null) { return; }
+            fieryDamageAllObject = Instantiate(fieryDamageAllPrefab);
+        }
+        else if (fieryDamageAllObject != null)
+        {
+            Destroy(fieryDamageAllObject);
         }
     }
 }
