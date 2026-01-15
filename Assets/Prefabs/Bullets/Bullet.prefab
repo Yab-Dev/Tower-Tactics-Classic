@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5983083698891132861}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,9 @@ MonoBehaviour:
   lifetime: 0
   target: {fileID: 0}
   tags: 
+  ignitedColor: {r: 1, g: 0.5254902, b: 0, a: 1}
   explosionBreakpoint2Radius: 2
   explosionBreakpoint1Radius: 1
   sniperBreakpoint1DamageScaling: 0.04
+  sprite: {fileID: 5227905074340729503}
   explosionPrefab: {fileID: 8185730215968909104, guid: 63561afc5c7c1ab4695e897647fa0bcd, type: 3}

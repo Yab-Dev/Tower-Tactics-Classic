@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - TowerSlot
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -56,4 +57,10 @@ TagManager:
     locked: 0
   - name: Bullets
     uniqueID: 1162377223
+    locked: 0
+  - name: Effects
+    uniqueID: 2250374411
+    locked: 0
+  - name: InWorldUI
+    uniqueID: 3093298623
     locked: 0

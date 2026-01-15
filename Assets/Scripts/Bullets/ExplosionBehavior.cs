@@ -10,9 +10,10 @@ public class ExplosionBehavior : MonoBehaviour
     [SerializeField] private List<BulletBehavior.BulletTags> tags = new List<BulletBehavior.BulletTags>();
 
     private List<GameObject> hasDamaged = new List<GameObject>();
+    private BulletBehavior.IgniteData igniteData;
 
 
-    public static void CreateExplosion(GameObject _explosionObject, Vector2 _position, IDamage.Team _team, int _damage, float _radius, List<BulletBehavior.BulletTags> _tags)
+    public static void CreateExplosion(GameObject _explosionObject, Vector2 _position, IDamage.Team _team, int _damage, float _radius, List<BulletBehavior.BulletTags> _tags, BulletBehavior.IgniteData _igniteData)
     {
         GameObject explosion = Instantiate(_explosionObject, _position, Quaternion.identity);
         ExplosionBehavior explosionBehavior = explosion.GetComponent<ExplosionBehavior>();
@@ -22,6 +23,7 @@ public class ExplosionBehavior : MonoBehaviour
             explosionBehavior.damage = _damage;
             explosion.transform.localScale = new Vector3(_radius, _radius, 0.0f);
             explosionBehavior.tags = _tags;
+            explosionBehavior.igniteData = _igniteData;
         }
         else
         {
@@ -40,6 +42,10 @@ public class ExplosionBehavior : MonoBehaviour
 
             damageInterface.Damage(damage);
             damageInterface.ApplyTags(tags);
+            if (igniteData.isIgnited)
+            {
+                damageInterface.Ignite(igniteData);
+            }
             hasDamaged.Add(collision.gameObject);
         }
     }

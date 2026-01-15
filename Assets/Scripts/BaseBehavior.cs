@@ -21,4 +21,9 @@ public class BaseBehavior : MonoBehaviour, IDamage
     {
         
     }
+
+    public void Ignite(BulletBehavior.IgniteData _igniteData)
+    {
+        
+    }
 }

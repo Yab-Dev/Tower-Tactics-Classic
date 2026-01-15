@@ -14,12 +14,15 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private TargetDetection targetDetection;
+    [SerializeField] private ParticleSystem ignitedParticles;
 
     private float attackCooldown;
     private bool isDestroyed;
 
     private bool waitFrame = true;
     private Color originalColor;
+
+    private BulletBehavior.IgniteData igniteData;
 
     public delegate void OnEnemyDestroyedEventArgs(Vector2 _deathPosition);
     public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
@@ -46,6 +49,8 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         currentHealth = enemyData.health;
         targetDetection.SetSize(enemyData.range, 0.5f);
         attackCooldown = enemyData.hitSpeed;
+
+        ignitedParticles.Stop();
     }
 
     private void Update()
@@ -127,6 +132,24 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     public void ApplyTags(List<BulletBehavior.BulletTags> _tags)
     {
         
+    }
+
+    public void Ignite(BulletBehavior.IgniteData _igniteData)
+    {
+        igniteData = _igniteData;
+        StopCoroutine(IgniteDamage());
+        StartCoroutine(IgniteDamage());
+    }
+
+    private IEnumerator IgniteDamage()
+    {
+        ignitedParticles.Play();
+        for (int i = 0; i < igniteData.igniteTickCount; i++)
+        {
+            Damage(igniteData.igniteDamage);
+            yield return new WaitForSeconds(igniteData.igniteTickSpeed);
+        }
+        ignitedParticles.Stop();
     }
 
     public EnemyData EnemyData

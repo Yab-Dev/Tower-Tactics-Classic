@@ -11,11 +11,15 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private float lifetime;
     [SerializeField] private GameObject target;
     [SerializeField] private List<BulletTags> tags = new List<BulletTags>();
+    [SerializeField] private Color ignitedColor;
 
     [Header("Static Attributes")]
     [SerializeField] private float explosionBreakpoint2Radius;
     [SerializeField] private float explosionBreakpoint1Radius;
     [SerializeField] private float sniperBreakpoint1DamageScaling;
+
+    [Header("Cache")]
+    [SerializeField] private SpriteRenderer sprite;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject explosionPrefab;
@@ -24,6 +28,15 @@ public class BulletBehavior : MonoBehaviour
     public static event OnApplyBulletTagsEventArgs OnApplyBulletTags;
 
     private float distanceTraveled;
+
+    public struct IgniteData
+    {
+        public bool isIgnited;
+        public int igniteDamage;
+        public float igniteTickSpeed;
+        public float igniteTickCount;
+    }
+    private IgniteData igniteData;
 
 
 
@@ -97,16 +110,20 @@ public class BulletBehavior : MonoBehaviour
 
         if (tags.Contains(BulletTags.Explosive2))
         {
-            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius, tags);
+            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius, tags, igniteData);
         }
         else if (tags.Contains(BulletTags.Explosive1))
         {
-            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint1Radius, tags);
+            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint1Radius, tags, igniteData);
         }
         else
         {
             _damageInterface.Damage(damage);
             _damageInterface.ApplyTags(tags);
+            if (igniteData.isIgnited)
+            {
+                _damageInterface.Ignite(igniteData);
+            }
         }
     }
 
@@ -115,5 +132,16 @@ public class BulletBehavior : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public enum BulletTags { Explosive1, Explosive2, Sniper, Earthy }
+    public void Ignite(int _igniteDamage, float _igniteTickSpeed, float _igniteTickCount)
+    {
+        tags.Add(BulletTags.Ignited);
+        igniteData.isIgnited = true;
+        igniteData.igniteDamage = _igniteDamage;
+        igniteData.igniteTickSpeed = _igniteTickSpeed;
+        igniteData.igniteTickCount = _igniteTickCount;
+
+        sprite.color = ignitedColor;
+    }
+
+    public enum BulletTags { Explosive1, Explosive2, Sniper, Earthy, Ignited }
 }

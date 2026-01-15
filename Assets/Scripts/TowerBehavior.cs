@@ -252,6 +252,11 @@ public class TowerBehavior : TooltipObject, IDamage
         
     }
 
+    public void Ignite(BulletBehavior.IgniteData _igniteData)
+    {
+        
+    }
+
     public TowerData TowerData
     {
         get { return towerData; }

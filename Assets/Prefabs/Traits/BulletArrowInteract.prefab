@@ -264,8 +264,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1162377223
-  m_SortingLayer: 5
+  m_SortingLayerID: -1201668673
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 209bf582346822043b353472784860d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -336,4 +336,5 @@ MonoBehaviour:
   baseSprite: {fileID: 1897336127185172503}
   ringSprite: {fileID: 2639812867518122662}
   ringAnimator: {fileID: 9139036772088560261}
+  medievalTrait: {fileID: 0}
   arrowBullet: {fileID: 956500956100696003, guid: 5f8ae9a8542f935419bba8620e35226b, type: 3}
