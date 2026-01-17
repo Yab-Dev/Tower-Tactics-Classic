@@ -46,7 +46,6 @@ public class ExplosionBehavior : MonoBehaviour
         {
             if (damageInterface.GetTeam() == team) { return; }
 
-            damageInterface.Damage(damage);
             damageInterface.ApplyTags(tags);
             if (igniteData.isIgnited)
             {
@@ -57,6 +56,7 @@ public class ExplosionBehavior : MonoBehaviour
                 damageInterface.Slow(slowDuration, slowAmount);
             }
             hasDamaged.Add(collision.gameObject);
+            damageInterface.Damage(damage);
         }
     }
 }

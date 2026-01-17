@@ -126,7 +126,6 @@ public class BulletBehavior : MonoBehaviour
         }
         else
         {
-            _damageInterface.Damage(damage);
             _damageInterface.ApplyTags(tags);
             if (igniteData.isIgnited)
             {
@@ -136,6 +135,7 @@ public class BulletBehavior : MonoBehaviour
             {
                 _damageInterface.Slow(icyBreakpoint1SlowDuration, icyBreakpoint1SlowAmount);
             }
+            _damageInterface.Damage(damage);
         }
     }
 

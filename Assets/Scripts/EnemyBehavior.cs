@@ -15,6 +15,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private TargetDetection targetDetection;
     [SerializeField] private ParticleSystem ignitedParticles;
+    [SerializeField] private ParticleSystem slowedParticles;
 
     private float attackCooldown;
     private bool isDestroyed;
@@ -54,6 +55,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         attackCooldown = enemyData.hitSpeed;
 
         ignitedParticles.Stop();
+        slowedParticles.Stop();
     }
 
     private void Update()
@@ -69,10 +71,15 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         if (slowDuration > 0.0f)
         {
             slowDuration -= Time.deltaTime;
+            if (!slowedParticles.isPlaying)
+            {
+                slowedParticles.Play();
+            }
         }
         else
         {
             slowAmount = 1.0f;
+            slowedParticles.Stop();
         }
     }
 
