@@ -20,6 +20,8 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private float sniperBreakpoint1DamageScaling;
     [SerializeField] private float icyBreakpoint1SlowDuration;
     [SerializeField] private float icyBreakpoint1SlowAmount;
+    [SerializeField] private float earthyKnockbackLength;
+    [SerializeField] private float earthyKnockbackDuration;
 
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
@@ -130,6 +132,10 @@ public class BulletBehavior : MonoBehaviour
             if (igniteData.isIgnited)
             {
                 _damageInterface.Ignite(igniteData);
+            }
+            if (tags.Contains(BulletTags.Earthy))
+            {
+                _damageInterface.Knockback(earthyKnockbackDuration, earthyKnockbackLength, false);
             }
             if (tags.Contains(BulletTags.Icy))
             {

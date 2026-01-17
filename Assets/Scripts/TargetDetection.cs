@@ -51,6 +51,11 @@ public class TargetDetection : MonoBehaviour
         areaCollider.radius = areaRange;
     }
 
+    public void ClearTargets()
+    {
+        targetList.Clear();
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         IDamage damageInterface = collision.GetComponent<IDamage>();

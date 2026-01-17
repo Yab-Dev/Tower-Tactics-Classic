@@ -263,6 +263,11 @@ public class TowerBehavior : TooltipObject, IDamage
         
     }
 
+    public void Knockback(float _duration, float _amount, bool toCenter)
+    {
+        
+    }
+
     public TowerData TowerData
     {
         get { return towerData; }

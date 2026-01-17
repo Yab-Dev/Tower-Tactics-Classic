@@ -31,4 +31,9 @@ public class BaseBehavior : MonoBehaviour, IDamage
     {
         
     }
+
+    public void Knockback(float _duration, float _amount, bool toCenter)
+    {
+        
+    }
 }

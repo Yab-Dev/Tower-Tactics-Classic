@@ -28,6 +28,9 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     private float slowDuration;
     private float slowAmount = 1.0f;
 
+    private float knockbackDuration;
+    private Vector2 knockbackPosition;
+
     public delegate void OnEnemyDestroyedEventArgs(Vector2 _deathPosition);
     public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
     public static event OnEnemyDestroyedEventArgs OnAnyEnemyDestroyed;
@@ -60,12 +63,19 @@ public class EnemyBehavior : MonoBehaviour, IDamage
 
     private void Update()
     {
-        GameObject target = targetDetection.GetClosestTarget(transform.position);
-        isAttacking = target != null;
-
-        if (isAttacking)
+        if (knockbackDuration <= 0)
         {
-            EnemyAttacking(target);
+            GameObject target = targetDetection.GetClosestTarget(transform.position);
+            isAttacking = target != null;
+
+            if (isAttacking)
+            {
+                EnemyAttacking(target);
+            }
+        }
+        else
+        {
+            knockbackDuration -= Time.deltaTime;
         }
 
         if (slowDuration > 0.0f)
@@ -91,9 +101,17 @@ public class EnemyBehavior : MonoBehaviour, IDamage
             return;
         }
 
-        if (!isAttacking)
+        if (knockbackDuration <= 0.0f)
         {
-            Vector3 moveTarget = transform.position - new Vector3(enemyData.moveSpeed * slowAmount * Time.fixedDeltaTime, 0.0f, 0.0f);
+            if (!isAttacking)
+            {
+                Vector3 moveTarget = transform.position - new Vector3(enemyData.moveSpeed * slowAmount * Time.fixedDeltaTime, 0.0f, 0.0f);
+                rigidbody.MovePosition(moveTarget);
+            }
+        }
+        else
+        {
+            Vector3 moveTarget = Vector3.MoveTowards(transform.position, knockbackPosition, (Vector3.Distance(transform.position, knockbackPosition) / 10.0f) * (Time.fixedDeltaTime * 40.0f));
             rigidbody.MovePosition(moveTarget);
         }
     }
@@ -175,6 +193,20 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     {
         slowAmount = _amount;
         slowDuration = _duration;
+    }
+
+    public void Knockback(float _duration, float _amount, bool toCenter)
+    {
+        knockbackDuration = _duration;
+        if (toCenter)
+        {
+
+        }
+        else
+        {
+            targetDetection.ClearTargets();
+            knockbackPosition = transform.position + new Vector3(_amount, 0);
+        }
     }
 
     public EnemyData EnemyData

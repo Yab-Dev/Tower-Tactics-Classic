@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Minefield
   m_EditorClassIdentifier: 
   description: Dangerous mines that explode everything in their path.
+  countsTowardsCap: 1
   traits:
   - {fileID: 11400000, guid: ff8f70c5aac94724ea30a49eb43e705d, type: 2}
   - {fileID: 11400000, guid: 03972b8c73c48dd439361b0399c37ec4, type: 2}
@@ -23,19 +24,19 @@ MonoBehaviour:
   - health: 6
     hitSpeed: 3
     damage: 24
-    laneRange: 30
+    laneRange: 2
     areaRange: 1
     hitCount: 1
   - health: 10
     hitSpeed: 3
     damage: 48
-    laneRange: 30
+    laneRange: 2
     areaRange: 1
     hitCount: 1
   - health: 14
     hitSpeed: 3
     damage: 72
-    laneRange: 30
+    laneRange: 2
     areaRange: 1
     hitCount: 1
   bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}

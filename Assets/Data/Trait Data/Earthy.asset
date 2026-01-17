@@ -19,5 +19,5 @@ MonoBehaviour:
     breakpointDescription: Occasionally click to fire rocks down a lane, which knock
       back enemies.
   - breakpointValue: 5
-    breakpointDescription: Bullets fired from earthy towers occasionally push enemies
-      into a neighboring lane.
+    breakpointDescription: Occasionally click to push an enemy from an outer lane
+      into the center one.

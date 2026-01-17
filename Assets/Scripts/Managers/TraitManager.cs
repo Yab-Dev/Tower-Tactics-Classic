@@ -17,6 +17,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private TraitData wallTrait;
     [SerializeField] private TraitData fieryTrait;
     [SerializeField] private TraitData icyTrait;
+    [SerializeField] private TraitData earthyTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -26,6 +27,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject wallHealerPrefab;
     [SerializeField] private GameObject igniteWallPrefab;
     [SerializeField] private GameObject fieryDamageAllPrefab;
+    [SerializeField] private GameObject earthyKnockbackBulletSpawner;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
@@ -60,6 +62,8 @@ public class TraitManager : MonoBehaviour
         BulletBehavior.OnApplyBulletTags += IcyBreakpoint1;
         GameManager.OnApplyStaticEffects += IcyBreakpoint2;
         GameManager.OnApplyStaticEffects += IcyBreakpoint3;
+
+        GameManager.OnDefensePhaseStart += EarthyBreakpoint1;
     }
 
     private void OnDisable()
@@ -86,6 +90,8 @@ public class TraitManager : MonoBehaviour
         BulletBehavior.OnApplyBulletTags -= IcyBreakpoint1;
         GameManager.OnApplyStaticEffects -= IcyBreakpoint2;
         GameManager.OnApplyStaticEffects -= IcyBreakpoint3;
+
+        GameManager.OnDefensePhaseStart -= EarthyBreakpoint1;
     }
 
 
@@ -275,5 +281,12 @@ public class TraitManager : MonoBehaviour
                 GameManager.GetInstance().UpdateCurrentTowers();
             }
         }
+    }
+
+    private void EarthyBreakpoint1(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(earthyTrait, 0)) { return; }
+
+        Instantiate(earthyKnockbackBulletSpawner);
     }
 }
