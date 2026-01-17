@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
   m_Name: Crystal
   m_EditorClassIdentifier: 
-  description: It's beauty glistens.
+  description: It's beauty glistens. (NOT IMPLEMENTED)
   traitIcon: {fileID: 6890823064011478499, guid: 3c6ebe0a06a58864eaafdc3607166b47, type: 3}
   breakpoints:
   - breakpointValue: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
   m_Name: Throne
   m_EditorClassIdentifier: 
-  description: A throne fit for a king.
+  description: A throne fit for a king. (NOT IMPLEMENTED)
   traitIcon: {fileID: -846724359101184623, guid: c4bf1d20a1f83964dbc32c635b2c60aa, type: 3}
   breakpoints:
   - breakpointValue: 1

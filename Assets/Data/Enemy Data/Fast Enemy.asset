@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb57f06c0cf7b7348bea0832acc4d22b, type: 3}
-  m_Name: Test Enemy
+  m_Name: Fast Enemy
   m_EditorClassIdentifier: 
-  description: An enemy for testing
-  sprite: {fileID: 7482667652216324306, guid: 15379a794a4e89c40bd645dea2956403, type: 3}
-  health: 50
+  description: A slightly faster enemy
+  sprite: {fileID: 7482667652216324306, guid: 9caa2f69bdb3b7f4681e35cf76642948, type: 3}
+  health: 60
   hitSpeed: 1
   damage: 1
   range: 1.2
-  moveSpeed: 1
+  moveSpeed: 1.5
