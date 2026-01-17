@@ -14,4 +14,9 @@ public class SellTowerSlot : TowerSlot
             GameManager.GetInstance().GetTooltipUI().ClearTooltip();
         }
     }
+
+    public override bool CanFetchSlot()
+    {
+        return false;
+    }
 }

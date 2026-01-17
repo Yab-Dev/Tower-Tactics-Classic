@@ -7,6 +7,7 @@ public class TowerData : ScriptableObject
 {
     [TextArea]
     public string description;
+    public bool countsTowardsCap = true;
     public List<TraitData> traits;
     public int cost;
     public Sprite sprite;

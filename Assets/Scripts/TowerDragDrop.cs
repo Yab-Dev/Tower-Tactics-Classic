@@ -196,7 +196,7 @@ public class TowerDragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
     }
 
-    private void SetDraggable(int _waveCount)
+    public void SetDraggable(int _waveCount)
     {
         canDrag = true;
     }

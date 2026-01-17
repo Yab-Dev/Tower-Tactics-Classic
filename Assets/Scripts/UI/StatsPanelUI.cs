@@ -39,11 +39,11 @@ public class StatsPanelUI : MonoBehaviour
         towerTokensText.text = _towerTokenAmount.ToString();
     }
 
-    private void UpdateTowerCap(List<GameObject> _towers, List<(TraitData trait, int count)> _traits, int _towerCap)
+    private void UpdateTowerCap(List<GameObject> _towers, int _towersTowardsCapCount, List<(TraitData trait, int count)> _traits, int _towerCap)
     {
-        towerCapText.text = $"{_towers.Count}/{_towerCap}";
+        towerCapText.text = $"{_towersTowardsCapCount}/{_towerCap}";
 
-        if (_towers.Count > _towerCap)
+        if (_towersTowardsCapCount > _towerCap)
         {
             towerCapText.color = invalidTowerCapTextColor;
         }

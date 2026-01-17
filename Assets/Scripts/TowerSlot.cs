@@ -23,6 +23,7 @@ public class TowerSlot : MonoBehaviour
         TowerDragDrop.OnAnyTowerMoveEnd += FadeSlotOut;
 
         GameManager.OnGetPlacedTowers += GetCurrentTower;
+        GameManager.OnGetTowerSlots += FetchTowerSlot;
     }
 
     private void OnDisable()
@@ -80,6 +81,19 @@ public class TowerSlot : MonoBehaviour
         {
             _towers.Add(currentTower.gameObject);
         }
+    }
+
+    private void FetchTowerSlot(ref List<TowerSlot> _slots)
+    {
+        if (CanFetchSlot())
+        {
+            _slots.Add(this);
+        }
+    }
+
+    public virtual bool CanFetchSlot()
+    {
+        return true;
     }
 
     public TowerDragDrop CurrentTower

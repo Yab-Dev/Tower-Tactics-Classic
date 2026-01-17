@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int waveCount;
     [SerializeField] private int startingLives;
     [SerializeField] private int startingTowerCap;
+    [SerializeField] private List<TowerSlot> towerSlots;
     [SerializeField] private List<GameObject> currentTowers = new List<GameObject>();
     [SerializeField] private TowerData startingTower;
     [SerializeField] private List<TowerSlot> startingSlots = new List<TowerSlot>();
@@ -41,13 +42,16 @@ public class GameManager : MonoBehaviour
     public static event OnDefensePhaseChangeEventArgs OnDefensePhaseStart;
     public static event OnDefensePhaseChangeEventArgs OnDefensePhaseEnd;
 
+    public delegate void OnGetTowerSlotsEventArgs(ref List<TowerSlot> _slots);
+    public static event OnGetTowerSlotsEventArgs OnGetTowerSlots;
+
     public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> _towers);
     public static event OnGetPlacedTowersEventArgs OnGetPlacedTowers;
 
     public delegate void OnGetTowersOfTraitEventArgs(ref List<TowerBehavior> _towers, TraitData _trait);
     public static event OnGetTowersOfTraitEventArgs OnGetTowersOfTrait;
 
-    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> _towers, List<(TraitData trait, int count)> _traits, int _towerCap);
+    public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> _towers, int _towersTowardsCapCount, List<(TraitData trait, int count)> _traits, int _towerCap);
     public static event OnCurrentTowersUpdatedEventArgs OnCurrentTowersUpdated;
 
     public delegate void OnClearEnemiesEventArgs();
@@ -91,6 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        OnGetTowerSlots?.Invoke(ref towerSlots);
         OnGameStart?.Invoke();
     }
 
@@ -127,16 +132,11 @@ public class GameManager : MonoBehaviour
         // Spawn starting towers
         for (int i = 0; i < startingSlots.Count; i++)
         {
-            GameObject tower = SpawnTower(false, startingTower, startingSlots[i].transform.position);
-            TowerDragDrop towerDragDrop = tower.GetComponent<TowerDragDrop>();
-
-            startingSlots[i].ClearTower();
-            startingSlots[i].OnSlotTowerMoved += towerDragDrop.SetStartingSlot;
-            startingSlots[i].SetCurrentTower(towerDragDrop);
+            SpawnTowerOnSlot(startingSlots[i], startingTower);
         }
 
         UpdateCurrentTowers();
-        OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
+        OnCurrentTowersUpdated?.Invoke(currentTowers, GetTowersCountingTowardsCap(), GetCurrentTraits(), towerCap);
         SetBuildPhase();
     }
 
@@ -199,6 +199,33 @@ public class GameManager : MonoBehaviour
         return tower;
     }
 
+    public GameObject SpawnTowerOnSlot(TowerSlot _slot, TowerData _towerData)
+    {
+        GameObject tower = SpawnTower(false, _towerData, _slot.transform.position);
+        TowerDragDrop towerDragDrop = tower.GetComponent<TowerDragDrop>();
+
+        _slot.ClearTower();
+        _slot.OnSlotTowerMoved += towerDragDrop.SetStartingSlot;
+        _slot.SetCurrentTower(towerDragDrop);
+
+        towerDragDrop.SetDraggable(0);
+
+        return tower;
+    }
+
+    public GameObject SpawnTowerOnSlot(TowerData _towerData)
+    {
+        foreach (TowerSlot slot in towerSlots)
+        {
+            if (!slot.HasTower())
+            {
+                return SpawnTowerOnSlot(slot, _towerData);
+            }
+        }
+
+        return null;
+    }
+
     public EnemyBehavior SpawnEnemy(EnemyData _enemyData, Vector2 _startingPos)
     {
         GameObject enemy = Instantiate(enemyObject, _startingPos, Quaternion.identity);
@@ -213,7 +240,7 @@ public class GameManager : MonoBehaviour
         currentTowers.Clear();
         OnGetPlacedTowers?.Invoke(ref currentTowers);
 
-        OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
+        OnCurrentTowersUpdated?.Invoke(currentTowers, GetTowersCountingTowardsCap(), GetCurrentTraits(), towerCap);
 
         OnClearStaticEffects?.Invoke();
         OnApplyStaticEffects?.Invoke();
@@ -289,7 +316,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseTowerCap()
     {
         towerCap++;
-        OnCurrentTowersUpdated?.Invoke(currentTowers, GetCurrentTraits(), towerCap);
+        OnCurrentTowersUpdated?.Invoke(currentTowers, GetTowersCountingTowardsCap(), GetCurrentTraits(), towerCap);
     }
 
     public List<TowerBehavior> GetTowersOfTrait(TraitData _trait)
@@ -297,6 +324,22 @@ public class GameManager : MonoBehaviour
         List<TowerBehavior> foundTowers = new List<TowerBehavior>();
         OnGetTowersOfTrait?.Invoke(ref foundTowers, _trait);
         return foundTowers;
+    }
+
+    private int GetTowersCountingTowardsCap()
+    {
+        int count = 0;
+        foreach (GameObject towerObject in currentTowers)
+        {
+            TowerBehavior towerBehavior = towerObject.GetComponent<TowerBehavior>();
+            if (towerBehavior == null) { continue; }
+
+            if (towerBehavior.TowerData.countsTowardsCap)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     public int TowerCap

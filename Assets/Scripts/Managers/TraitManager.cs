@@ -7,6 +7,7 @@ public class TraitManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private float medievalBreakpoint2AttackSpeedBoost = -0.05f;
     [SerializeField] private int wallBreakpoint1HealthPerLevel = 6;
+    [SerializeField] private TowerData icyBreakpointTowerData;
 
     [Header("Cache")]
     [SerializeField] private TraitData gathererTrait;
@@ -28,6 +29,9 @@ public class TraitManager : MonoBehaviour
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
+    private GameObject icePillar1;
+    private GameObject icePillar2;
+    private GameObject icePillar3;
 
 
 
@@ -54,6 +58,8 @@ public class TraitManager : MonoBehaviour
         GameManager.OnApplyStaticEffects += FieryBreakpoint2;
 
         BulletBehavior.OnApplyBulletTags += IcyBreakpoint1;
+        GameManager.OnApplyStaticEffects += IcyBreakpoint2;
+        GameManager.OnApplyStaticEffects += IcyBreakpoint3;
     }
 
     private void OnDisable()
@@ -76,6 +82,10 @@ public class TraitManager : MonoBehaviour
 
         GameManager.OnApplyStaticEffects -= FieryBreakpoint1;
         GameManager.OnApplyStaticEffects -= FieryBreakpoint2;
+
+        BulletBehavior.OnApplyBulletTags -= IcyBreakpoint1;
+        GameManager.OnApplyStaticEffects -= IcyBreakpoint2;
+        GameManager.OnApplyStaticEffects -= IcyBreakpoint3;
     }
 
 
@@ -220,5 +230,50 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(icyTrait, 0)) { return; }
 
         _tags.Add(BulletBehavior.BulletTags.Icy);
+    }
+
+    private void IcyBreakpoint2()
+    {
+        if (TraitUtils.CheckTraitBreakpoint(icyTrait, 1))
+        { 
+            if (icePillar1 != null) { return; }
+            icePillar1 = GameManager.GetInstance().SpawnTowerOnSlot(icyBreakpointTowerData);
+        }
+        else if (icePillar1 != null)
+        {
+            Destroy(icePillar1);
+            icePillar1 = null;
+            GameManager.GetInstance().UpdateCurrentTowers();
+        }
+    }
+
+    private void IcyBreakpoint3()
+    {
+        if (TraitUtils.CheckTraitBreakpoint(icyTrait, 2))
+        {
+            if (icePillar2 == null)
+            {
+                icePillar2 = GameManager.GetInstance().SpawnTowerOnSlot(icyBreakpointTowerData);
+            }
+            if (icePillar3 == null)
+            {
+                icePillar3 = GameManager.GetInstance().SpawnTowerOnSlot(icyBreakpointTowerData);
+            }
+        }
+        else
+        {
+            if (icePillar2 != null)
+            {
+                Destroy(icePillar2);
+                icePillar2 = null;
+                GameManager.GetInstance().UpdateCurrentTowers();
+            }
+            if (icePillar3 != null)
+            {
+                Destroy(icePillar3);
+                icePillar3 = null;
+                GameManager.GetInstance().UpdateCurrentTowers();
+            }
+        }
     }
 }

@@ -81,6 +81,7 @@ public class TowerBehavior : TooltipObject, IDamage
 
     private void TowerFiring(GameObject _target)
     {
+        if (CurrentStats.hitSpeed == 0) { return; }
         if (shootCooldown <= 0.0f)
         {
             StartCoroutine(ShootBullets(_target));
