@@ -16,7 +16,9 @@ MonoBehaviour:
   traitIcon: {fileID: -2840521585152295393, guid: 699cd3ba1cde62c4fb1e4cbbcea47f3b, type: 3}
   breakpoints:
   - breakpointValue: 1
-    breakpointDescription: Spawns an icy rock tower at the start of the shop phase.
-      Is destroyed at the end of defense.
+    breakpointDescription: Bullets fired from icy towers briefly slow enemies.
+  - breakpointValue: 2
+    breakpointDescription: Spawns an icy rock tower that does not deal damage but
+      does not count towards the tower cap.
   - breakpointValue: 4
     breakpointDescription: Spawns 3 icy rocks instead.

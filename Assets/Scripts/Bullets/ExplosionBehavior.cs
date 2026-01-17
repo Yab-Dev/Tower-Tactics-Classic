@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static BulletBehavior;
 
 public class ExplosionBehavior : MonoBehaviour
 {
@@ -12,8 +13,11 @@ public class ExplosionBehavior : MonoBehaviour
     private List<GameObject> hasDamaged = new List<GameObject>();
     private BulletBehavior.IgniteData igniteData;
 
+    private float slowDuration;
+    private float slowAmount;
 
-    public static void CreateExplosion(GameObject _explosionObject, Vector2 _position, IDamage.Team _team, int _damage, float _radius, List<BulletBehavior.BulletTags> _tags, BulletBehavior.IgniteData _igniteData)
+
+    public static void CreateExplosion(GameObject _explosionObject, Vector2 _position, IDamage.Team _team, int _damage, float _radius, List<BulletBehavior.BulletTags> _tags, BulletBehavior.IgniteData _igniteData, float _slowDuration, float _slowAmount)
     {
         GameObject explosion = Instantiate(_explosionObject, _position, Quaternion.identity);
         ExplosionBehavior explosionBehavior = explosion.GetComponent<ExplosionBehavior>();
@@ -24,6 +28,8 @@ public class ExplosionBehavior : MonoBehaviour
             explosion.transform.localScale = new Vector3(_radius, _radius, 0.0f);
             explosionBehavior.tags = _tags;
             explosionBehavior.igniteData = _igniteData;
+            explosionBehavior.slowDuration = _slowDuration;
+            explosionBehavior.slowAmount = _slowAmount;
         }
         else
         {
@@ -45,6 +51,10 @@ public class ExplosionBehavior : MonoBehaviour
             if (igniteData.isIgnited)
             {
                 damageInterface.Ignite(igniteData);
+            }
+            if (tags.Contains(BulletTags.Icy))
+            {
+                damageInterface.Slow(slowDuration, slowAmount);
             }
             hasDamaged.Add(collision.gameObject);
         }

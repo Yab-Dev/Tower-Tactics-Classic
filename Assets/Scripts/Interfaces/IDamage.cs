@@ -14,4 +14,5 @@ public interface IDamage
     public void Damage(int _amount);
     public void ApplyTags(List<BulletBehavior.BulletTags> _tags);
     public void Ignite(BulletBehavior.IgniteData _igniteData);
+    public void Slow(float _duration, float _amount);
 }

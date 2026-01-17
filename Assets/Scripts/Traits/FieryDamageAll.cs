@@ -27,18 +27,21 @@ public class FieryDamageAll : MonoBehaviour
 
     private void Update()
     {
-        if (damageTimer <= 0.0f)
+        if (isDamaging)
         {
-            List<EnemyBehavior> enemies = WaveManager.GetInstance().GetEnemies();
-            foreach (EnemyBehavior enemy in enemies)
+            if (damageTimer <= 0.0f)
             {
-                enemy.Damage(damage);
+                List<EnemyBehavior> enemies = WaveManager.GetInstance().GetEnemies();
+                foreach (EnemyBehavior enemy in enemies)
+                {
+                    enemy.Damage(damage);
+                }
+                damageTimer = damageSpeed;
             }
-            damageTimer = damageSpeed;
-        }
-        else
-        {
-            damageTimer -= Time.deltaTime;
+            else
+            {
+                damageTimer -= Time.deltaTime;
+            }
         }
     }
 

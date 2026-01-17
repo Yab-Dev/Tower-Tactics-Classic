@@ -15,6 +15,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private TraitData sniperTrait;
     [SerializeField] private TraitData wallTrait;
     [SerializeField] private TraitData fieryTrait;
+    [SerializeField] private TraitData icyTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -51,6 +52,8 @@ public class TraitManager : MonoBehaviour
 
         GameManager.OnApplyStaticEffects += FieryBreakpoint1;
         GameManager.OnApplyStaticEffects += FieryBreakpoint2;
+
+        BulletBehavior.OnApplyBulletTags += IcyBreakpoint1;
     }
 
     private void OnDisable()
@@ -208,5 +211,14 @@ public class TraitManager : MonoBehaviour
         {
             Destroy(fieryDamageAllObject);
         }
+    }
+
+    private void IcyBreakpoint1(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
+    {
+        if (_towerData == null) { return; }
+        if (!_towerData.traits.Contains(icyTrait)) { return; }
+        if (!TraitUtils.CheckTraitBreakpoint(icyTrait, 0)) { return; }
+
+        _tags.Add(BulletBehavior.BulletTags.Icy);
     }
 }

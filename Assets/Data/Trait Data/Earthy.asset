@@ -15,8 +15,9 @@ MonoBehaviour:
   description: Uses the power of earth
   traitIcon: {fileID: -1825098913617826676, guid: 3b655935a89579e43816b9ed9f0122d8, type: 3}
   breakpoints:
-  - breakpointValue: 2
-    breakpointDescription: Earth tower bullets occasionally push enemies into a neighboring
-      lane.
+  - breakpointValue: 3
+    breakpointDescription: Occasionally click to fire rocks down a lane, which knock
+      back enemies.
   - breakpointValue: 5
-    breakpointDescription: Enemies occasionally get knocked back.
+    breakpointDescription: Bullets fired from earthy towers occasionally push enemies
+      into a neighboring lane.

@@ -26,4 +26,9 @@ public class BaseBehavior : MonoBehaviour, IDamage
     {
         
     }
+
+    public void Slow(float _duration, float _amount)
+    {
+        
+    }
 }

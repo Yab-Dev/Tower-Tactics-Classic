@@ -12,11 +12,14 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private List<BulletTags> tags = new List<BulletTags>();
     [SerializeField] private Color ignitedColor;
+    [SerializeField] private Color icyColor;
 
     [Header("Static Attributes")]
     [SerializeField] private float explosionBreakpoint2Radius;
     [SerializeField] private float explosionBreakpoint1Radius;
     [SerializeField] private float sniperBreakpoint1DamageScaling;
+    [SerializeField] private float icyBreakpoint1SlowDuration;
+    [SerializeField] private float icyBreakpoint1SlowAmount;
 
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
@@ -86,6 +89,11 @@ public class BulletBehavior : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (tags.Contains(BulletTags.Icy) && igniteData.isIgnited == false)
+        {
+            sprite.color = icyColor;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -99,7 +107,7 @@ public class BulletBehavior : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     protected virtual void OnHit(Collider2D _collision, IDamage _damageInterface)
     {
         if (tags.Contains(BulletTags.Sniper))
@@ -110,11 +118,11 @@ public class BulletBehavior : MonoBehaviour
 
         if (tags.Contains(BulletTags.Explosive2))
         {
-            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius, tags, igniteData);
+            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint2Radius, tags, igniteData, icyBreakpoint1SlowDuration, icyBreakpoint1SlowAmount);
         }
         else if (tags.Contains(BulletTags.Explosive1))
         {
-            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint1Radius, tags, igniteData);
+            ExplosionBehavior.CreateExplosion(explosionPrefab, transform.position, IDamage.Team.Tower, damage, explosionBreakpoint1Radius, tags, igniteData, icyBreakpoint1SlowDuration, icyBreakpoint1SlowAmount);
         }
         else
         {
@@ -123,6 +131,10 @@ public class BulletBehavior : MonoBehaviour
             if (igniteData.isIgnited)
             {
                 _damageInterface.Ignite(igniteData);
+            }
+            if (tags.Contains(BulletTags.Icy))
+            {
+                _damageInterface.Slow(icyBreakpoint1SlowDuration, icyBreakpoint1SlowAmount);
             }
         }
     }
@@ -143,5 +155,5 @@ public class BulletBehavior : MonoBehaviour
         sprite.color = ignitedColor;
     }
 
-    public enum BulletTags { Explosive1, Explosive2, Sniper, Earthy, Ignited }
+    public enum BulletTags { Explosive1, Explosive2, Sniper, Earthy, Ignited, Icy }
 }

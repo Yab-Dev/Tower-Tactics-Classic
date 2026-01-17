@@ -24,6 +24,9 @@ public class EnemyBehavior : MonoBehaviour, IDamage
 
     private BulletBehavior.IgniteData igniteData;
 
+    private float slowDuration;
+    private float slowAmount = 1.0f;
+
     public delegate void OnEnemyDestroyedEventArgs(Vector2 _deathPosition);
     public event OnEnemyDestroyedEventArgs OnEnemyDestroyed;
     public static event OnEnemyDestroyedEventArgs OnAnyEnemyDestroyed;
@@ -62,6 +65,15 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         {
             EnemyAttacking(target);
         }
+
+        if (slowDuration > 0.0f)
+        {
+            slowDuration -= Time.deltaTime;
+        }
+        else
+        {
+            slowAmount = 1.0f;
+        }
     }
 
     private void FixedUpdate()
@@ -74,7 +86,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
 
         if (!isAttacking)
         {
-            Vector3 moveTarget = transform.position - new Vector3(enemyData.moveSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
+            Vector3 moveTarget = transform.position - new Vector3(enemyData.moveSpeed * slowAmount * Time.fixedDeltaTime, 0.0f, 0.0f);
             rigidbody.MovePosition(moveTarget);
         }
     }
@@ -150,6 +162,12 @@ public class EnemyBehavior : MonoBehaviour, IDamage
             yield return new WaitForSeconds(igniteData.igniteTickSpeed);
         }
         ignitedParticles.Stop();
+    }
+
+    public void Slow(float _duration, float _amount)
+    {
+        slowAmount = _amount;
+        slowDuration = _duration;
     }
 
     public EnemyData EnemyData

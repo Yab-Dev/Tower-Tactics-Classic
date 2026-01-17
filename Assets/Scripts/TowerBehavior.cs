@@ -257,6 +257,11 @@ public class TowerBehavior : TooltipObject, IDamage
         
     }
 
+    public void Slow(float _duration, float _amount)
+    {
+        
+    }
+
     public TowerData TowerData
     {
         get { return towerData; }
