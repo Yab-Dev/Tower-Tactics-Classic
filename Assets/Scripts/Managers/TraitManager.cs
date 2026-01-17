@@ -28,6 +28,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject igniteWallPrefab;
     [SerializeField] private GameObject fieryDamageAllPrefab;
     [SerializeField] private GameObject earthyKnockbackBulletSpawner;
+    [SerializeField] private GameObject earthyLaneSwitchSpawner;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
@@ -64,6 +65,7 @@ public class TraitManager : MonoBehaviour
         GameManager.OnApplyStaticEffects += IcyBreakpoint3;
 
         GameManager.OnDefensePhaseStart += EarthyBreakpoint1;
+        GameManager.OnDefensePhaseStart += EarthyBreakpoint2;
     }
 
     private void OnDisable()
@@ -92,6 +94,7 @@ public class TraitManager : MonoBehaviour
         GameManager.OnApplyStaticEffects -= IcyBreakpoint3;
 
         GameManager.OnDefensePhaseStart -= EarthyBreakpoint1;
+        GameManager.OnDefensePhaseStart -= EarthyBreakpoint2;
     }
 
 
@@ -288,5 +291,12 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(earthyTrait, 0)) { return; }
 
         Instantiate(earthyKnockbackBulletSpawner);
+    }
+
+    private void EarthyBreakpoint2(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(earthyTrait, 1)) { return; }
+
+        Instantiate(earthyLaneSwitchSpawner);
     }
 }

@@ -9,6 +9,7 @@ public class EnemyBehavior : MonoBehaviour, IDamage
     [SerializeField] private int currentHealth;
     [SerializeField] private bool isAttacking;
     [SerializeField] private Color hurtColor;
+    [SerializeField] private LanePosition lanePosition;
 
     [Header("Cache")]
     [SerializeField] private SpriteRenderer sprite;
@@ -200,7 +201,8 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         knockbackDuration = _duration;
         if (toCenter)
         {
-
+            targetDetection.ClearTargets();
+            knockbackPosition = new Vector3(transform.position.x, 0.5f);
         }
         else
         {
@@ -214,4 +216,12 @@ public class EnemyBehavior : MonoBehaviour, IDamage
         private get { return enemyData; }
         set { enemyData = value; }
     }
+
+    public LanePosition CurrentLane
+    {
+        get { return lanePosition; }
+        set { lanePosition = value; }
+    }
+
+    public enum LanePosition { Top, Middle, Bottom }
 }

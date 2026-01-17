@@ -42,7 +42,18 @@ public class EarthInteractSpawner : MonoBehaviour
                     Instantiate(earthInteractPrefab, new Vector3(knockbackInteractXPosition, laneYPositions[Random.Range(0, laneYPositions.Count)]), Quaternion.identity);
                     break;
                 case EarthInteract.EarthMode.EnemyPush:
-
+                    List<EnemyBehavior> enemies = WaveManager.GetInstance().GetEnemies();
+                    List<EnemyBehavior> validEnemies = new List<EnemyBehavior>();
+                    foreach(EnemyBehavior enemy in enemies)
+                    {
+                        if (enemy.CurrentLane != EnemyBehavior.LanePosition.Middle)
+                        {
+                            validEnemies.Add(enemy);
+                        }
+                    }
+                    Transform enemyToSpawn = validEnemies[Random.Range(0, validEnemies.Count)].transform;
+                    if (enemyToSpawn == null) { break; }
+                    Instantiate(earthInteractPrefab, enemyToSpawn);
                     break;
             }
 

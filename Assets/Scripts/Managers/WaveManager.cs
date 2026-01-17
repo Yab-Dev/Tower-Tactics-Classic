@@ -80,15 +80,17 @@ public class WaveManager : MonoBehaviour
             var (enemyToSpawn, lane) = GetEnemyToSpawn();
 
             Vector2 spawnPos = Vector2.zero;
+            EnemyBehavior.LanePosition lanePosition = EnemyBehavior.LanePosition.Top;
             switch (lane)
             {
-                case 0: spawnPos = topLaneSpawnPos; break;
-                case 1: spawnPos = midLaneSpawnPos; break;
-                case 2: spawnPos = botLaneSpawnPos; break;
+                case 0: spawnPos = topLaneSpawnPos; lanePosition = EnemyBehavior.LanePosition.Top; break;
+                case 1: spawnPos = midLaneSpawnPos; lanePosition = EnemyBehavior.LanePosition.Middle; break;
+                case 2: spawnPos = botLaneSpawnPos; lanePosition = EnemyBehavior.LanePosition.Bottom; break;
             }
 
             EnemyBehavior enemyBehavior = GameManager.GetInstance().SpawnEnemy(enemyToSpawn, spawnPos);
             enemyBehavior.OnEnemyDestroyed += EnemyDestroyed;
+            enemyBehavior.CurrentLane = lanePosition;
             spawnedEnemies++;
         }
 

@@ -56,7 +56,11 @@ public class EarthInteract : MonoBehaviour, IPointerDownHandler
                 Destroy(gameObject);
                 break;
             case EarthMode.EnemyPush:
-
+                IDamage damageInterface = transform.parent.GetComponent<IDamage>();
+                if (damageInterface != null)
+                {
+                    damageInterface.Knockback(2.0f, 0.0f, true);
+                }
                 break;
         }
     }
