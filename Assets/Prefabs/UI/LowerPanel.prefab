@@ -803,7 +803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
-  tooltipDelay: 1
+  tooltipDelay: 0.25
   description: Starts the next wave. Defeat all of the enemies in order to proceed
     to the next build phase and make more tower tokens. If the enemies get past your
     towers you lose, prepare yourself!
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
-  tooltipDelay: 1
+  tooltipDelay: 0.25
   description: Refreshes the current shop with new towers.
 --- !u!1 &5538759458503145785
 GameObject:
@@ -1393,7 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 8204723444373362780, guid: 99119e6ac60d3d34d90bfbad9e40ef7f, type: 3}
-  tooltipDelay: 1
+  tooltipDelay: 0.25
   description: Increases your experience. When you level up, increase your tower
     cap.
 --- !u!1 &7722919434007477327
@@ -1808,6 +1808,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4112407676954117055}
     m_Modifications:
+    - target: {fileID: 879118316580612634, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: tooltipDelay
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1809454915212196655, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1911,6 +1915,14 @@ PrefabInstance:
     - target: {fileID: 5500022059190818352, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6505626780603973151, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: tooltipDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569269284116126730, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: tooltipDelay
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7122917198417939023, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
       propertyPath: m_AnchorMax.y

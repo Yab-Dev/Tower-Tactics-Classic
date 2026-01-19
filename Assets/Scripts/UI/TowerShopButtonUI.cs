@@ -29,10 +29,10 @@ public class TowerShopButtonUI : TooltipObject
 
     protected override void DisplayTooltip(GameObject _tooltip)
     {
-        TowerTooltipUI towerTooltip = _tooltip.GetComponent<TowerTooltipUI>();
+        ShopTowerTooltipUI towerTooltip = _tooltip.GetComponent<ShopTowerTooltipUI>();
         if (towerTooltip != null)
         {
-            towerTooltip.DisplayTowerData(towerInfo.TowerData);
+            towerTooltip.DisplayShopTowerData(towerInfo.TowerData);
         }
     }
 }

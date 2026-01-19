@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408edfb9cd6c3d649b10dc7b41b7bfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tooltipPrefab: {fileID: 4890056134145657256, guid: 66823c982b283674ebfc496462ee5ec5, type: 3}
+  tooltipPrefab: {fileID: 1843736302008999803, guid: 958d250d0a9b0c146b0830c216097916, type: 3}
   tooltipDelay: 0
   towerInfo: {fileID: 1706625693931412347}
   shopButton: {fileID: 7070165284142098748}

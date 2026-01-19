@@ -18,7 +18,7 @@ public class TraitBreakpointTooltipUI : MonoBehaviour
 
     public void SetBreakpointData(TraitData.BreakpointData breakpointData, int traitCount)
     {
-        if (traitCount >= breakpointData.breakpointValue)
+        if (traitCount >= breakpointData.breakpointValue || traitCount == -1)
         {
             breakpointBackground.color = breakpointReachedColor;
         }

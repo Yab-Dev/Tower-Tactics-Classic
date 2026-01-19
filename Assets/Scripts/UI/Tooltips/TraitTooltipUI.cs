@@ -41,4 +41,9 @@ public class TraitTooltipUI : MonoBehaviour
             }
         }
     }
+
+    public void DisplayTraitData(TraitData _traitData)
+    {
+        DisplayTraitData(_traitData, -1);
+    }
 }
