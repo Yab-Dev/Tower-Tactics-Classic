@@ -19,5 +19,5 @@ MonoBehaviour:
     breakpointDescription: Bullets fired from explosive towers deal damage to nearby
       enemies as well.
   - breakpointValue: 4
-    breakpointDescription: Bullet explosion radius range massively increased. Can
-      hit enemies in other lanes.
+    breakpointDescription: Bullet explosion radius range increased. Can hit enemies
+      in other lanes.
