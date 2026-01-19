@@ -10,6 +10,7 @@ public class TooltipBaseUI : MonoBehaviour
 
     [Header("Cache")]
     [SerializeField] private Image dropShadowImage;
+    [SerializeField] private RectTransform canvasTransform;
 
     public delegate void OnAssignTooltipObjectEventArgs(TooltipBaseUI _tooltipObject);
     public static event OnAssignTooltipObjectEventArgs OnAssignTooltipObject;
@@ -32,10 +33,11 @@ public class TooltipBaseUI : MonoBehaviour
     {
         Vector3 viewPortPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-        viewPortPos.x = Mathf.Floor(viewPortPos.x + 0.5f);
-        viewPortPos.y = Mathf.Floor(viewPortPos.y + 0.5f);
+        //Debug.Log($"{Input.mousePosition} {rectTransform.position}");
+        viewPortPos.x = Mathf.Max(0, Mathf.Sign(Input.mousePosition.x - (Screen.width / 2)));
+        viewPortPos.y = Mathf.Max(0, Mathf.Sign(Input.mousePosition.y - (Screen.height / 2)));
 
-        rectTransform.anchoredPosition = Input.mousePosition;
+        rectTransform.position = Input.mousePosition;
         rectTransform.anchoredPosition += new Vector2((viewPortPos.x * 2 - 1) * displayOffset.x, (viewPortPos.y * 2 - 1) * displayOffset.y);
         rectTransform.pivot = viewPortPos;
     }
@@ -46,6 +48,7 @@ public class TooltipBaseUI : MonoBehaviour
 
         GameObject tooltip = Instantiate(_tooltipPrefab, transform);
         dropShadowImage.enabled = true;
+        Update();
 
         return tooltip;
     }
