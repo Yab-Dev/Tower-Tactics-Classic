@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         gameSettings.LoadData();
+        gameSettings.ApplySettings();
     }
 
     public static LevelManager GetInstance()
