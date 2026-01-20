@@ -348,5 +348,11 @@ public class GameManager : MonoBehaviour
         private set { towerCap = value; }
     }
 
+    public GamePhase Phase
+    {
+        get { return gamePhase; }
+        private set { gamePhase = value; }
+    }
+
     public enum GamePhase { Build, Defense, None }
 }

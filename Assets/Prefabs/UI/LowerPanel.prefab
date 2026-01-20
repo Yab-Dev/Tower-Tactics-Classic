@@ -171,9 +171,9 @@ MonoBehaviour:
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 24
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1761,9 +1761,9 @@ MonoBehaviour:
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 24
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1811,6 +1811,26 @@ PrefabInstance:
     - target: {fileID: 879118316580612634, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
       propertyPath: tooltipDelay
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168870089728042537, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168870089728042537, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168870089728042537, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168870089728042537, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168870089728042537, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1809454915212196655, guid: 1b6bbf296710a8c42927223d78b5b56f, type: 3}
       propertyPath: m_AnchorMax.y
