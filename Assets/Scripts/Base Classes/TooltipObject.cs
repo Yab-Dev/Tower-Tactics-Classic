@@ -22,6 +22,7 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
             if (tooltipTimer >= tooltipDelay && displaying == false)
             {
                 displaying = true;
+                Time.timeScale = 0.2f;
                 GameObject tooltip = GameManager.GetInstance().GetTooltipUI().SetTooltip(tooltipPrefab);
                 DisplayTooltip(tooltip);
             }
@@ -38,6 +39,7 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
         hovering = false;
         displaying = false;
         tooltipTimer = 0.0f;
+        Time.timeScale = 1.0f;
 
         GameManager.GetInstance().GetTooltipUI().ClearTooltip();
     }
