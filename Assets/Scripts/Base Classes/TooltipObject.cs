@@ -42,10 +42,17 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
         hovering = false;
         displaying = false;
         tooltipTimer = 0.0f;
+
+        TooltipRemoved();
+
         Time.timeScale = 1.0f;
 
         GameManager.GetInstance().GetTooltipUI().ClearTooltip();
     }
 
     protected abstract void DisplayTooltip(GameObject tooltip);
+    protected virtual void TooltipRemoved()
+    {
+
+    }
 }

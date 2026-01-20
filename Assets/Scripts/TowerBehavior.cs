@@ -23,6 +23,8 @@ public class TowerBehavior : TooltipObject, IDamage
     [SerializeField] private BoxCollider2D towerCollision;
     [SerializeField] private TargetDetection targetDetection;
     [SerializeField] private ParticleSystem buffParticles;
+    [SerializeField] private SpriteRenderer areaRangeSprite;
+    [SerializeField] private SpriteRenderer laneRangeSprite;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject healParticlesPrefab;
@@ -63,6 +65,9 @@ public class TowerBehavior : TooltipObject, IDamage
     private void Start()
     {
         originalColor = sprite.color;
+
+        areaRangeSprite.gameObject.SetActive(false);
+        laneRangeSprite.gameObject.SetActive(false);
     }
 
     protected override void Update()
@@ -204,6 +209,17 @@ public class TowerBehavior : TooltipObject, IDamage
         {
             towerTooltip.DisplayTowerData(this);
         }
+
+        areaRangeSprite.gameObject.SetActive(true);
+        laneRangeSprite.gameObject.SetActive(true);
+        areaRangeSprite.transform.localScale = new Vector3(CurrentStats.areaRange * 2, CurrentStats.areaRange * 2, 1);
+        laneRangeSprite.transform.localScale = new Vector3(CurrentStats.laneRange, 1, 1);
+    }
+
+    protected override void TooltipRemoved()
+    {
+        areaRangeSprite.gameObject.SetActive(false);
+        laneRangeSprite.gameObject.SetActive(false);
     }
 
     public void ClearStatModifications()
