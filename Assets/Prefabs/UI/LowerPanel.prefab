@@ -646,8 +646,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 0.2
+  towerCapOverMessage: Too many towers! Over capacity!
+  towerCapOverColor: {r: 1, g: 0, b: 0, a: 1}
   phaseText: {fileID: 1042598014732832496}
   startWaveButton: {fileID: 3596936586232000783}
+  textPopupPrefab: {fileID: 1061346630672259137, guid: 55f3d2bad8496ac4c9985276b5e7977e, type: 3}
 --- !u!114 &109583348861157695
 MonoBehaviour:
   m_ObjectHideFlags: 0

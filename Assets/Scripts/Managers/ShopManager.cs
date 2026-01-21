@@ -16,6 +16,11 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int startingUpgradeCost;
     [SerializeField] private int upgradeCost;
     [SerializeField] private float upgradeCostScalar;
+    [SerializeField] private string notEnoughTokensMessage;
+    [SerializeField] private Color notEnoughTokensColor;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject textPopupPrefab;
 
     private List<TowerData> shopTowers = new List<TowerData>();
 
@@ -80,6 +85,7 @@ public class ShopManager : MonoBehaviour
     {
         if (refreshCost > towerTokens)
         {
+            TextPopupUI.CreateTextPopup(textPopupPrefab, notEnoughTokensMessage, notEnoughTokensColor);
             return;
         }
         TowerTokens -= refreshCost;
@@ -91,6 +97,7 @@ public class ShopManager : MonoBehaviour
     {
         if (upgradeCost > towerTokens || GameManager.GetInstance().TowerCap >= 21)
         {
+            TextPopupUI.CreateTextPopup(textPopupPrefab, notEnoughTokensMessage, notEnoughTokensColor);
             return;
         }
         TowerTokens -= upgradeCost;
@@ -106,6 +113,7 @@ public class ShopManager : MonoBehaviour
     {
         if (shopTowers[_index].cost > towerTokens)
         {
+            TextPopupUI.CreateTextPopup(textPopupPrefab, notEnoughTokensMessage, notEnoughTokensColor);
             return false;
         }
 

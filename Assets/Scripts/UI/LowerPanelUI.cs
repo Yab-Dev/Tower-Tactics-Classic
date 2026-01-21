@@ -7,15 +7,21 @@ public class LowerPanelUI : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private float fadeDuration = 0.2f;
+    [SerializeField] private string towerCapOverMessage;
+    [SerializeField] private Color towerCapOverColor;
 
     [Header("Cache")]
     [SerializeField] private TMPro.TMP_Text phaseText;
     [SerializeField] private Button startWaveButton;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject textPopupPrefab;
+
     private Vector2 fadeOutPosition;
     private Vector2 fadeInPosition;
 
     private RectTransform rectTransform;
+    private bool canStartWave;
 
 
     private void Awake()
@@ -23,7 +29,7 @@ public class LowerPanelUI : MonoBehaviour
         GameManager.OnBuildPhaseStart += BuildPhaseStart;
         GameManager.OnBuildPhaseEnd += FadePanelOut;
         TowerDragDrop.OnTowerPlaceStart += DisableButtons;
-        //TowerDragDrop.OnTowerPlaceEnd += EnableButtons;
+        TowerDragDrop.OnTowerPlaceEnd += EnableButtons;
         GameManager.OnCurrentTowersUpdated += TowersUpdated;
 
         startWaveButton.onClick.AddListener(StartWave);
@@ -38,7 +44,7 @@ public class LowerPanelUI : MonoBehaviour
         GameManager.OnBuildPhaseStart -= BuildPhaseStart;
         GameManager.OnBuildPhaseEnd -= FadePanelOut;
         TowerDragDrop.OnTowerPlaceStart -= DisableButtons;
-        //TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
+        TowerDragDrop.OnTowerPlaceEnd -= EnableButtons;
         GameManager.OnCurrentTowersUpdated -= TowersUpdated;
 
         startWaveButton.onClick.RemoveAllListeners();
@@ -46,12 +52,19 @@ public class LowerPanelUI : MonoBehaviour
 
     private void StartWave()
     {
-        startWaveButton.interactable = false;
+        if (canStartWave)
+        {
+            startWaveButton.interactable = false;
 
-        GameManager.GetInstance().SetDefensePhase();
+            GameManager.GetInstance().SetDefensePhase();
+        }
+        else
+        {
+            TextPopupUI.CreateTextPopup(textPopupPrefab, towerCapOverMessage, towerCapOverColor);
+        }
     }
 
-    private void BuildPhaseStart(int waveCount)
+    private void BuildPhaseStart(int _waveCount)
     {
         startWaveButton.interactable = true;
 
@@ -63,7 +76,7 @@ public class LowerPanelUI : MonoBehaviour
         StartCoroutine(MoveOverTime.MoveUIObjectOverTime(rectTransform, fadeInPosition, fadeDuration));
     }
 
-    private void FadePanelOut(int waveCount)
+    private void FadePanelOut(int _waveCount)
     {
         StartCoroutine(MoveOverTime.MoveUIObjectOverTime(rectTransform, fadeOutPosition, fadeDuration));
     }
@@ -82,11 +95,13 @@ public class LowerPanelUI : MonoBehaviour
     {
         if (_towersTowardsCapCount > _towerCap)
         {
-            startWaveButton.interactable = false;
+            //startWaveButton.interactable = false;
+            canStartWave = false;
         }
         else
         {
-            startWaveButton.interactable = true;
+            //startWaveButton.interactable = true;
+            canStartWave = true;
         }
     }
 }

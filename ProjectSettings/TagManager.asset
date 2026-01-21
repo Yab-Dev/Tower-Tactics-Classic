@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TowerSlot
   - Bullet
+  - MainCanvas
   layers:
   - Default
   - TransparentFX
