@@ -18,6 +18,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private TraitData fieryTrait;
     [SerializeField] private TraitData icyTrait;
     [SerializeField] private TraitData earthyTrait;
+    [SerializeField] private TraitData throneTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -29,6 +30,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject fieryDamageAllPrefab;
     [SerializeField] private GameObject earthyKnockbackBulletSpawner;
     [SerializeField] private GameObject earthyLaneSwitchSpawner;
+    [SerializeField] private GameObject throneBuffPrefab;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
@@ -66,6 +68,8 @@ public class TraitManager : MonoBehaviour
 
         GameManager.OnDefensePhaseStart += EarthyBreakpoint1;
         GameManager.OnDefensePhaseStart += EarthyBreakpoint2;
+
+        GameManager.OnDefensePhaseStart += ThroneBeakpoint1;
     }
 
     private void OnDisable()
@@ -298,5 +302,12 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(earthyTrait, 1)) { return; }
 
         Instantiate(earthyLaneSwitchSpawner);
+    }
+
+    private void ThroneBeakpoint1(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(throneTrait, 0)) { return; }
+
+        Instantiate(throneBuffPrefab);
     }
 }
