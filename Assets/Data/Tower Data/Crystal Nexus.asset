@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Crystal Nexus
   m_EditorClassIdentifier: 
   description: The beating heart of a crystal.
+  countsTowardsCap: 1
   traits:
   - {fileID: 11400000, guid: eaf65af4dec82b0469e6840f6c8eac8b, type: 2}
   - {fileID: 11400000, guid: ff8f70c5aac94724ea30a49eb43e705d, type: 2}
+  rarity: 1
   cost: 5
   sprite: {fileID: -4507643061094997345, guid: 4106b3c3342a5a34bba3cc1dad4ef69b, type: 3}
   destroyedSprite: {fileID: 0}

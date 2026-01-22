@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6462264, b: 0.6462264, a: 1}
+  m_Color: {r: 0.72563463, g: 0.64705884, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -290,8 +290,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 1843736302008999803, guid: 958d250d0a9b0c146b0830c216097916, type: 3}
   tooltipDelay: 0
+  commonBackgroundColor: {r: 1, g: 0.64705884, b: 0.64705884, a: 1}
+  commonNameBackgroundColor: {r: 0.98039216, g: 0.40392157, b: 0.40392157, a: 1}
+  rareBackgroundColor: {r: 0.7294118, g: 0.64705884, b: 1, a: 1}
+  rareNameBackgroundColor: {r: 0.4117647, g: 0.40392157, b: 0.98039216, a: 1}
   towerInfo: {fileID: 1706625693931412347}
   shopButton: {fileID: 7070165284142098748}
+  buttonBackground: {fileID: 2011972882111475863}
+  nameBackground: {fileID: 7260710289241397517}
 --- !u!1 &2021115805732668547
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9811321, g: 0.4026344, b: 0.4026344, a: 1}
+  m_Color: {r: 0.411038, g: 0.40392157, b: 0.98039216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

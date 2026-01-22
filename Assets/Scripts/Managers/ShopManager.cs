@@ -16,12 +16,14 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int startingUpgradeCost;
     [SerializeField] private int upgradeCost;
     [SerializeField] private float upgradeCostScalar;
+    [SerializeField] private float rareTowerOdds;
     [SerializeField] private string notEnoughTokensMessage;
     [SerializeField] private Color notEnoughTokensColor;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject textPopupPrefab;
 
+    private Dictionary<TowerData.TowerRarity, List<TowerData>> towersWithRarities = new Dictionary<TowerData.TowerRarity, List<TowerData>>();
     private List<TowerData> shopTowers = new List<TowerData>();
 
     public delegate void OnRefreshShopEventArgs(List<TowerData> _shopData);
@@ -44,6 +46,13 @@ public class ShopManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        towersWithRarities.Add(TowerData.TowerRarity.Common, new List<TowerData>());
+        towersWithRarities.Add(TowerData.TowerRarity.Rare, new List<TowerData>());
+        foreach (TowerData tower in towerPool)
+        {
+            towersWithRarities[tower.rarity].Add(tower);
         }
 
         GameManager.OnBuildPhaseStart += RefreshShop;
@@ -75,7 +84,15 @@ public class ShopManager : MonoBehaviour
 
         for (int i = 0; i < shopSize; i++)
         {
-            shopTowers.Add(towerPool[Random.Range(0, towerPool.Count)]);
+            float rand = Random.Range(0.0f, 1.0f);
+            if (rand < rareTowerOdds)
+            {
+                shopTowers.Add(towersWithRarities[TowerData.TowerRarity.Rare][Random.Range(0, towersWithRarities[TowerData.TowerRarity.Rare].Count)]);
+            }
+            else
+            {
+                shopTowers.Add(towersWithRarities[TowerData.TowerRarity.Common][Random.Range(0, towersWithRarities[TowerData.TowerRarity.Common].Count)]);
+            }
         }
 
         OnRefreshShop?.Invoke(shopTowers);

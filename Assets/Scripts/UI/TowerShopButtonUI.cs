@@ -5,9 +5,17 @@ using UnityEngine.UI;
 
 public class TowerShopButtonUI : TooltipObject
 {
+    [Header("Attributes")]
+    [SerializeField] private Color commonBackgroundColor;
+    [SerializeField] private Color commonNameBackgroundColor;
+    [SerializeField] private Color rareBackgroundColor;
+    [SerializeField] private Color rareNameBackgroundColor;
+
     [Header("Cache")]
     [SerializeField] public TowerInfoUI towerInfo;
     [SerializeField] public Button shopButton;
+    [SerializeField] private Image buttonBackground;
+    [SerializeField] private Image nameBackground;
 
 
 
@@ -25,6 +33,21 @@ public class TowerShopButtonUI : TooltipObject
     {
         //GameManager.GetInstance().SpawnTower(true, TESTDATA);
         //shopButton.interactable = false;
+    }
+
+    public void SetRarityColor(TowerData.TowerRarity rarity)
+    {
+        switch (rarity)
+        {
+            case TowerData.TowerRarity.Common:
+                buttonBackground.color = commonBackgroundColor;
+                nameBackground.color = commonNameBackgroundColor;
+                break;
+            case TowerData.TowerRarity.Rare:
+                buttonBackground.color = rareBackgroundColor;
+                nameBackground.color = rareNameBackgroundColor;
+                break;
+        }
     }
 
     protected override void DisplayTooltip(GameObject _tooltip)

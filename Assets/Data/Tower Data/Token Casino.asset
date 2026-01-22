@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Token Casino
   m_EditorClassIdentifier: 
   description: GAMBLE YOUR SAVINGS AWAY! YOU WANNA BE A BIG SHOT DON'T YA?
+  countsTowardsCap: 1
   traits:
   - {fileID: 11400000, guid: d9ef9c8931c9551428e545738ece9164, type: 2}
   - {fileID: 11400000, guid: e8e23587ef169ef4dbc9939eda260ca3, type: 2}
+  rarity: 1
   cost: 5
   sprite: {fileID: 3201078864990313308, guid: 9f5f8e57c0243bb438698d2246dcdea4, type: 3}
   destroyedSprite: {fileID: 0}

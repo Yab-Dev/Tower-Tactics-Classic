@@ -9,6 +9,7 @@ public class TowerData : ScriptableObject
     public string description;
     public bool countsTowardsCap = true;
     public List<TraitData> traits;
+    public TowerRarity rarity;
     public int cost;
     public Sprite sprite;
     public Sprite destroyedSprite;
@@ -41,4 +42,5 @@ public class TowerData : ScriptableObject
 
     public GameObject bulletObject;
     public float bulletSpeed;
+    public enum TowerRarity { Common, Rare }
 }

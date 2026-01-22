@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: King's Keep
   m_EditorClassIdentifier: 
   description: Equipped with a throne fit for a king.
+  countsTowardsCap: 1
   traits:
   - {fileID: 11400000, guid: 493010597a2e3f144a5fbf611a4954dd, type: 2}
   - {fileID: 11400000, guid: 2210dfedeb1cbaa44862fe14f290deae, type: 2}
+  rarity: 1
   cost: 5
   sprite: {fileID: -8992672218072202454, guid: 6a8478251180a72448d29aa581a11b8b, type: 3}
   destroyedSprite: {fileID: 0}

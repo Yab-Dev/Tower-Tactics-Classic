@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Kinetic Engine
   m_EditorClassIdentifier: 
   description: A clockwork machine powered by fire and ice that shoots... potatoes?
+  countsTowardsCap: 1
   traits:
   - {fileID: 11400000, guid: 54fd553ec083b164da38dd88d22f71cb, type: 2}
   - {fileID: 11400000, guid: aeae83cf2c15a5545a5297fb83253000, type: 2}
   - {fileID: 11400000, guid: dd4104b6bf02a4c46be6af93859aaa1f, type: 2}
+  rarity: 1
   cost: 5
   sprite: {fileID: 2553639946324100342, guid: 0f8e052eca2ade842b49cf7a6755952d, type: 3}
   destroyedSprite: {fileID: 0}

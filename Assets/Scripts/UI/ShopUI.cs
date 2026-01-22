@@ -70,6 +70,7 @@ public class ShopUI : MonoBehaviour
             GameObject button = Instantiate(shopButton, shopButtonContent);
             TowerShopButtonUI shopButtonUI = button.GetComponent<TowerShopButtonUI>();
             shopButtonUI.towerInfo.SetTowerInfo(_shopData[i]);
+            shopButtonUI.SetRarityColor(_shopData[i].rarity);
             int index = i;
             shopButtonUI.shopButton.onClick.AddListener(() => BuyTowerButtonClick(index));
             shopButtons.Add(shopButtonUI);
