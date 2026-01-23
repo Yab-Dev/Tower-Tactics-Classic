@@ -19,6 +19,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private TraitData icyTrait;
     [SerializeField] private TraitData earthyTrait;
     [SerializeField] private TraitData throneTrait;
+    [SerializeField] private TraitData steamTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -31,6 +32,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject earthyKnockbackBulletSpawner;
     [SerializeField] private GameObject earthyLaneSwitchSpawner;
     [SerializeField] private GameObject throneBuffPrefab;
+    [SerializeField] private GameObject steamValvePrefab;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
@@ -70,6 +72,7 @@ public class TraitManager : MonoBehaviour
         GameManager.OnDefensePhaseStart += EarthyBreakpoint2;
 
         GameManager.OnDefensePhaseStart += ThroneBeakpoint1;
+        GameManager.OnDefensePhaseStart += SteamBreakpoint1;
     }
 
     private void OnDisable()
@@ -99,6 +102,9 @@ public class TraitManager : MonoBehaviour
 
         GameManager.OnDefensePhaseStart -= EarthyBreakpoint1;
         GameManager.OnDefensePhaseStart -= EarthyBreakpoint2;
+
+        GameManager.OnDefensePhaseStart -= ThroneBeakpoint1;
+        GameManager.OnDefensePhaseStart -= SteamBreakpoint1;
     }
 
 
@@ -309,5 +315,12 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(throneTrait, 0)) { return; }
 
         Instantiate(throneBuffPrefab);
+    }
+
+    private void SteamBreakpoint1(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(steamTrait, 0)) { return; }
+
+        Instantiate(steamValvePrefab, GameObject.FindWithTag("MainCanvas").transform);
     }
 }
