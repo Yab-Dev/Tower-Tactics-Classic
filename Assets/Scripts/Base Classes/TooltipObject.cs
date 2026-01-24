@@ -24,7 +24,10 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
                 displaying = true;
                 if (GameManager.GetInstance().Phase == GameManager.GamePhase.Defense)
                 {
-                    Time.timeScale = 0.2f;
+                    if (!PauseMenuUI.IsPaused)
+                    {
+                        Time.timeScale = 0.2f;
+                    }
                 }
                 GameObject tooltip = GameManager.GetInstance().GetTooltipUI().SetTooltip(tooltipPrefab);
                 DisplayTooltip(tooltip);
@@ -34,6 +37,8 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (PauseMenuUI.IsPaused) { return; }
+
         hovering = true;
     }
 
@@ -45,7 +50,10 @@ public abstract class TooltipObject : MonoBehaviour, IPointerEnterHandler, IPoin
 
         TooltipRemoved();
 
-        Time.timeScale = 1.0f;
+        if (!PauseMenuUI.IsPaused)
+        {
+            Time.timeScale = 1.0f;
+        }
 
         GameManager.GetInstance().GetTooltipUI().ClearTooltip();
     }
