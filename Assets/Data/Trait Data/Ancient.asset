@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
   m_Name: Ancient
   m_EditorClassIdentifier: 
-  description: Somethings trapped in the ice. (NOT IMPLEMENTED)
+  description: Somethings trapped in the ice.
   traitIcon: {fileID: 2597528908896620609, guid: 604d51808ed3b62438c97315c969ea72, type: 3}
   breakpoints:
   - breakpointValue: 1

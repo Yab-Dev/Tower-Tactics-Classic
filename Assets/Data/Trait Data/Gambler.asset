@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
   m_Name: Gambler
   m_EditorClassIdentifier: 
-  description: Get it twisted. (NOT IMPLEMENTED)
+  description: Get it twisted.
   traitIcon: {fileID: 139143764222662521, guid: a8baadc48f0174c4bb1fe9ef4fe53d56, type: 3}
   breakpoints:
   - breakpointValue: 1
