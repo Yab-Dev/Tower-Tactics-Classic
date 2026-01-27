@@ -21,6 +21,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private TraitData throneTrait;
     [SerializeField] private TraitData steamTrait;
     [SerializeField] private TraitData gamblerTrait;
+    [SerializeField] private TraitData ancientTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -35,12 +36,14 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject throneBuffPrefab;
     [SerializeField] private GameObject steamValvePrefab;
     [SerializeField] private GameObject tokenCasinoPrefab;
+    [SerializeField] private GameObject pterodactylPrefab;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
     private GameObject icePillar1;
     private GameObject icePillar2;
     private GameObject icePillar3;
+    private GameObject pterodactylObject;
 
 
 
@@ -76,6 +79,7 @@ public class TraitManager : MonoBehaviour
         GameManager.OnDefensePhaseStart += ThroneBeakpoint1;
         GameManager.OnDefensePhaseStart += SteamBreakpoint1;
         GameManager.OnDefensePhaseStart += GamblerBreakpoint1;
+        TowerBehavior.OnAnyTowerDestroyed += AncientBreakpoint1;
     }
 
     private void OnDisable()
@@ -333,5 +337,13 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(gamblerTrait, 0)) { return; }
 
         Instantiate(tokenCasinoPrefab, GameObject.FindWithTag("TraitCanvas").transform);
+    }
+
+    private void AncientBreakpoint1(TowerData _towerData, Vector2 _destroyPosition)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(ancientTrait, 0)) { return; }
+        if (pterodactylObject != null) { return; }
+
+        pterodactylObject = Instantiate(pterodactylPrefab, _destroyPosition, Quaternion.identity);
     }
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   traitIcon: {fileID: 2597528908896620609, guid: 604d51808ed3b62438c97315c969ea72, type: 3}
   breakpoints:
   - breakpointValue: 1
-    breakpointDescription: When destroyed, spawn a pterodactyl that follow the cursor,
-      occasionally attacking enemies.
+    breakpointDescription: When the first ancient tower is destroyed, spawn a pterodactyl
+      that follows the cursor that attacks enemies.
