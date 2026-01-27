@@ -215,12 +215,17 @@ public class GameManager : MonoBehaviour
 
     public GameObject SpawnTowerOnSlot(TowerData _towerData)
     {
+        List<TowerSlot> slots = new List<TowerSlot>();
         foreach (TowerSlot slot in towerSlots)
         {
             if (!slot.HasTower())
             {
-                return SpawnTowerOnSlot(slot, _towerData);
+                slots.Add(slot);
             }
+        }
+        if (slots.Count > 0)
+        {
+            return SpawnTowerOnSlot(slots[Random.Range(0, slots.Count)], _towerData);
         }
 
         return null;
@@ -253,6 +258,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject tower in currentTowers)
         {
+            if (tower == null) { continue; }
             TowerBehavior towerBehavior = tower.GetComponent<TowerBehavior>();
             if (towerBehavior == null) { continue; }
 

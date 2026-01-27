@@ -47,6 +47,8 @@ public class BulletBehavior : MonoBehaviour
 
     public static void CreateBullet(GameObject _bulletObject, Vector2 _position, GameObject _target, IDamage.Team _team, int _damage, float _speed, float _lifetime = 5.0f, TowerData _towerData = null)
     {
+        if (_bulletObject == null) return;
+
         GameObject bullet = Instantiate(_bulletObject, _position, Quaternion.identity);
         BulletBehavior bulletBehavior = bullet.GetComponent<BulletBehavior>();
         if (bulletBehavior != null)

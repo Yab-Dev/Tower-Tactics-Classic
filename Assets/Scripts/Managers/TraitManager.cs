@@ -20,6 +20,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private TraitData earthyTrait;
     [SerializeField] private TraitData throneTrait;
     [SerializeField] private TraitData steamTrait;
+    [SerializeField] private TraitData gamblerTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -33,6 +34,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject earthyLaneSwitchSpawner;
     [SerializeField] private GameObject throneBuffPrefab;
     [SerializeField] private GameObject steamValvePrefab;
+    [SerializeField] private GameObject tokenCasinoPrefab;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
@@ -73,6 +75,7 @@ public class TraitManager : MonoBehaviour
 
         GameManager.OnDefensePhaseStart += ThroneBeakpoint1;
         GameManager.OnDefensePhaseStart += SteamBreakpoint1;
+        GameManager.OnDefensePhaseStart += GamblerBreakpoint1;
     }
 
     private void OnDisable()
@@ -105,6 +108,7 @@ public class TraitManager : MonoBehaviour
 
         GameManager.OnDefensePhaseStart -= ThroneBeakpoint1;
         GameManager.OnDefensePhaseStart -= SteamBreakpoint1;
+        GameManager.OnDefensePhaseStart -= GamblerBreakpoint1;
     }
 
 
@@ -321,6 +325,13 @@ public class TraitManager : MonoBehaviour
     {
         if (!TraitUtils.CheckTraitBreakpoint(steamTrait, 0)) { return; }
 
-        Instantiate(steamValvePrefab, GameObject.FindWithTag("MainCanvas").transform);
+        Instantiate(steamValvePrefab, GameObject.FindWithTag("TraitCanvas").transform);
+    }
+
+    private void GamblerBreakpoint1(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(gamblerTrait, 0)) { return; }
+
+        Instantiate(tokenCasinoPrefab, GameObject.FindWithTag("TraitCanvas").transform);
     }
 }

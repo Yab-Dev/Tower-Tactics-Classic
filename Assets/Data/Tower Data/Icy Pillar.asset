@@ -15,6 +15,7 @@ MonoBehaviour:
   description: Won't fight back, but will stall a good while.
   countsTowardsCap: 0
   traits: []
+  rarity: 0
   cost: 0
   sprite: {fileID: 7352149993549726430, guid: 76445860c1d08d54da1923e5cc463a70, type: 3}
   destroyedSprite: {fileID: 0}
@@ -25,5 +26,5 @@ MonoBehaviour:
     laneRange: 0
     areaRange: 0
     hitCount: 0
-  bulletObject: {fileID: 0}
-  bulletSpeed: 0
+  bulletObject: {fileID: 6951778787355220073, guid: 1fee06e18ad9fa349a995bd6641d63fe, type: 3}
+  bulletSpeed: 3
