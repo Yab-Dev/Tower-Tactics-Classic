@@ -160,7 +160,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackDamage: 15
   targetDetection: {fileID: 2296626922459748154}
-  collider: {fileID: 4578325467631764900}
+  hitCollider: {fileID: 4578325467631764900}
 --- !u!58 &4578325467631764900
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -363,7 +363,7 @@ public class TraitManager : MonoBehaviour
 
     private void CrystallizedBeakpoint2(TowerData _towerData, Vector2 _destroyPosition)
     {
-        if (!_towerData.traits.Contains(crystallizedTrait)) { return; }
+        if (!_towerData.traits.Contains(earthyTrait)) { return; }
         if (!TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 1)) { return; }
 
         Instantiate(crystalPylonPrefab, _destroyPosition, Quaternion.identity);
