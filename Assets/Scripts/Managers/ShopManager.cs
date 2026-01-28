@@ -73,6 +73,14 @@ public class ShopManager : MonoBehaviour
         GameManager.OnDefensePhaseEnd -= WaveComplete;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            TowerTokens += 999;
+        }
+    }
+
     public static ShopManager GetInstance()
     {
         if (instance == null)

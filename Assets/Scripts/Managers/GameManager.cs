@@ -117,14 +117,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            SetBuildPhase();
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            SetDefensePhase();
-        }
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //{
+        //    SetBuildPhase();
+        //}
+        //if (Input.GetKeyDown(KeyCode.F2))
+        //{
+        //    SetDefensePhase();
+        //}
     }
 
     private void StartGame()
