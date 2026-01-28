@@ -6,12 +6,15 @@ using static UnityEngine.GraphicsBuffer;
 public class CrystalBullet : MonoBehaviour
 {
     [Header("Attributes")]
-    
+    [SerializeField] private float pylonSpawnChance;
     [SerializeField] private float xDespawn;
     [SerializeField] private IDamage.Team team;
     [SerializeField] private int damage;
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject crystalPylonPrefab;
 
 
 
@@ -43,6 +46,8 @@ public class CrystalBullet : MonoBehaviour
         lifetime -= Time.deltaTime;
         if (lifetime <= 0.0f || transform.position.x > xDespawn)
         {
+            PylonSpawn();
+
             Destroy(gameObject);
         }
     }
@@ -56,7 +61,18 @@ public class CrystalBullet : MonoBehaviour
 
             damageInterface.Damage(damage);
 
+            PylonSpawn();
+
             Destroy(gameObject);
+        }
+    }
+
+    private void PylonSpawn()
+    {
+        float rand = Random.Range(0.0f, 1.0f);
+        if (rand <= pylonSpawnChance)
+        {
+            Instantiate(crystalPylonPrefab, transform.position, Quaternion.identity);
         }
     }
 }
