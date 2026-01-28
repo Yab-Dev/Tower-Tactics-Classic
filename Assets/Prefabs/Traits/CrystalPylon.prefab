@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3467779279477611759}
   - component: {fileID: 2338929270042429210}
+  - component: {fileID: -2111865221852273246}
   m_Layer: 0
   m_Name: CrystalPylon
   m_TagString: CrystalPylon
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2111865221852273246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3078013956856538845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4666b4946c7ecbf46bb63b44dc82f6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
