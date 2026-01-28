@@ -87,6 +87,7 @@ public class TraitManager : MonoBehaviour
         TowerBehavior.OnAnyTowerDestroyed += AncientBreakpoint1;
 
         TowerBehavior.OnAnyTowerDestroyed += CrystallizedBeakpoint2;
+        BulletBehavior.OnApplyBulletTags += CrystallizedBeakpoint3;
     }
 
     private void OnDisable()
@@ -122,6 +123,7 @@ public class TraitManager : MonoBehaviour
         GameManager.OnDefensePhaseStart -= GamblerBreakpoint1;
 
         TowerBehavior.OnAnyTowerDestroyed -= CrystallizedBeakpoint2;
+        BulletBehavior.OnApplyBulletTags -= CrystallizedBeakpoint3;
     }
 
 
@@ -358,17 +360,19 @@ public class TraitManager : MonoBehaviour
 
     private void CrystallizedBeakpoint2(TowerData _towerData, Vector2 _destroyPosition)
     {
-        Debug.Log("CRYSTAL BREAKPOINT 2");
-
-        List<(TraitData trait, int count)> traitData = GameManager.GetInstance().GetCurrentTraits();
-        (TraitData trait, int count) specificTraitData = TraitUtils.GetTrait(traitData, crystallizedTrait);
-        Debug.Log($"Crystallized breakpoint value: {specificTraitData.count}");
-
+        if (!_towerData.traits.Contains(crystallizedTrait)) { return; }
         if (!TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 1)) { return; }
-
-        Debug.Log("CRYSTAL SPAWN PREFABS");
 
         Instantiate(crystalPylonPrefab, _destroyPosition, Quaternion.identity);
         ExplosionBehavior.CreateExplosion(crystalExplosionPrefab, _destroyPosition, IDamage.Team.Tower, crystallizedExplosionDamage, crystallizedExplosionRadius, new List<BulletBehavior.BulletTags>(), new BulletBehavior.IgniteData(), 0, 0);
+    }
+
+    private void CrystallizedBeakpoint3(ref List<BulletBehavior.BulletTags> _tags, TowerData _towerData)
+    {
+        if (_towerData == null) { return; }
+        if (!_towerData.traits.Contains(earthyTrait)) { return; }
+        if (!TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 2)) { return; }
+
+        _tags.Add(BulletBehavior.BulletTags.Crystalline);
     }
 }

@@ -28,6 +28,7 @@ public class BulletBehavior : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject crystalBulletPrefab;
 
     public delegate void OnApplyBulletTagsEventArgs(ref List<BulletTags> _tags, TowerData _towerData);
     public static event OnApplyBulletTagsEventArgs OnApplyBulletTags;
@@ -143,6 +144,12 @@ public class BulletBehavior : MonoBehaviour
             {
                 _damageInterface.Slow(icyBreakpoint1SlowDuration, icyBreakpoint1SlowAmount);
             }
+            if (tags.Contains(BulletTags.Crystalline))
+            {
+                CrystalBullet.CreateCrystalBullet(crystalBulletPrefab, transform.position + new Vector3(1.5f, 0), team, 0.0f, 5.0f, Mathf.RoundToInt(damage / 4.0f), 0.5f);
+                CrystalBullet.CreateCrystalBullet(crystalBulletPrefab, transform.position + new Vector3(1.5f, 1), team, 30.0f, 5.0f, Mathf.RoundToInt(damage / 4.0f), 0.5f);
+                CrystalBullet.CreateCrystalBullet(crystalBulletPrefab, transform.position + new Vector3(1.5f, -1), team, -30.0f, 5.0f, Mathf.RoundToInt(damage / 4.0f), 0.5f);
+            }
             _damageInterface.Damage(damage);
         }
     }
@@ -163,5 +170,5 @@ public class BulletBehavior : MonoBehaviour
         sprite.color = ignitedColor;
     }
 
-    public enum BulletTags { Explosive1, Explosive2, Sniper, Earthy, Ignited, Icy }
+    public enum BulletTags { Explosive1, Explosive2, Sniper, Earthy, Ignited, Icy, Crystalline }
 }

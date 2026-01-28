@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6951778787355220073
+--- !u!1 &7252045452790113169
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6196306303400693981}
-  - component: {fileID: 5227905074340729503}
-  - component: {fileID: 6003667316208229778}
-  - component: {fileID: 5983083698891132861}
+  - component: {fileID: 6050733313885595920}
+  - component: {fileID: 5413866895951941532}
+  - component: {fileID: 2104936481097829196}
+  - component: {fileID: 8802105318262044241}
   m_Layer: 0
-  m_Name: Bullet
-  m_TagString: Bullet
+  m_Name: CrystalBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6196306303400693981
+--- !u!4 &6050733313885595920
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951778787355220073}
+  m_GameObject: {fileID: 7252045452790113169}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,13 +34,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5227905074340729503
+--- !u!212 &5413866895951941532
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951778787355220073}
+  m_GameObject: {fileID: 7252045452790113169}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1162377223
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2661493587475830478, guid: 4c53b73d347c5964e92140e425c0f853, type: 3}
+  m_Sprite: {fileID: -5353715248375003253, guid: 91fa8963569311340bb9c641395b8712, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,13 +86,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6003667316208229778
+--- !u!58 &2104936481097829196
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951778787355220073}
+  m_GameObject: {fileID: 7252045452790113169}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -115,39 +115,27 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
---- !u!114 &5983083698891132861
+  m_Radius: 0.25
+--- !u!114 &8802105318262044241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951778787355220073}
+  m_GameObject: {fileID: 7252045452790113169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729d5fd4f0b7df043a37084e13a46bf0, type: 3}
+  m_Script: {fileID: 11500000, guid: aa743ef58fcf17443a9983f47b0f7cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pylonSpawnChance: 0.1
   team: 0
   damage: 0
-  speed: 0
-  lifetime: 0
-  target: {fileID: 0}
-  tags: 
-  ignitedColor: {r: 1, g: 0.5254902, b: 0, a: 1}
-  icyColor: {r: 0, g: 0.21568628, b: 0.98039216, a: 1}
-  explosionBreakpoint2Radius: 2
-  explosionBreakpoint1Radius: 1
-  sniperBreakpoint1DamageScaling: 0.04
-  icyBreakpoint1SlowDuration: 1
-  icyBreakpoint1SlowAmount: 0.8
-  earthyKnockbackLength: 0
-  earthyKnockbackDuration: 0
-  sprite: {fileID: 5227905074340729503}
-  explosionPrefab: {fileID: 8185730215968909104, guid: 63561afc5c7c1ab4695e897647fa0bcd, type: 3}
-  crystalBulletPrefab: {fileID: 7252045452790113169, guid: 842e3046ae04b974cb20dbd26e81c6b7, type: 3}
+  speed: 0.1
+  lifetime: 999
+  crystalPylonPrefab: {fileID: 3078013956856538845, guid: 035f16309d7743946a51686bcc05aef6, type: 3}
