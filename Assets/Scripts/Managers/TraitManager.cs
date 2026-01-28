@@ -8,6 +8,8 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private float medievalBreakpoint2AttackSpeedBoost = -0.05f;
     [SerializeField] private int wallBreakpoint1HealthPerLevel = 6;
     [SerializeField] private TowerData icyBreakpointTowerData;
+    [SerializeField] private float crystallizedExplosionRadius;
+    [SerializeField] private int crystallizedExplosionDamage;
 
     [Header("Cache")]
     [SerializeField] private TraitData gathererTrait;
@@ -22,6 +24,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private TraitData steamTrait;
     [SerializeField] private TraitData gamblerTrait;
     [SerializeField] private TraitData ancientTrait;
+    [SerializeField] private TraitData crystallizedTrait;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject gathererFallingTokensPrefab;
@@ -37,6 +40,8 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject steamValvePrefab;
     [SerializeField] private GameObject tokenCasinoPrefab;
     [SerializeField] private GameObject pterodactylPrefab;
+    [SerializeField] private GameObject crystalExplosionPrefab;
+    [SerializeField] private GameObject crystalPylonPrefab;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
@@ -80,6 +85,8 @@ public class TraitManager : MonoBehaviour
         GameManager.OnDefensePhaseStart += SteamBreakpoint1;
         GameManager.OnDefensePhaseStart += GamblerBreakpoint1;
         TowerBehavior.OnAnyTowerDestroyed += AncientBreakpoint1;
+
+        TowerBehavior.OnAnyTowerDestroyed += CrystallizedBeakpoint2;
     }
 
     private void OnDisable()
@@ -113,6 +120,8 @@ public class TraitManager : MonoBehaviour
         GameManager.OnDefensePhaseStart -= ThroneBeakpoint1;
         GameManager.OnDefensePhaseStart -= SteamBreakpoint1;
         GameManager.OnDefensePhaseStart -= GamblerBreakpoint1;
+
+        TowerBehavior.OnAnyTowerDestroyed -= CrystallizedBeakpoint2;
     }
 
 
@@ -345,5 +354,21 @@ public class TraitManager : MonoBehaviour
         if (pterodactylObject != null) { return; }
 
         pterodactylObject = Instantiate(pterodactylPrefab, _destroyPosition, Quaternion.identity);
+    }
+
+    private void CrystallizedBeakpoint2(TowerData _towerData, Vector2 _destroyPosition)
+    {
+        Debug.Log("CRYSTAL BREAKPOINT 2");
+
+        List<(TraitData trait, int count)> traitData = GameManager.GetInstance().GetCurrentTraits();
+        (TraitData trait, int count) specificTraitData = TraitUtils.GetTrait(traitData, crystallizedTrait);
+        Debug.Log($"Crystallized breakpoint value: {specificTraitData.count}");
+
+        if (!TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 1)) { return; }
+
+        Debug.Log("CRYSTAL SPAWN PREFABS");
+
+        Instantiate(crystalPylonPrefab, _destroyPosition, Quaternion.identity);
+        ExplosionBehavior.CreateExplosion(crystalExplosionPrefab, _destroyPosition, IDamage.Team.Tower, crystallizedExplosionDamage, crystallizedExplosionRadius, new List<BulletBehavior.BulletTags>(), new BulletBehavior.IgniteData(), 0, 0);
     }
 }

@@ -61,14 +61,14 @@ public class ShopManager : MonoBehaviour
             towersWithRarities[tower.rarity].Add(tower);
         }
 
-        GameManager.OnBuildPhaseStart += StartBuildPhase;
+        //GameManager.OnBuildPhaseStart += StartBuildPhase;
         GameManager.OnGameStart += StartGame;
         GameManager.OnDefensePhaseEnd += WaveComplete;
     }
 
     private void OnDisable()
     {
-        GameManager.OnBuildPhaseStart -= StartBuildPhase;
+        //GameManager.OnBuildPhaseStart -= StartBuildPhase;
         GameManager.OnGameStart -= StartGame;
         GameManager.OnDefensePhaseEnd -= WaveComplete;
     }
@@ -90,8 +90,14 @@ public class ShopManager : MonoBehaviour
 
         int towersToPopulate = shopSize;
 
+        GameManager.GetInstance().UpdateCurrentTowers();
+
+        Debug.Log($"First Shop: {firstShopOfPhase}");
+
         if (firstShopOfPhase && TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 0))
         {
+            Debug.Log("EARTHY CONFIRM");
+
             List<TowerData> earthyTowers = new List<TowerData>();
             foreach (TowerData tower in towerPool)
             {
@@ -122,7 +128,7 @@ public class ShopManager : MonoBehaviour
         firstShopOfPhase = false;
     }
 
-    private void StartBuildPhase(int _waveCount)
+    public void StartBuildPhase(int _waveCount)
     {
         firstShopOfPhase = true;
         RefreshShop(0);

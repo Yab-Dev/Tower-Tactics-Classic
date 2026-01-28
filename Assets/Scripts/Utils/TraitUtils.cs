@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TraitUtils : MonoBehaviour
 {
-    private static (TraitData trait, int count) GetTrait(List<(TraitData trait, int count)> _traitData, TraitData _trait)
+    public static (TraitData trait, int count) GetTrait(List<(TraitData trait, int count)> _traitData, TraitData _trait)
     {
         for (int i = 0; i < _traitData.Count; i++)
         {

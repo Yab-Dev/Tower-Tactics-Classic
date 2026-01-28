@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - MainCanvas
   - TraitCanvas
+  - CrystalPylon
   layers:
   - Default
   - TransparentFX

@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public delegate void OnGetPlacedTowersEventArgs(ref List<GameObject> _towers);
     public static event OnGetPlacedTowersEventArgs OnGetPlacedTowers;
 
-    public delegate void OnGetTowersOfTraitEventArgs(ref List<TowerBehavior> _towers, TraitData _trait);
+    public delegate void OnGetTowersOfTraitEventArgs(ref List<TowerBehavior> _towers, TraitData _trait, bool countDestroyed = false);
     public static event OnGetTowersOfTraitEventArgs OnGetTowersOfTrait;
 
     public delegate void OnCurrentTowersUpdatedEventArgs(List<GameObject> _towers, int _towersTowardsCapCount, List<(TraitData trait, int count)> _traits, int _towerCap);
@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour
         gamePhase = GamePhase.Build;
         OnBuildPhaseStart?.Invoke(waveCount);
         UpdateCurrentTowers();
+        ShopManager.GetInstance().StartBuildPhase(0);
     }
 
     public void SetDefensePhase()
@@ -340,7 +341,7 @@ public class GameManager : MonoBehaviour
     public List<TowerBehavior> GetTowersOfTrait(TraitData _trait)
     {
         List<TowerBehavior> foundTowers = new List<TowerBehavior>();
-        OnGetTowersOfTrait?.Invoke(ref foundTowers, _trait);
+        OnGetTowersOfTrait?.Invoke(ref foundTowers, _trait, true);
         return foundTowers;
     }
 

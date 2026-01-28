@@ -247,9 +247,9 @@ public class TowerBehavior : TooltipObject, IDamage
         buffParticles.Play();
     }
 
-    private void FetchTowerTraitData(ref List<TowerBehavior> _towers, TraitData _trait)
+    private void FetchTowerTraitData(ref List<TowerBehavior> _towers, TraitData _trait, bool _countDestroyedTowers)
     {
-        if (isDestroyed) { return; }
+        if (isDestroyed && !_countDestroyedTowers) { return; }
         if (_trait == null || (_trait != null && towerData.traits.Contains(_trait)))
         {
             _towers.Add(this);
