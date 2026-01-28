@@ -51,9 +51,14 @@ public class EarthInteractSpawner : MonoBehaviour
                             validEnemies.Add(enemy);
                         }
                     }
-                    Transform enemyToSpawn = validEnemies[Random.Range(0, validEnemies.Count)].transform;
-                    if (enemyToSpawn == null) { break; }
-                    Instantiate(earthInteractPrefab, enemyToSpawn);
+                    try
+                    {
+                        Transform enemyToSpawn = validEnemies[Random.Range(0, validEnemies.Count)].transform;
+                        if (enemyToSpawn == null) { break; }
+                        Instantiate(earthInteractPrefab, enemyToSpawn);
+                    }
+                    catch
+                    { }
                     break;
             }
 

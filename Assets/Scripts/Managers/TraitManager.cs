@@ -42,6 +42,7 @@ public class TraitManager : MonoBehaviour
     [SerializeField] private GameObject pterodactylPrefab;
     [SerializeField] private GameObject crystalExplosionPrefab;
     [SerializeField] private GameObject crystalPylonPrefab;
+    [SerializeField] private GameObject crystalLaserSpawnerPrefab;
 
     private GameObject igniteWallObject;
     private GameObject fieryDamageAllObject;
@@ -88,6 +89,7 @@ public class TraitManager : MonoBehaviour
 
         TowerBehavior.OnAnyTowerDestroyed += CrystallizedBeakpoint2;
         BulletBehavior.OnApplyBulletTags += CrystallizedBeakpoint3;
+        GameManager.OnDefensePhaseStart += CrystallizedBeakpoint4;
     }
 
     private void OnDisable()
@@ -124,6 +126,7 @@ public class TraitManager : MonoBehaviour
 
         TowerBehavior.OnAnyTowerDestroyed -= CrystallizedBeakpoint2;
         BulletBehavior.OnApplyBulletTags -= CrystallizedBeakpoint3;
+        GameManager.OnDefensePhaseStart += CrystallizedBeakpoint4;
     }
 
 
@@ -374,5 +377,12 @@ public class TraitManager : MonoBehaviour
         if (!TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 2)) { return; }
 
         _tags.Add(BulletBehavior.BulletTags.Crystalline);
+    }
+
+    private void CrystallizedBeakpoint4(int _waveCount)
+    {
+        if (!TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 3)) { return; }
+
+        Instantiate(crystalLaserSpawnerPrefab);
     }
 }

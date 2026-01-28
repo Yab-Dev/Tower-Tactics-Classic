@@ -92,12 +92,8 @@ public class ShopManager : MonoBehaviour
 
         GameManager.GetInstance().UpdateCurrentTowers();
 
-        Debug.Log($"First Shop: {firstShopOfPhase}");
-
         if (firstShopOfPhase && TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 0))
         {
-            Debug.Log("EARTHY CONFIRM");
-
             List<TowerData> earthyTowers = new List<TowerData>();
             foreach (TowerData tower in towerPool)
             {

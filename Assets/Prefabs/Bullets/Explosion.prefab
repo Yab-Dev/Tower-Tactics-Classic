@@ -4940,4 +4940,6 @@ MonoBehaviour:
   team: 0
   damage: 0
   tags: 
+  pylonSpawnChance: 0.1
   crystalBulletPrefab: {fileID: 7252045452790113169, guid: 842e3046ae04b974cb20dbd26e81c6b7, type: 3}
+  crystalPylonPrefab: {fileID: 3078013956856538845, guid: 035f16309d7743946a51686bcc05aef6, type: 3}

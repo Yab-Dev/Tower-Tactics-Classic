@@ -141,6 +141,7 @@ MonoBehaviour:
   tags: 
   ignitedColor: {r: 1, g: 0.5254902, b: 0, a: 1}
   icyColor: {r: 0, g: 0.21568628, b: 0.98039216, a: 1}
+  pylonSpawnChance: 0.1
   explosionBreakpoint2Radius: 2
   explosionBreakpoint1Radius: 1
   sniperBreakpoint1DamageScaling: 0.04
@@ -151,3 +152,4 @@ MonoBehaviour:
   sprite: {fileID: 5227905074340729503}
   explosionPrefab: {fileID: 8185730215968909104, guid: 63561afc5c7c1ab4695e897647fa0bcd, type: 3}
   crystalBulletPrefab: {fileID: 7252045452790113169, guid: 842e3046ae04b974cb20dbd26e81c6b7, type: 3}
+  crystalPylonPrefab: {fileID: 3078013956856538845, guid: 035f16309d7743946a51686bcc05aef6, type: 3}

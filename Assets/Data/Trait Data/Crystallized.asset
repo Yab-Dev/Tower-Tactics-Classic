@@ -25,5 +25,5 @@ MonoBehaviour:
     breakpointDescription: Bullets fired from crystallized towers will fracture,
       dealing damage and sometimes leaving a crystal pylon.
   - breakpointValue: 8
-    breakpointDescription: Occasionally click on a crystal pylon to fire lasers between
-      each other pylon and crystal nexus.
+    breakpointDescription: Occasionally crystal pylons will fire lasers between each
+      other pylon and crystal nexuses.

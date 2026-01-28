@@ -13,6 +13,7 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private List<BulletTags> tags = new List<BulletTags>();
     [SerializeField] private Color ignitedColor;
     [SerializeField] private Color icyColor;
+    [SerializeField] private float pylonSpawnChance;
 
     [Header("Static Attributes")]
     [SerializeField] private float explosionBreakpoint2Radius;
@@ -28,7 +29,8 @@ public class BulletBehavior : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private GameObject crystalBulletPrefab;
+    [SerializeField] private GameObject crystalBulletPrefab; 
+    [SerializeField] private GameObject crystalPylonPrefab;
 
     public delegate void OnApplyBulletTagsEventArgs(ref List<BulletTags> _tags, TowerData _towerData);
     public static event OnApplyBulletTagsEventArgs OnApplyBulletTags;
@@ -146,11 +148,21 @@ public class BulletBehavior : MonoBehaviour
             }
             if (tags.Contains(BulletTags.Crystalline))
             {
+                PylonSpawn();
                 CrystalBullet.CreateCrystalBullet(crystalBulletPrefab, transform.position + new Vector3(1.5f, 0), team, 0.0f, 5.0f, Mathf.RoundToInt(damage / 4.0f), 0.5f);
                 CrystalBullet.CreateCrystalBullet(crystalBulletPrefab, transform.position + new Vector3(1.5f, 1), team, 30.0f, 5.0f, Mathf.RoundToInt(damage / 4.0f), 0.5f);
                 CrystalBullet.CreateCrystalBullet(crystalBulletPrefab, transform.position + new Vector3(1.5f, -1), team, -30.0f, 5.0f, Mathf.RoundToInt(damage / 4.0f), 0.5f);
             }
             _damageInterface.Damage(damage);
+        }
+    }
+
+    private void PylonSpawn()
+    {
+        float rand = Random.Range(0.0f, 1.0f);
+        if (rand <= pylonSpawnChance)
+        {
+            Instantiate(crystalPylonPrefab, transform.position, Quaternion.identity);
         }
     }
 
