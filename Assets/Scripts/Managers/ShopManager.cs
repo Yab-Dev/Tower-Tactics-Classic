@@ -20,11 +20,17 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private string notEnoughTokensMessage;
     [SerializeField] private Color notEnoughTokensColor;
 
+    [Header("Cache")]
+    [SerializeField] private TraitData earthyTrait;
+    [SerializeField] private TraitData crystallizedTrait;
+
     [Header("Prefabs")]
     [SerializeField] private GameObject textPopupPrefab;
 
     private Dictionary<TowerData.TowerRarity, List<TowerData>> towersWithRarities = new Dictionary<TowerData.TowerRarity, List<TowerData>>();
     private List<TowerData> shopTowers = new List<TowerData>();
+
+    private bool firstShopOfPhase;
 
     public delegate void OnRefreshShopEventArgs(List<TowerData> _shopData);
     public static event OnRefreshShopEventArgs OnRefreshShop;
@@ -55,14 +61,14 @@ public class ShopManager : MonoBehaviour
             towersWithRarities[tower.rarity].Add(tower);
         }
 
-        GameManager.OnBuildPhaseStart += RefreshShop;
+        GameManager.OnBuildPhaseStart += StartBuildPhase;
         GameManager.OnGameStart += StartGame;
         GameManager.OnDefensePhaseEnd += WaveComplete;
     }
 
     private void OnDisable()
     {
-        GameManager.OnBuildPhaseStart -= RefreshShop;
+        GameManager.OnBuildPhaseStart -= StartBuildPhase;
         GameManager.OnGameStart -= StartGame;
         GameManager.OnDefensePhaseEnd -= WaveComplete;
     }
@@ -82,7 +88,23 @@ public class ShopManager : MonoBehaviour
     {
         shopTowers.Clear();
 
-        for (int i = 0; i < shopSize; i++)
+        int towersToPopulate = shopSize;
+
+        if (firstShopOfPhase && TraitUtils.CheckTraitBreakpoint(crystallizedTrait, 0))
+        {
+            List<TowerData> earthyTowers = new List<TowerData>();
+            foreach (TowerData tower in towerPool)
+            {
+                if (tower.traits.Contains(earthyTrait))
+                {
+                    earthyTowers.Add(tower);
+                }
+            }
+            shopTowers.Add(earthyTowers[Random.Range(0, earthyTowers.Count)]);
+            towersToPopulate--;
+        }
+
+        for (int i = 0; i < towersToPopulate; i++)
         {
             float rand = Random.Range(0.0f, 1.0f);
             if (rand < rareTowerOdds)
@@ -96,6 +118,14 @@ public class ShopManager : MonoBehaviour
         }
 
         OnRefreshShop?.Invoke(shopTowers);
+
+        firstShopOfPhase = false;
+    }
+
+    private void StartBuildPhase(int _waveCount)
+    {
+        firstShopOfPhase = true;
+        RefreshShop(0);
     }
 
     public void CheckRefreshCost()

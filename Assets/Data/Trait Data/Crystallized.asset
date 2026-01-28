@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7bcde6721108b4cb58741416a26023, type: 3}
+  m_Name: Crystallized
+  m_EditorClassIdentifier: 
+  description: Your earthy towers have been mutated!
+  traitIcon: {fileID: 8410776723451219211, guid: 3f639a2e1c4cb824ba1c789e14cf64ba, type: 3}
+  breakpoints:
+  - breakpointValue: 1
+    breakpointDescription: The first shop each build phase is guaranteed to have
+      an earthy tower.
+  - breakpointValue: 3
+    breakpointDescription: Destroyed crystallized towers shatter, dealing damage
+      and leaving behind a crystal pylon.
+  - breakpointValue: 5
+    breakpointDescription: Bullets fired from crystallized towers will fracture,
+      dealing damage and sometimes leaving a crystal pylon.
+  - breakpointValue: 8
+    breakpointDescription: Occasionally click on a crystal pylon to fire lasers between
+      each other pylon and crystal nexus.

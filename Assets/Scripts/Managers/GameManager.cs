@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<TowerSlot> startingSlots = new List<TowerSlot>();
     [SerializeField] private TooltipBaseUI tooltipObject;
 
+    [Header("Cache")]
+    [SerializeField] private TraitData crystalTrait;
+    [SerializeField] private TraitData earthyTrait;
+    [SerializeField] private TraitData crystallizedTrait;
+
     [Header("Prefabs")]
     [SerializeField] private GameObject towerObject;
     [SerializeField] private GameObject enemyObject;
@@ -263,6 +268,7 @@ public class GameManager : MonoBehaviour
             if (towerBehavior == null) { continue; }
 
             List<TraitData> towerTraits = towerBehavior.TowerData.traits;
+
             foreach (TraitData trait in towerTraits)
             {
                 if (traitDict.ContainsKey(trait))
@@ -274,6 +280,12 @@ public class GameManager : MonoBehaviour
                     traitDict.Add(trait, 1);
                 }
             }
+        }
+
+        // Crystallized trait
+        if (traitDict.ContainsKey(crystalTrait))
+        {
+            traitDict.Add(crystallizedTrait, GetTowersOfTrait(earthyTrait).Count);
         }
 
         foreach (var trait in traitDict.Keys)

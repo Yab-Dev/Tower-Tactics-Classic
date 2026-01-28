@@ -15,7 +15,7 @@ public class PterodactylBehavior : MonoBehaviour
 
     [Header("Cache")]
     [SerializeField] private TargetDetection targetDetection;
-    [SerializeField] private CircleCollider2D collider;
+    [SerializeField] private CircleCollider2D hitCollider;
 
     private Vector3 targetPosition;
     private float retargetCooldown;
@@ -55,7 +55,7 @@ public class PterodactylBehavior : MonoBehaviour
             attackTimer -= Time.deltaTime;
         }
 
-        collider.enabled = attacking;
+        hitCollider.enabled = attacking;
     }
 
     private void FollowCursor()
