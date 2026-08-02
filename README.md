@@ -1,5 +1,8 @@
 # Tower Tactics
 
+## Play
+https://yabdev.itch.io/tower-tactics
+
 ## About
 Tower Tactics is a hybrid Tower Defense and Auto Battler, where you create your own combination of towers to fight off hordes of enemies! Activate powerful trait abilities and strategize your placement to secure victory!
 
